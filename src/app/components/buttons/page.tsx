@@ -76,7 +76,9 @@ export default function ComponentsButtonsPage() {
               <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
                 {/* Center the button preview */}
                 <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 rounded-xl">
-                  <button.component onClick={() => {}} />
+                  <button.component onClick={() => {}}>
+                    {button.displayName}
+                  </button.component>
                 </div>
 
                 {/* Info overlay */}

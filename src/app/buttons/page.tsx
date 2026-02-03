@@ -7,9 +7,10 @@ import { ThreeDButton } from "@/registry/buttons/3d-button";
 import { ShineButton } from "@/registry/buttons/shine-button";
 import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
 import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
+import { WetButton } from "@/registry/buttons/wet-button";
 
 // Button preview component mapping
-const buttonPreviews: Record<ButtonName, React.ReactNode> = {
+const buttonPreviews: Partial<Record<ButtonName, React.ReactNode>> = {
   "3d-button": (
     <ThreeDButton onClick={() => {}}>
       3D Button
@@ -29,6 +30,11 @@ const buttonPreviews: Record<ButtonName, React.ReactNode> = {
     <GradientFillButton onClick={() => {}}>
       Gradient Fill
     </GradientFillButton>
+  ),
+  "wet-button": (
+    <WetButton onClick={() => {}}>
+      Wet Paint
+    </WetButton>
   ),
 };
 
