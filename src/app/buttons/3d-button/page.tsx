@@ -1,36 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { ThreeDButton } from "@/registry/buttons/3d-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
 const buttonCode = `"use client";
 
-import React from "react";
-import { cn } from "@/lib/utils";
+import React from 'react';
 
-export interface ThreeDButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-}
-
-/**
- * 3D Button - From SyntaxUI
- * A button with 3D depth effect and ripple on hover
- */
 export const ThreeDButton = ({
-  children,
+  children = 'Button',
   className,
   ...props
-}: ThreeDButtonProps) => {
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      className={cn(
-        "group relative m-1 inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-l-2 border-r-2 border-red-700 bg-gradient-to-tr from-red-600 to-red-500 px-4 py-1 text-white shadow-lg transition duration-100 ease-in-out active:translate-y-0.5 active:border-red-600 active:shadow-none",
-        className
-      )}
+      className={\`group relative m-1 inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-l-2 border-r-2 border-accent bg-gradient-to-tr from-accent to-accent-foreground px-4 py-1 text-white shadow-lg transition duration-100 ease-in-out active:translate-y-0.5 active:border-accent-foreground active:shadow-none \${className || ''}\`}
       {...props}
     >
       <span className="absolute h-0 w-0 rounded-full bg-white opacity-10 transition-all duration-300 ease-out group-hover:h-32 group-hover:w-32"></span>
@@ -39,34 +26,27 @@ export const ThreeDButton = ({
   );
 };
 
-export default ThreeDButton;
-`;
+export type ThreeDButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;`;
 
 export default function ThreeDButtonPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="space-y-4"
       >
         <div className="flex items-center gap-2">
-          <Link
-            href="/components/buttons"
-            className="p-1 rounded-md hover:bg-secondary transition-colors"
-          >
+          <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">3D Button</h1>
         </div>
         <p className="text-muted-foreground max-w-lg">
-          A button with 3D depth effect and ripple on hover. The bottom border
-          creates the 3D illusion, while a subtle ripple animates on hover.
+          Button with 3D depth effect that presses on click with ripple animation on hover.
         </p>
       </motion.div>
 
-      {/* Component Tabs */}
       <ComponentPageTabs
         preview={
           <ThreeDButton onClick={() => console.log("3D Button clicked!")}>
@@ -76,7 +56,6 @@ export default function ThreeDButtonPage() {
         code={buttonCode}
       />
 
-      {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
@@ -93,40 +72,23 @@ export default function ThreeDButtonPage() {
               <tr className="border-b border-border/50">
                 <td className="py-2 px-4 font-mono text-accent">children</td>
                 <td className="py-2 px-4">ReactNode</td>
-                <td className="py-2 px-4">-</td>
-                <td className="py-2 px-4 text-muted-foreground">
-                  Button label or content
-                </td>
+                <td className="py-2 px-4">"Button"</td>
+                <td className="py-2 px-4 text-muted-foreground">Button label</td>
               </tr>
               <tr className="border-b border-border/50">
                 <td className="py-2 px-4 font-mono text-accent">className</td>
                 <td className="py-2 px-4">string</td>
                 <td className="py-2 px-4">undefined</td>
-                <td className="py-2 px-4 text-muted-foreground">
-                  Additional CSS classes
-                </td>
+                <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
               </tr>
               <tr>
                 <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props (onClick, disabled, etc.)
+                  Inherits all native button props
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
-
-      {/* Source */}
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <span>Source:</span>
-        <a
-          href="https://syntaxui.com/components/button"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-accent hover:underline"
-        >
-          SyntaxUI <ExternalLink className="w-3 h-3" />
-        </a>
       </div>
     </div>
   );

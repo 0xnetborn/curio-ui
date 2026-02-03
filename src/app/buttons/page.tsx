@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { buttons, ButtonName } from "@/registry/buttons";
-import { ThreeDButton } from "@/registry/buttons/3d-button";
-import { ShineButton } from "@/registry/buttons/shine-button";
-import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
-import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
-import { WetButton } from "@/registry/buttons/wet-button";
+import { ThreeDButton } "@/registry/buttons/3d-button";
+import { ShineButton } "@/registry/buttons/shine-button";
+import { BorderGlowButton } "@/registry/buttons/border-glow-button";
+import { GradientFillButton } "@/registry/buttons/gradient-fill-button";
+import { WetButton } "@/registry/buttons/wet-button";
 
 // Button preview component mapping
 const buttonPreviews: Partial<Record<ButtonName, React.ReactNode>> = {

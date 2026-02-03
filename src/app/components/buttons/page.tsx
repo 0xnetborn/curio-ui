@@ -2,11 +2,11 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { WetButton } from "@/registry/buttons/wet-button";
-import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
-import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
-import { ThreeDButton } from "@/registry/buttons/3d-button";
-import { ShineButton } from "@/registry/buttons/shine-button";
+import { WetButton } "@/registry/buttons/wet-button";
+import { BorderGlowButton } "@/registry/buttons/border-glow-button";
+import { GradientFillButton } "@/registry/buttons/gradient-fill-button";
+import { ThreeDButton } "@/registry/buttons/3d-button";
+import { ShineButton } "@/registry/buttons/shine-button";
 
 // Button components list for this category
 const buttonComponents = [

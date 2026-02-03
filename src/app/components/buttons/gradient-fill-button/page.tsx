@@ -1,35 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
+import { GradientFillButton } "@/registry/buttons/gradient-fill-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
 const buttonCode = `"use client";
 
-import React from "react";
-import { cn } from "@/lib/utils";
+import React from 'react';
 
-export interface GradientFillButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
-}
-
-export const GradientFillButton = ({
-  children,
+const GradientFillButton = ({
+  children = 'Button',
   className,
   ...props
-}: GradientFillButtonProps) => {
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
-      className={cn(
-        "group/button relative overflow-hidden rounded-md border border-red-500/20 bg-white px-4 py-1 text-xs font-medium text-red-500 transition-all duration-150 hover:border-red-500 active:scale-95",
-        className
-      )}
+      className={\`group/button relative overflow-hidden rounded-md border border-accent/20 bg-white px-4 py-1 text-xs font-medium text-accent transition-all duration-150 hover:border-accent active:scale-95 \${className || ''}\`}
       {...props}
     >
-      <span className="absolute bottom-0 left-0 z-0 h-0 w-full bg-gradient-to-t from-red-600 to-red-500 transition-all duration-500 group-hover/button:h-full" />
+      <span className="absolute bottom-0 left-0 z-0 h-0 w-full bg-gradient-to-t from-accent to-accent-foreground transition-all duration-500 group-hover/button:h-full" />
       <span className="relative z-10 transition-all duration-500 group-hover/button:text-white">
         {children}
       </span>
@@ -48,25 +39,19 @@ export default function GradientFillButtonPage() {
         className="space-y-4"
       >
         <div className="flex items-center gap-2">
-          <Link
-            href="/components/buttons"
-            className="p-1 rounded-md hover:bg-secondary transition-colors"
-          >
+          <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Gradient Fill Button</h1>
         </div>
         <p className="text-muted-foreground max-w-lg">
-          A button that fills with an animated gradient from bottom to top on hover.
-          The gradient smoothly transitions the button colors.
+          Button that fills with gradient from bottom on hover.
         </p>
       </motion.div>
 
       <ComponentPageTabs
         preview={
-          <GradientFillButton
-            onClick={() => console.log("Gradient Fill Button clicked!")}
-          >
+          <GradientFillButton onClick={() => console.log("Gradient Fill clicked!")}>
             Gradient Fill
           </GradientFillButton>
         }
@@ -89,18 +74,14 @@ export default function GradientFillButtonPage() {
               <tr className="border-b border-border/50">
                 <td className="py-2 px-4 font-mono text-accent">children</td>
                 <td className="py-2 px-4">ReactNode</td>
-                <td className="py-2 px-4">-</td>
-                <td className="py-2 px-4 text-muted-foreground">
-                  Button label or content
-                </td>
+                <td className="py-2 px-4">"Button"</td>
+                <td className="py-2 px-4 text-muted-foreground">Button label</td>
               </tr>
               <tr className="border-b border-border/50">
                 <td className="py-2 px-4 font-mono text-accent">className</td>
                 <td className="py-2 px-4">string</td>
                 <td className="py-2 px-4">undefined</td>
-                <td className="py-2 px-4 text-muted-foreground">
-                  Additional CSS classes
-                </td>
+                <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
               </tr>
               <tr>
                 <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
@@ -110,18 +91,6 @@ export default function GradientFillButtonPage() {
             </tbody>
           </table>
         </div>
-      </div>
-
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <span>Source:</span>
-        <a
-          href="https://syntaxui.com/components/button/gradient-fill-button"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-accent hover:underline"
-        >
-          SyntaxUI <ExternalLink className="w-3 h-3" />
-        </a>
       </div>
     </div>
   );

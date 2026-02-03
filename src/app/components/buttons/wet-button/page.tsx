@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { WetButton } from "@/registry/buttons/wet-button";
+import { WetButton } "@/registry/buttons/wet-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
 const buttonCode = `"use client";
