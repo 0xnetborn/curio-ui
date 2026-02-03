@@ -114,6 +114,16 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
+    // Text Animations
+    {
+        slug: "text-animations/fuzzy-text",
+        name: "Fuzzy Text",
+        description: "Text that blurs and reveals on hover",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["framer-motion"],
+    },
 ];
 
 // Helper functions
