@@ -4,51 +4,6 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
-import { ComponentPageTabs } from "@/components/ui/tabs";
-
-const buttonCode = 
-`"use client";
-
-import { useEffect, useRef, useState } from 'react';
-
-export const BorderGlowButton = ({
-  children = 'Button',
-  className,
-  ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const ref = useRef<HTMLButtonElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: '-100%', y: '-100%' });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      setMousePosition({ x: \`\${x}px\`, y: \`\${y}px\` });
-    };
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => { document.removeEventListener('mousemove', handleMouseMove); };
-  }, []);
-
-  return (
-    <button
-      className={\`relative overflow-hidden rounded-lg bg-[#e5e7eb] transform transition-transform ease-in-out active:scale-90 \${className || ''}\`}
-      ref={ref}
-      {...props}
-    >
-      <span
-        className={\`absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(var(--accent)_0%,transparent_70\%)]\`}
-        style={{ left: mousePosition.x, top: mousePosition.y } as React.CSSProperties}
-      ></span>
-      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-accent backdrop-blur-sm">
-        {children}
-      </div>
-    </button>
-  );
-};
-
-export type BorderGlowButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;`;
 
 export default function BorderGlowButtonPage() {
   return (
@@ -63,10 +18,22 @@ export default function BorderGlowButtonPage() {
         <p className="text-muted-foreground max-w-lg">Button with mouse-tracking glow effect on border.</p>
       </motion.div>
 
-      <ComponentPageTabs
-        preview={<BorderGlowButton onClick={() => console.log("Border Glow clicked!")}>Border Glow</BorderGlowButton>}
-        code={buttonCode}
-      />
+      <div className="rounded-xl border border-border bg-card p-8">
+        <div className="flex items-center justify-center min-h-[200px]">
+          <BorderGlowButton onClick={() => console.log("Border Glow clicked!")}>Border Glow</BorderGlowButton>
+        </div>
+      </div>
+
+      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+        <h3 className="font-semibold">Usage</h3>
+        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
+{`import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
+
+<BorderGlowButton onClick={() => console.log("click!")}>
+  Border Glow
+</BorderGlowButton>`}
+        </pre>
+      </div>
 
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Props</h3>
@@ -77,7 +44,6 @@ export default function BorderGlowButtonPage() {
                 <th className="text-left py-2 px-4 font-medium">Prop</th>
                 <th className="text-left py-2 px-4 font-medium">Type</th>
                 <th className="text-left py-2 px-4 font-medium">Default</th>
-                <th className="text-left py-2 px-4 font-medium">Description</th>
               </tr>
             </thead>
             <tbody>
@@ -85,16 +51,11 @@ export default function BorderGlowButtonPage() {
                 <td className="py-2 px-4 font-mono text-accent">children</td>
                 <td className="py-2 px-4">ReactNode</td>
                 <td className="py-2 px-4">"Button"</td>
-                <td className="py-2 px-4 text-muted-foreground">Button label</td>
               </tr>
               <tr className="border-b border-border/50">
                 <td className="py-2 px-4 font-mono text-accent">className</td>
                 <td className="py-2 px-4">string</td>
                 <td className="py-2 px-4">undefined</td>
-                <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
-              </tr>
-              <tr>
-                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">Inherits all native button props</td>
               </tr>
             </tbody>
           </table>

@@ -13,9 +13,7 @@ export const GradientFillButton = ({
       {...props}
     >
       <span className="absolute bottom-0 left-0 z-0 h-0 w-full bg-gradient-to-t from-accent to-accent-foreground transition-all duration-500 group-hover/button:h-full" />
-      <span className="relative z-10 transition-all duration-500 group-hover/button:text-white">
-        {children}
-      </span>
+      <span className="relative z-10 transition-all duration-500 group-hover/button:text-white">{children}</span>
     </button>
   );
 };
