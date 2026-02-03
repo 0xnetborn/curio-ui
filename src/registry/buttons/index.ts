@@ -5,6 +5,7 @@ export { ThreeDButton, type ThreeDButtonProps } from './3d-button';
 export { ShineButton, type ShineButtonProps } from './shine-button';
 export { BorderGlowButton, type BorderGlowButtonProps } from './border-glow-button';
 export { GradientFillButton, type GradientFillButtonProps } from './gradient-fill-button';
+export { WetButton, type WetButtonProps } from './wet-button';
 export { GlassSurface } from './glass-surface';
 
 // Component metadata for the registry
@@ -31,6 +32,12 @@ export const buttons = [
     name: 'gradient-fill-button',
     displayName: 'Gradient Fill Button',
     description: 'Animated gradient fill with directional movement',
+    category: 'buttons',
+  },
+  {
+    name: 'wet-button',
+    displayName: 'Wet Paint Button',
+    description: 'Dripping paint effect on hover',
     category: 'buttons',
   },
 ] as const;

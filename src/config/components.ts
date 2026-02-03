@@ -105,6 +105,15 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
+    {
+        slug: "components/buttons/wet-button",
+        name: "Wet Paint Button",
+        description: "Dripping paint effect on hover",
+        category: "buttons",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["framer-motion"],
+    },
 ];
 
 // Helper functions
