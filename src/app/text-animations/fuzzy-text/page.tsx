@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { FuzzyText, FuzzyTextChars } from "@/registry/text/fuzzy-text";
-import { ComponentPageTabs } from "@/components/ui/tabs";
+import { PreviewCodeTabs } from "@/components/ui/tabs";
 
 const fuzzyTextCode = `"use client";
 
@@ -116,7 +116,7 @@ export default function FuzzyTextPage() {
       {/* Simple Fuzzy Text */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold">Simple Blur</h2>
-        <ComponentPageTabs
+        <PreviewCodeTabs
           preview={
             <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center">
               <FuzzyText
@@ -135,7 +135,7 @@ export default function FuzzyTextPage() {
       {/* Character Reveal */}
       <div className="space-y-4">
         <h2 className="text-xl font-semibold">Character Reveal</h2>
-        <ComponentPageTabs
+        <PreviewCodeTabs
           preview={
             <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center">
               <FuzzyTextChars

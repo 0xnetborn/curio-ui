@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
+import GradientFillButton from "@/registry/buttons/gradient-fill-button";
 
 export default function GradientFillButtonPage() {
   return (
@@ -13,53 +13,22 @@ export default function GradientFillButtonPage() {
           <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <h1 className="font-display text-4xl font-bold">Gradient Fill Button</h1>
+          <h1 className="font-display text-4xl font-bold">Gradient Fill</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">Button that fills with gradient from bottom on hover.</p>
+        <p className="text-muted-foreground max-w-lg">Button with gradient fill from bottom.</p>
       </motion.div>
 
       <div className="rounded-xl border border-border bg-card p-8">
         <div className="flex items-center justify-center min-h-[200px]">
-          <GradientFillButton onClick={() => console.log("Gradient Fill clicked!")}>Gradient Fill</GradientFillButton>
+          <GradientFillButton />
         </div>
       </div>
 
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Usage</h3>
-        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
-{`import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
+        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">{`import GradientFillButton from "@/registry/buttons/gradient-fill-button";
 
-<GradientFillButton onClick={() => console.log("click!")}>
-  Gradient Fill
-</GradientFillButton>`}
-        </pre>
-      </div>
-
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">Props</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="text-left py-2 px-4 font-medium">Prop</th>
-                <th className="text-left py-2 px-4 font-medium">Type</th>
-                <th className="text-left py-2 px-4 font-medium">Default</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">children</td>
-                <td className="py-2 px-4">ReactNode</td>
-                <td className="py-2 px-4">"Button"</td>
-              </tr>
-              <tr className="border-b border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">className</td>
-                <td className="py-2 px-4">string</td>
-                <td className="py-2 px-4">undefined</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+<GradientFillButton />`}</pre>
       </div>
     </div>
   );
