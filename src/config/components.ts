@@ -73,6 +73,38 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
+    {
+        slug: "buttons/3d-button",
+        name: "3D Button",
+        description: "Button with 3D depth effect and ripple on hover",
+        category: "buttons",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "buttons/shine-button",
+        name: "Shine Button",
+        description: "Button with diagonal light sweep effect on hover",
+        category: "buttons",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "buttons/border-glow-button",
+        name: "Border Glow Button",
+        description: "Button with mouse-tracking glow effect on border",
+        category: "buttons",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "buttons/gradient-fill-button",
+        name: "Gradient Fill Button",
+        description: "Button that fills with gradient from bottom on hover",
+        category: "buttons",
+        isPremium: false,
+        isNew: true,
+    },
 ];
 
 // Helper functions
