@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { ThreeDButton } from "@/registry/buttons/3d-button";
+import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
 const buttonCode = \`"use client";
@@ -11,38 +11,40 @@ const buttonCode = \`"use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 
-export interface ThreeDButtonProps
+export interface GradientFillButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
 /**
- * 3D Button - From SyntaxUI
- * A button with 3D depth effect and ripple on hover
+ * Gradient Fill Button - From SyntaxUI
+ * A button that fills with gradient from bottom on hover
  */
-export const ThreeDButton = ({
+export const GradientFillButton = ({
   children,
   className,
   ...props
-}: ThreeDButtonProps) => {
+}: GradientFillButtonProps) => {
   return (
     <button
       className={cn(
-        "group relative m-1 inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-l-2 border-r-2 border-red-700 bg-gradient-to-tr from-red-600 to-red-500 px-4 py-1 text-white shadow-lg transition duration-100 ease-in-out active:translate-y-0.5 active:border-red-600 active:shadow-none",
+        "group/button relative overflow-hidden rounded-md border border-red-500/20 bg-white px-4 py-1 text-xs font-medium text-red-500 transition-all duration-150 hover:border-red-500 active:scale-95",
         className
       )}
       {...props}
     >
-      <span className="absolute h-0 w-0 rounded-full bg-white opacity-10 transition-all duration-300 ease-out group-hover:h-32 group-hover:w-32"></span>
-      <span className="relative font-medium">{children}</span>
+      <span className="absolute bottom-0 left-0 z-0 h-0 w-full bg-gradient-to-t from-red-600 to-red-500 transition-all duration-500 group-hover/button:h-full" />
+      <span className="relative z-10 transition-all duration-500 group-hover/button:text-white">
+        {children}
+      </span>
     </button>
   );
 };
 
-export default ThreeDButton;
+export default GradientFillButton;
 \`;
 
-export default function ThreeDButtonPage() {
+export default function GradientFillButtonPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -58,20 +60,22 @@ export default function ThreeDButtonPage() {
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <h1 className="font-display text-4xl font-bold">3D Button</h1>
+          <h1 className="font-display text-4xl font-bold">Gradient Fill Button</h1>
         </div>
         <p className="text-muted-foreground max-w-lg">
-          A button with 3D depth effect and ripple on hover. The bottom border
-          creates the 3D illusion, while a subtle ripple animates on hover.
+          A button that fills with an animated gradient from bottom to top on hover.
+          The gradient smoothly transitions the button colors.
         </p>
       </motion.div>
 
       {/* Component Tabs */}
       <ComponentPageTabs
         preview={
-          <ThreeDButton onClick={() => console.log("3D Button clicked!")}>
-            3D Button
-          </ThreeDButton>
+          <GradientFillButton
+            onClick={() => console.log("Gradient Fill Button clicked!")}
+          >
+            Gradient Fill
+          </GradientFillButton>
         }
         code={buttonCode}
       />
@@ -120,7 +124,7 @@ export default function ThreeDButtonPage() {
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a
-          href="https://syntaxui.com/components/button"
+          href="https://syntaxui.com/components/button/gradient-fill-button"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-accent hover:underline"

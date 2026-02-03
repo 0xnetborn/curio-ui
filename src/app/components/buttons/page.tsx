@@ -3,6 +3,10 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { WetButton } from "@/registry/buttons/wet-button";
+import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
+import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
+import { ThreeDButton } from "@/registry/buttons/3d-button";
+import { ShineButton } from "@/registry/buttons/shine-button";
 
 // Button components list for this category
 const buttonComponents = [
@@ -12,6 +16,34 @@ const buttonComponents = [
     description: "Dripping paint effect on hover",
     component: WetButton,
     href: "/components/buttons/wet-button",
+  },
+  {
+    name: "border-glow-button",
+    displayName: "Border Glow Button",
+    description: "Mouse-tracking glow effect on border",
+    component: BorderGlowButton,
+    href: "/components/buttons/border-glow-button",
+  },
+  {
+    name: "gradient-fill-button",
+    displayName: "Gradient Fill Button",
+    description: "Animated gradient fill from bottom on hover",
+    component: GradientFillButton,
+    href: "/components/buttons/gradient-fill-button",
+  },
+  {
+    name: "3d-button",
+    displayName: "3D Button",
+    description: "3D depth effect with press animation",
+    component: ThreeDButton,
+    href: "/components/buttons/3d-button",
+  },
+  {
+    name: "shine-button",
+    displayName: "Shine Button",
+    description: "Diagonal light sweep animation",
+    component: ShineButton,
+    href: "/components/buttons/shine-button",
   },
 ];
 

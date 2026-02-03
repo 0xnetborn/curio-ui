@@ -55,7 +55,7 @@ export default function GradientFillButtonPage() {
       >
         <div className="flex items-center gap-2">
           <Link
-            href="/buttons"
+            href="/components/buttons"
             className="p-1 rounded-md hover:bg-secondary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />

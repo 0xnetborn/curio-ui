@@ -3,46 +3,70 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { ThreeDButton } from "@/registry/buttons/3d-button";
+import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
 const buttonCode = \`"use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export interface ThreeDButtonProps
+export interface BorderGlowButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
 /**
- * 3D Button - From SyntaxUI
- * A button with 3D depth effect and ripple on hover
+ * Border Glow Button - From SyntaxUI
+ * A button with mouse-tracking glow effect on the border
  */
-export const ThreeDButton = ({
+export const BorderGlowButton = ({
   children,
   className,
   ...props
-}: ThreeDButtonProps) => {
+}: BorderGlowButtonProps) => {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [mousePosition, setMousePosition] = useState({
+    x: "-100%",
+    y: "-100%",
+  });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      setMousePosition({ x: \`\${x}px\`, y: \`\${y}px\` });
+    };
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => document.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <button
       className={cn(
-        "group relative m-1 inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-l-2 border-r-2 border-red-700 bg-gradient-to-tr from-red-600 to-red-500 px-4 py-1 text-white shadow-lg transition duration-100 ease-in-out active:translate-y-0.5 active:border-red-600 active:shadow-none",
+        "relative overflow-hidden rounded-lg bg-[#e5e7eb] transform transition-transform ease-in-out active:scale-90",
         className
       )}
+      ref={ref}
       {...props}
     >
-      <span className="absolute h-0 w-0 rounded-full bg-white opacity-10 transition-all duration-300 ease-out group-hover:h-32 group-hover:w-32"></span>
-      <span className="relative font-medium">{children}</span>
+      <span
+        className="absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(#fb3b53_0%,transparent_70%)]"
+        style={{ left: mousePosition.x, top: mousePosition.y } as React.CSSProperties}
+      />
+      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-[#fb3b53] backdrop-blur-sm">
+        {children}
+      </div>
     </button>
   );
 };
 
-export default ThreeDButton;
+export default BorderGlowButton;
 \`;
 
-export default function ThreeDButtonPage() {
+export default function BorderGlowButtonPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -58,20 +82,20 @@ export default function ThreeDButtonPage() {
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <h1 className="font-display text-4xl font-bold">3D Button</h1>
+          <h1 className="font-display text-4xl font-bold">Border Glow Button</h1>
         </div>
         <p className="text-muted-foreground max-w-lg">
-          A button with 3D depth effect and ripple on hover. The bottom border
-          creates the 3D illusion, while a subtle ripple animates on hover.
+          A button with a mouse-tracking cyan glow effect on the border. The glow
+          follows your cursor around the button edges.
         </p>
       </motion.div>
 
       {/* Component Tabs */}
       <ComponentPageTabs
         preview={
-          <ThreeDButton onClick={() => console.log("3D Button clicked!")}>
-            3D Button
-          </ThreeDButton>
+          <BorderGlowButton onClick={() => console.log("Border Glow clicked!")}>
+            Border Glow
+          </BorderGlowButton>
         }
         code={buttonCode}
       />
@@ -120,7 +144,7 @@ export default function ThreeDButtonPage() {
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a
-          href="https://syntaxui.com/components/button"
+          href="https://syntaxui.com/components/button/border-glow-button"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 text-accent hover:underline"
