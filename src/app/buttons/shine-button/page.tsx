@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ShineButton } "@/registry/buttons/shine-button";
+import { ShineButton } from "@/registry/buttons/shine-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = `"use client";
+const buttonCode = 
+`"use client";
 
 import React from 'react';
 
-const ShineButton = ({
+export const ShineButton = ({
   children = 'Button',
   className,
   ...props
@@ -28,33 +29,23 @@ const ShineButton = ({
   );
 };
 
-export default ShineButton;`;
+export type ShineButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;`;
 
 export default function ShineButtonPage() {
   return (
     <div className="space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
         <div className="flex items-center gap-2">
           <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Shine Button</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">
-          Button with diagonal light sweep animation on hover.
-        </p>
+        <p className="text-muted-foreground max-w-lg">Button with diagonal light sweep animation on hover.</p>
       </motion.div>
 
       <ComponentPageTabs
-        preview={
-          <ShineButton onClick={() => console.log("Shine Button clicked!")}>
-            Shine
-          </ShineButton>
-        }
+        preview={<ShineButton onClick={() => console.log("Shine Button clicked!")}>Shine</ShineButton>}
         code={buttonCode}
       />
 
@@ -84,9 +75,7 @@ export default function ShineButtonPage() {
                 <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
               </tr>
               <tr>
-                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props
-                </td>
+                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">Inherits all native button props</td>
               </tr>
             </tbody>
           </table>

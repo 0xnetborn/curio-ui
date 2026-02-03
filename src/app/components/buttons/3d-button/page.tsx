@@ -3,14 +3,14 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ThreeDButton } "@/registry/buttons/3d-button";
+import { ThreeDButton } from "@/registry/buttons/3d-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = `"use client";
+const buttonCode = "use client";
 
 import React from 'react';
 
-const ThreeDButton = ({
+export const ThreeDButton = ({
   children = 'Button',
   className,
   ...props
@@ -26,7 +26,7 @@ const ThreeDButton = ({
   );
 };
 
-export default ThreeDButton;`;
+export type ThreeDButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;";
 
 export default function ThreeDButtonPage() {
   return (

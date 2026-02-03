@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { BorderGlowButton } "@/registry/buttons/border-glow-button";
+import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = `"use client";
+const buttonCode = 
+`"use client";
 
 import { useEffect, useRef, useState } from 'react';
 
-const BorderGlowButton = ({
+export const BorderGlowButton = ({
   children = 'Button',
   className,
   ...props
@@ -27,9 +28,7 @@ const BorderGlowButton = ({
       setMousePosition({ x: \`\${x}px\`, y: \`\${y}px\` });
     };
     document.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-    };
+    return () => { document.removeEventListener('mousemove', handleMouseMove); };
   }, []);
 
   return (
@@ -40,10 +39,7 @@ const BorderGlowButton = ({
     >
       <span
         className={\`absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(var(--accent)_0%,transparent_70\%)]\`}
-        style={{
-          left: mousePosition.x,
-          top: mousePosition.y,
-        } as React.CSSProperties}
+        style={{ left: mousePosition.x, top: mousePosition.y } as React.CSSProperties}
       ></span>
       <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-accent backdrop-blur-sm">
         {children}
@@ -52,33 +48,23 @@ const BorderGlowButton = ({
   );
 };
 
-export default BorderGlowButton;`;
+export type BorderGlowButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;`;
 
 export default function BorderGlowButtonPage() {
   return (
     <div className="space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
         <div className="flex items-center gap-2">
           <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Border Glow Button</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">
-          Button with mouse-tracking glow effect on border.
-        </p>
+        <p className="text-muted-foreground max-w-lg">Button with mouse-tracking glow effect on border.</p>
       </motion.div>
 
       <ComponentPageTabs
-        preview={
-          <BorderGlowButton onClick={() => console.log("Border Glow clicked!")}>
-            Border Glow
-          </BorderGlowButton>
-        }
+        preview={<BorderGlowButton onClick={() => console.log("Border Glow clicked!")}>Border Glow</BorderGlowButton>}
         code={buttonCode}
       />
 
@@ -108,9 +94,7 @@ export default function BorderGlowButtonPage() {
                 <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
               </tr>
               <tr>
-                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props
-                </td>
+                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">Inherits all native button props</td>
               </tr>
             </tbody>
           </table>

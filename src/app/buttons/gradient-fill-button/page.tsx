@@ -3,14 +3,15 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { GradientFillButton } "@/registry/buttons/gradient-fill-button";
+import { GradientFillButton } from "@/registry/buttons/gradient-fill-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = `"use client";
+const buttonCode = 
+`"use client";
 
 import React from 'react';
 
-const GradientFillButton = ({
+export const GradientFillButton = ({
   children = 'Button',
   className,
   ...props
@@ -21,40 +22,28 @@ const GradientFillButton = ({
       {...props}
     >
       <span className="absolute bottom-0 left-0 z-0 h-0 w-full bg-gradient-to-t from-accent to-accent-foreground transition-all duration-500 group-hover/button:h-full" />
-      <span className="relative z-10 transition-all duration-500 group-hover/button:text-white">
-        {children}
-      </span>
+      <span className="relative z-10 transition-all duration-500 group-hover/button:text-white">{children}</span>
     </button>
   );
 };
 
-export default GradientFillButton;`;
+export type GradientFillButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;`;
 
 export default function GradientFillButtonPage() {
   return (
     <div className="space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
         <div className="flex items-center gap-2">
           <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Gradient Fill Button</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">
-          Button that fills with gradient from bottom on hover.
-        </p>
+        <p className="text-muted-foreground max-w-lg">Button that fills with gradient from bottom on hover.</p>
       </motion.div>
 
       <ComponentPageTabs
-        preview={
-          <GradientFillButton onClick={() => console.log("Gradient Fill clicked!")}>
-            Gradient Fill
-          </GradientFillButton>
-        }
+        preview={<GradientFillButton onClick={() => console.log("Gradient Fill clicked!")}>Gradient Fill</GradientFillButton>}
         code={buttonCode}
       />
 
@@ -84,9 +73,7 @@ export default function GradientFillButtonPage() {
                 <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
               </tr>
               <tr>
-                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props
-                </td>
+                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">Inherits all native button props</td>
               </tr>
             </tbody>
           </table>

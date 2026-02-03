@@ -6,7 +6,8 @@ import Link from "next/link";
 import { ThreeDButton } from "@/registry/buttons/3d-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = `"use client";
+const buttonCode = 
+`"use client";
 
 import React from 'react';
 
@@ -31,11 +32,7 @@ export type ThreeDButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;`;
 export default function ThreeDButtonPage() {
   return (
     <div className="space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
         <div className="flex items-center gap-2">
           <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
@@ -48,11 +45,7 @@ export default function ThreeDButtonPage() {
       </motion.div>
 
       <ComponentPageTabs
-        preview={
-          <ThreeDButton onClick={() => console.log("3D Button clicked!")}>
-            3D Button
-          </ThreeDButton>
-        }
+        preview={<ThreeDButton onClick={() => console.log("3D Button clicked!")}>3D Button</ThreeDButton>}
         code={buttonCode}
       />
 
@@ -82,9 +75,7 @@ export default function ThreeDButtonPage() {
                 <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
               </tr>
               <tr>
-                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props
-                </td>
+                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">Inherits all native button props</td>
               </tr>
             </tbody>
           </table>

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ShineButton } "@/registry/buttons/shine-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = `"use client";
+const buttonCode = "use client";
 
 import React from 'react';
 
@@ -28,7 +28,7 @@ const ShineButton = ({
   );
 };
 
-export default ShineButton;`;
+export default ShineButton;";
 
 export default function ShineButtonPage() {
   return (

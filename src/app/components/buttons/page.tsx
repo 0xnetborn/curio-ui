@@ -1,97 +1,85 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { WetButton } "@/registry/buttons/wet-button";
-import { BorderGlowButton } "@/registry/buttons/border-glow-button";
-import { GradientFillButton } "@/registry/buttons/gradient-fill-button";
-import { ThreeDButton } "@/registry/buttons/3d-button";
-import { ShineButton } "@/registry/buttons/shine-button";
+import { ShineButton } from "@/registry/buttons/shine-button";
+import { ComponentPageTabs } from "@/components/ui/tabs";
 
-// Button components list for this category
-const buttonComponents = [
-  {
-    name: "wet-button",
-    displayName: "Wet Paint Button",
-    description: "Dripping paint effect on hover",
-    component: WetButton,
-    href: "/components/buttons/wet-button",
-  },
-  {
-    name: "border-glow-button",
-    displayName: "Border Glow Button",
-    description: "Mouse-tracking glow effect on border",
-    component: BorderGlowButton,
-    href: "/components/buttons/border-glow-button",
-  },
-  {
-    name: "gradient-fill-button",
-    displayName: "Gradient Fill Button",
-    description: "Animated gradient fill from bottom on hover",
-    component: GradientFillButton,
-    href: "/components/buttons/gradient-fill-button",
-  },
-  {
-    name: "3d-button",
-    displayName: "3D Button",
-    description: "3D depth effect with press animation",
-    component: ThreeDButton,
-    href: "/components/buttons/3d-button",
-  },
-  {
-    name: "shine-button",
-    displayName: "Shine Button",
-    description: "Diagonal light sweep animation",
-    component: ShineButton,
-    href: "/components/buttons/shine-button",
-  },
-];
+const buttonCode = 
+`"use client";
 
-export default function ComponentsButtonsPage() {
+import React from 'react';
+
+export const ShineButton = ({
+  children = 'Button',
+  className,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return (
+    <button
+      className={\`group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-accent px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-accent/30 \${className || ''}\`}
+      {...props}
+    >
+      <span className="text-sm">{children}</span>
+      <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
+        <div className="relative h-full w-8 bg-white/20" />
+      </div>
+    </button>
+  );
+};
+
+export type ShineButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;`;
+
+export default function ShineButtonPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
-        <h1 className="font-display text-4xl font-bold">Buttons</h1>
-        <p className="text-muted-foreground max-w-lg">
-          Interactive button components with hover effects, animations, and
-          playful interactions.
-        </p>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+        <div className="flex items-center gap-2">
+          <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors">
+            <ArrowLeft className="w-4 h-4" />
+          </Link>
+          <h1 className="font-display text-4xl font-bold">Shine Button</h1>
+        </div>
+        <p className="text-muted-foreground max-w-lg">Button with diagonal light sweep animation on hover.</p>
       </motion.div>
 
-      {/* Buttons Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {buttonComponents.map((button, i) => (
-          <motion.div
-            key={button.name}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
-          >
-            <Link href={button.href}>
-              <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
-                {/* Center the button preview */}
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50 rounded-xl">
-                  <button.component onClick={() => {}}>
-                    {button.displayName}
-                  </button.component>
-                </div>
+      <ComponentPageTabs
+        preview={<ShineButton onClick={() => console.log("Shine Button clicked!")}>Shine</ShineButton>}
+        code={buttonCode}
+      />
 
-                {/* Info overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card to-transparent rounded-b-xl">
-                  <h3 className="font-medium text-sm">{button.displayName}</h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2">
-                    {button.description}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
+      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+        <h3 className="font-semibold">Props</h3>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="text-left py-2 px-4 font-medium">Prop</th>
+                <th className="text-left py-2 px-4 font-medium">Type</th>
+                <th className="text-left py-2 px-4 font-medium">Default</th>
+                <th className="text-left py-2 px-4 font-medium">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-border/50">
+                <td className="py-2 px-4 font-mono text-accent">children</td>
+                <td className="py-2 px-4">ReactNode</td>
+                <td className="py-2 px-4">"Button"</td>
+                <td className="py-2 px-4 text-muted-foreground">Button label</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <td className="py-2 px-4 font-mono text-accent">className</td>
+                <td className="py-2 px-4">string</td>
+                <td className="py-2 px-4">undefined</td>
+                <td className="py-2 px-4 text-muted-foreground">Additional CSS classes</td>
+              </tr>
+              <tr>
+                <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">Inherits all native button props</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
