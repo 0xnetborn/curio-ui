@@ -6,7 +6,7 @@ import Link from "next/link";
 import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = \`"use client";
+const buttonCode = `"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -64,7 +64,7 @@ export const BorderGlowButton = ({
 };
 
 export default BorderGlowButton;
-\`;
+`;
 
 export default function BorderGlowButtonPage() {
   return (

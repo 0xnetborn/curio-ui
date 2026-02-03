@@ -6,7 +6,7 @@ import Link from "next/link";
 import { BorderGlowButton } from "@/registry/buttons/border-glow-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = \`"use client";
+const buttonCode = `"use client";
 
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
@@ -16,10 +16,6 @@ export interface BorderGlowButtonProps
   children: React.ReactNode;
 }
 
-/**
- * Border Glow Button - From SyntaxUI
- * A button with mouse-tracking glow effect on the border
- */
 export const BorderGlowButton = ({
   children,
   className,
@@ -37,7 +33,7 @@ export const BorderGlowButton = ({
       const rect = ref.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      setMousePosition({ x: \`\${x}px\`, y: \`\${y}px\` });
+      setMousePosition({ x: x + "px", y: y + "px" });
     };
     document.addEventListener("mousemove", handleMouseMove);
     return () => document.removeEventListener("mousemove", handleMouseMove);
@@ -63,13 +59,11 @@ export const BorderGlowButton = ({
   );
 };
 
-export default BorderGlowButton;
-\`;
+export default BorderGlowButton;`;
 
 export default function BorderGlowButtonPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -90,7 +84,6 @@ export default function BorderGlowButtonPage() {
         </p>
       </motion.div>
 
-      {/* Component Tabs */}
       <ComponentPageTabs
         preview={
           <BorderGlowButton onClick={() => console.log("Border Glow clicked!")}>
@@ -100,7 +93,6 @@ export default function BorderGlowButtonPage() {
         code={buttonCode}
       />
 
-      {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
@@ -132,7 +124,7 @@ export default function BorderGlowButtonPage() {
               </tr>
               <tr>
                 <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props (onClick, disabled, etc.)
+                  Inherits all native button props
                 </td>
               </tr>
             </tbody>
@@ -140,7 +132,6 @@ export default function BorderGlowButtonPage() {
         </div>
       </div>
 
-      {/* Source */}
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a

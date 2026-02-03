@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ThreeDButton } from "@/registry/buttons/3d-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = \`"use client";
+const buttonCode = `"use client";
 
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -16,10 +16,6 @@ export interface ThreeDButtonProps
   children: React.ReactNode;
 }
 
-/**
- * 3D Button - From SyntaxUI
- * A button with 3D depth effect and ripple on hover
- */
 export const ThreeDButton = ({
   children,
   className,
@@ -39,13 +35,11 @@ export const ThreeDButton = ({
   );
 };
 
-export default ThreeDButton;
-\`;
+export default ThreeDButton;`;
 
 export default function ThreeDButtonPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -66,7 +60,6 @@ export default function ThreeDButtonPage() {
         </p>
       </motion.div>
 
-      {/* Component Tabs */}
       <ComponentPageTabs
         preview={
           <ThreeDButton onClick={() => console.log("3D Button clicked!")}>
@@ -76,7 +69,6 @@ export default function ThreeDButtonPage() {
         code={buttonCode}
       />
 
-      {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
@@ -108,7 +100,7 @@ export default function ThreeDButtonPage() {
               </tr>
               <tr>
                 <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props (onClick, disabled, etc.)
+                  Inherits all native button props
                 </td>
               </tr>
             </tbody>
@@ -116,7 +108,6 @@ export default function ThreeDButtonPage() {
         </div>
       </div>
 
-      {/* Source */}
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a

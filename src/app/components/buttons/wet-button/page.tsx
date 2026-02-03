@@ -6,7 +6,7 @@ import Link from "next/link";
 import { WetButton } from "@/registry/buttons/wet-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = \`"use client";
+const buttonCode = `"use client";
 
 import React from "react";
 import { motion } from "framer-motion";
@@ -17,10 +17,6 @@ export interface WetButtonProps
   children?: React.ReactNode;
 }
 
-/**
- * Wet Paint Button - From hover.dev
- * A button with dripping paint effect on hover
- */
 export const WetButton = ({
   children = "Wet Paint",
   className,
@@ -35,7 +31,6 @@ export const WetButton = ({
       {...props}
     >
       {children}
-      {/* Drip effects */}
       <Drip left="10%" height={24} delay={0.5} colorClass="bg-accent" groupHoverClass="group-hover:bg-accent/90" />
       <Drip left="30%" height={20} delay={3} colorClass="bg-accent" groupHoverClass="group-hover:bg-accent/90" />
       <Drip left="57%" height={10} delay={4.25} colorClass="bg-accent" groupHoverClass="group-hover:bg-accent/90" />
@@ -68,30 +63,10 @@ const Drip = ({ left, height, delay, colorClass, groupHoverClass }: DripProps) =
         repeatDelay: 2,
       }}
     >
-      {/* Main drip column */}
-      <div
-        style={{ height }}
-        className={cn(
-          "w-2 rounded-b-full transition-colors",
-          groupHoverClass
-        )}
-      />
-
-      {/* Left SVG drip tip */}
-      <svg
-        width="6"
-        height="6"
-        viewBox="0 0 6 6"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={cn("absolute left-full top-0", colorClass, groupHoverClass)}
-      >
+      <div style={{ height }} className={cn("w-2 rounded-b-full transition-colors", groupHoverClass)} />
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg" className={cn("absolute left-full top-0", colorClass, groupHoverClass)}>
         <g clipPath="url(#clip0_1077_28)">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-          />
+          <path fillRule="evenodd" clipRule="evenodd" d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z" />
         </g>
         <defs>
           <clipPath id="clip0_1077_28">
@@ -99,22 +74,9 @@ const Drip = ({ left, height, delay, colorClass, groupHoverClass }: DripProps) =
           </clipPath>
         </defs>
       </svg>
-
-      {/* Right SVG drip tip */}
-      <svg
-        width="6"
-        height="6"
-        viewBox="0 0 6 6"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className={cn("absolute right-full top-0 rotate-90", colorClass, groupHoverClass)}
-      >
+      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg" className={cn("absolute right-full top-0 rotate-90", colorClass, groupHoverClass)}>
         <g clipPath="url(#clip0_1077_28_2)">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-          />
+          <path fillRule="evenodd" clipRule="evenodd" d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z" />
         </g>
         <defs>
           <clipPath id="clip0_1077_28_2">
@@ -122,36 +84,21 @@ const Drip = ({ left, height, delay, colorClass, groupHoverClass }: DripProps) =
           </clipPath>
         </defs>
       </svg>
-
-      {/* Falling droplet */}
       <motion.div
         initial={{ y: -8, opacity: 1 }}
         animate={{ y: [-8, 50], opacity: [1, 0] }}
-        transition={{
-          duration: 2,
-          times: [0, 1],
-          delay,
-          ease: "easeIn",
-          repeat: Infinity,
-          repeatDelay: 2,
-        }}
-        className={cn(
-          "absolute top-full h-2 w-2 rounded-full",
-          colorClass,
-          groupHoverClass
-        )}
+        transition={{ duration: 2, times: [0, 1], delay, ease: "easeIn", repeat: Infinity, repeatDelay: 2 }}
+        className={cn("absolute top-full h-2 w-2 rounded-full", colorClass, groupHoverClass)}
       />
     </motion.div>
   );
 };
 
-export default WetButton;
-\`;
+export default WetButton;`;
 
 export default function WetButtonPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -172,7 +119,6 @@ export default function WetButtonPage() {
         </p>
       </motion.div>
 
-      {/* Component Tabs */}
       <ComponentPageTabs
         preview={
           <div className="bg-slate-900 p-8 rounded-lg">
@@ -182,7 +128,6 @@ export default function WetButtonPage() {
         code={buttonCode}
       />
 
-      {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
@@ -214,7 +159,7 @@ export default function WetButtonPage() {
               </tr>
               <tr>
                 <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props (onClick, disabled, etc.)
+                  Inherits all native button props
                 </td>
               </tr>
             </tbody>
@@ -222,7 +167,6 @@ export default function WetButtonPage() {
         </div>
       </div>
 
-      {/* Dependencies */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Dependencies</h3>
         <ul className="text-sm text-muted-foreground space-y-2">
@@ -233,7 +177,6 @@ export default function WetButtonPage() {
         </ul>
       </div>
 
-      {/* Source */}
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a

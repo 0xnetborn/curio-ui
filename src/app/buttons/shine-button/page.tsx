@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ShineButton } from "@/registry/buttons/shine-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = \`"use client";
+const buttonCode = `"use client";
 
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -42,7 +42,7 @@ export const ShineButton = ({
 };
 
 export default ShineButton;
-\`;
+`;
 
 export default function ShineButtonPage() {
   return (

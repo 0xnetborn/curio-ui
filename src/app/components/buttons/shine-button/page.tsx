@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ShineButton } from "@/registry/buttons/shine-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = \`"use client";
+const buttonCode = `"use client";
 
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -16,10 +16,6 @@ export interface ShineButtonProps
   children: React.ReactNode;
 }
 
-/**
- * Shine Button - From SyntaxUI
- * A button with diagonal light sweep effect on hover
- */
 export const ShineButton = ({
   children,
   className,
@@ -41,13 +37,11 @@ export const ShineButton = ({
   );
 };
 
-export default ShineButton;
-\`;
+export default ShineButton;`;
 
 export default function ShineButtonPage() {
   return (
     <div className="space-y-8">
-      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -68,7 +62,6 @@ export default function ShineButtonPage() {
         </p>
       </motion.div>
 
-      {/* Component Tabs */}
       <ComponentPageTabs
         preview={
           <ShineButton onClick={() => console.log("Shine Button clicked!")}>
@@ -78,7 +71,6 @@ export default function ShineButtonPage() {
         code={buttonCode}
       />
 
-      {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
         <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
@@ -110,7 +102,7 @@ export default function ShineButtonPage() {
               </tr>
               <tr>
                 <td colSpan={4} className="py-2 px-4 text-muted-foreground text-center">
-                  Inherits all native button props (onClick, disabled, etc.)
+                  Inherits all native button props
                 </td>
               </tr>
             </tbody>
@@ -118,7 +110,6 @@ export default function ShineButtonPage() {
         </div>
       </div>
 
-      {/* Source */}
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a

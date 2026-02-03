@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ThreeDButton } from "@/registry/buttons/3d-button";
 import { ComponentPageTabs } from "@/components/ui/tabs";
 
-const buttonCode = \`"use client";
+const buttonCode = `"use client";
 
 import React from "react";
 import { cn } from "@/lib/utils";
@@ -40,7 +40,7 @@ export const ThreeDButton = ({
 };
 
 export default ThreeDButton;
-\`;
+`;
 
 export default function ThreeDButtonPage() {
   return (
