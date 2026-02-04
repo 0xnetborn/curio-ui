@@ -13,4 +13,4 @@ export * from './effects/glass-surface';
 export * from './text';
 
 // Blocks
-export * from './blocks/infinite-logos-loop';
+// export * from './blocks/infinite-logos-loop';
