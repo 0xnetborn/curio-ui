@@ -51,27 +51,9 @@ export const componentCategories = {
 
 // Component Registry
 export const components: ComponentMeta[] = [
-    // Backgrounds
-    {
-        slug: "ascii-media",
-        name: "ASCII Media",
-        description: "Convert video and images to real-time ASCII art with WebGL",
-        category: "backgrounds",
-        isPremium: false,
-        isNew: false,
-    },
-    {
-        slug: "aurora-glow",
-        name: "Aurora Glow",
-        description: "Ethereal light pillar effect with Three.js raymarching shaders",
-        category: "backgrounds",
-        isPremium: false,
-        isNew: true,
-        dependencies: ["three"],
-    },
     // Buttons / Surfaces
     {
-        slug: "glass-surface",
+        slug: "effects/glass-surface",
         name: "Glass Surface",
         description: "Glassmorphism container with chromatic aberration distortion",
         category: "buttons",
@@ -111,7 +93,7 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "components/buttons/wet-button",
+        slug: "buttons/wet-paint-button",
         name: "Wet Paint Button",
         description: "Dripping paint effect on hover",
         category: "buttons",
@@ -123,16 +105,15 @@ export const components: ComponentMeta[] = [
     {
         slug: "text-animations/fuzzy-text",
         name: "Fuzzy Text",
-        description: "Text that blurs and reveals on hover",
+        description: "Canvas-based fuzzy text effect with glitch animations",
         category: "text",
         isPremium: false,
         isNew: true,
-        dependencies: ["framer-motion"],
     },
     // Blocks
     {
         slug: "blocks/infinite-logos-loop",
-        name: "Infinite Logoss Loop",
+        name: "Infinite Logos Loop",
         description: "Continuously scrolling logo cloud animation",
         category: "blocks",
         isPremium: false,

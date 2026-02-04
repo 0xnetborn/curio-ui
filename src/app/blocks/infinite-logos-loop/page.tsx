@@ -5,7 +5,7 @@ import Link from "next/link";
 import { PreviewCodeTabs } from "@/components/ui/tabs";
 import InfiniteLogosLoop from "@/registry/blocks/infinite-logos-loop";
 
-const CODE = `/* Required: Add this to globals.css:
+const CODE = `/* Add to globals.css:
 @keyframes logo-cloud {
   from { transform: 'translateX(0)'; }
   to { transform: 'translateX(calc(-100% - 2rem))'; }
@@ -24,15 +24,20 @@ const USAGE = `import InfiniteLogosLoop from "@/registry/blocks/infinite-logos-l
 // Basic usage
 <InfiniteLogosLoop />
 
-// With custom props
-<InfiniteLogosLoop 
-  className="my-12"
-  speed="slow"
-/>`;
+// With custom logos
+<InfiniteLogosLoop
+  logos={[
+    { name: 'React', url: 'https://react.svg' },
+    { name: 'Next.js', url: 'https://nextjs.svg' },
+  ]}
+/>
 
-function TechBadge({ children, color = "secondary" }: { children: React.ReactNode; color?: string }) {
+// With custom className
+<InfiniteLogosLoop className="py-8" />`;
+
+function TechBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className={`px-2 py-1 text-xs font-medium rounded-md bg-${color}/10 text-${color}`}>
+    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground">
       {children}
     </span>
   );
@@ -52,15 +57,16 @@ export default function InfiniteLogosLoopPage() {
         <p className="text-muted-foreground max-w-lg">
           Continuously scrolling logo cloud animation with seamless loop.
         </p>
-        <div className="flex gap-2">
-          <TechBadge color="primary">React</TechBadge>
-          <TechBadge color="accent">Tailwind</TechBadge>
+        <div className="flex flex-wrap gap-2">
+          <TechBadge>React</TechBadge>
+          <TechBadge>Tailwind</TechBadge>
+          <TechBadge>CSS Animation</TechBadge>
         </div>
       </div>
 
       {/* Preview + Code */}
       <PreviewCodeTabs
-        preview={<div className="w-full max-w-4xl"><InfiniteLogosLoop /></div>}
+        preview={<InfiniteLogosLoop />}
         code={CODE}
         codeLanguage="css"
       />

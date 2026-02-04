@@ -6,14 +6,14 @@ import ThreeDButton from "@/registry/buttons/3d-button";
 import ShineButton from "@/registry/buttons/shine-button";
 import BorderGlowButton from "@/registry/buttons/border-glow-button";
 import GradientFillButton from "@/registry/buttons/gradient-fill-button";
-import WetButton from "@/registry/buttons/wet-button";
+import WetPaintButton from "@/registry/buttons/wet-paint-button";
 
 const buttons = [
   { name: "3d-button", displayName: "3D Button", component: ThreeDButton, href: "/components/buttons/3d-button" },
   { name: "shine-button", displayName: "Shine Button", component: ShineButton, href: "/components/buttons/shine-button" },
   { name: "border-glow-button", displayName: "Border Glow", component: BorderGlowButton, href: "/components/buttons/border-glow-button" },
   { name: "gradient-fill-button", displayName: "Gradient Fill", component: GradientFillButton, href: "/components/buttons/gradient-fill-button" },
-  { name: "wet-button", displayName: "Wet Paint", component: WetButton, href: "/components/buttons/wet-button" },
+  { name: "wet-paint-button", displayName: "Wet Paint", component: WetPaintButton, href: "/buttons/wet-paint-button" },
 ];
 
 export default function ComponentsButtonsPage() {

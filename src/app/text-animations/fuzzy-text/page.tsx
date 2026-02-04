@@ -1,24 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import FuzzyText from "@/registry/text/fuzzy-text";
+import { motion } from "framer-motion";
 import { PreviewCodeTabs } from "@/components/ui/tabs";
+import FuzzyText from "@/registry/text/fuzzy-text";
 
-const CODE = `import React, { useEffect, useRef } from 'react';
+const CODE = `"use client";
+
+import React, { useEffect, useRef } from 'react';
 
 interface FuzzyTextProps {
   children: React.ReactNode;
   fontSize?: number | string;
   fontWeight?: string | number;
-  fontFamily?: string;
   color?: string;
   enableHover?: boolean;
   baseIntensity?: number;
   hoverIntensity?: number;
   fuzzRange?: number;
-  // ... more props
+  fps?: number;
+  direction?: 'horizontal' | 'vertical' | 'both';
+  clickEffect?: boolean;
+  glitchMode?: boolean;
+  glitchInterval?: number;
+  glitchDuration?: number;
+  gradient?: string[] | null;
+  className?: string;
 }
 
 const FuzzyText: React.FC<FuzzyTextProps> = ({
@@ -30,17 +38,21 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   baseIntensity = 0.18,
   hoverIntensity = 0.5,
   fuzzRange = 30,
-  // ... more props
+  fps = 60,
+  direction = 'horizontal',
+  clickEffect = false,
+  glitchMode = false,
+  glitchInterval = 2000,
+  glitchDuration = 200,
+  gradient = null,
+  className = ''
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => {
-    // Canvas-based fuzzy text animation
-    // Uses requestAnimationFrame for smooth animation
-    // Supports hover, click, and glitch effects
-  }, []);
+  // Canvas-based fuzzy text animation with requestAnimationFrame
+  // Supports hover, click, and glitch effects
 
-  return <canvas ref={canvasRef} />;
+  return <canvas ref={canvasRef} className={className} />;
 };
 
 export default FuzzyText;`;
@@ -51,27 +63,16 @@ const USAGE = `import FuzzyText from "@/registry/text/fuzzy-text";
 <FuzzyText>CurioUI</FuzzyText>
 
 // With gradient
-<FuzzyText gradient={["#0D9488", "#14B8A6", "#2DD4BF"]}>
+<FuzzyText
+  gradient={["#0D9488", "#14B8A6", "#2DD4BF"]}
+  fontSize="4rem"
+>
   CurioUI
 </FuzzyText>
 
 // With glitch mode
 <FuzzyText glitchMode glitchInterval={2000}>
-  CurioUI
-</FuzzyText>
-
-// Full customization
-<FuzzyText
-  fontSize="4rem"
-  fontWeight={900}
-  color="#0D9488"
-  enableHover
-  baseIntensity={0.2}
-  hoverIntensity={0.6}
-  fuzzRange={40}
-  clickEffect
->
-  Hover Me
+  Glitch Effect
 </FuzzyText>`;
 
 function TechBadge({ children }: { children: React.ReactNode }) {
@@ -92,10 +93,7 @@ export default function FuzzyTextPage() {
         className="space-y-4"
       >
         <div className="flex items-center gap-2">
-          <Link
-            href="/text-animations"
-            className="p-1 rounded-md hover:bg-secondary transition-colors"
-          >
+          <Link href="/components" className="p-1 rounded-md hover:bg-secondary transition-colors">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Fuzzy Text</h1>
