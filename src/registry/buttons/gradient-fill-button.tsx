@@ -1,25 +1,10 @@
-"use client";
+import React from "react";
 
-import { ButtonHTMLAttributes } from "react";
-
-export interface GradientFillButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode;
-}
-
-export const GradientFillButton = ({
-  children = "CurioUI",
-  className,
-  ...props
-}: GradientFillButtonProps) => {
+const GradientFillButton = () => {
   return (
-    <button
-      className={`group/button relative overflow-hidden rounded-md border border-accent/20 bg-background px-4 py-1 text-xs font-medium text-accent transition-all duration-150 hover:border-accent active:scale-95 ${className || ""}`}
-      {...props}
-    >
-      <span className="absolute bottom-0 left-0 z-0 h-0 w-full bg-gradient-to-t from-accent to-accent/80 transition-all duration-500 group-hover/button:h-full" />
-      <span className="relative z-10 transition-all duration-500 group-hover/button:text-accent-foreground">
-        {children}
-      </span>
+    <button className="px-4 py-2 bg-slate-900 text-white rounded-lg relative overflow-hidden">
+      <span className="absolute inset-0 bg-gradient-to-b from-accent/0 via-accent/50 to-accent/0 -translate-y-full hover:translate-y-0 transition-transform duration-300" />
+      <span className="relative">Gradient Fill</span>
     </button>
   );
 };
