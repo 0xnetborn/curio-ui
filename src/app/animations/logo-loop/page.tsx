@@ -10,9 +10,8 @@ import { PreviewCodeTabs } from "@/components/ui/tabs";
 const sampleLogos = [
   { node: <span className="text-2xl font-bold text-accent">Curio</span>, href: "#", ariaLabel: "Curio" },
   { node: <span className="text-2xl font-bold text-white">UI</span>, href: "#", ariaLabel: "UI" },
-  { node: <span className="text-2xl font-bold text-muted-foreground">Design</span>, href: "#", ariaLabel: "Design" },
+  { node: <span className="text-2xl font-bold text-white">Design</span>, href: "#", ariaLabel: "Design" },
   { node: <span className="text-2xl font-bold text-white">Components</span>, href: "#", ariaLabel: "Components" },
-  { node: <span className="text-2xl font-bold text-accent">Animation</span>, href: "#", ariaLabel: "Animation" },
 ];
 
 const logoLoopCode = `"use client";
@@ -363,12 +362,12 @@ export default function LogoLoopPage() {
         </p>
       </motion.div>
 
-      {/* Default Logo Loop */}
+      {/* Preview */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Default Loop</h2>
+        <h2 className="text-xl font-semibold">Preview</h2>
         <PreviewCodeTabs
           preview={
-            <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center w-full overflow-hidden">
+            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center w-full overflow-hidden">
               <div className="w-full max-w-4xl">
                 <LogoLoop logos={sampleLogos} speed={80} />
               </div>
@@ -378,54 +377,9 @@ export default function LogoLoopPage() {
         />
       </div>
 
-      {/* Pause on Hover */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Pause on Hover</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center w-full overflow-hidden">
-              <div className="w-full max-w-4xl">
-                <LogoLoop logos={sampleLogos} speed={100} pauseOnHover />
-              </div>
-            </div>
-          }
-          code={logoLoopCode}
-        />
-      </div>
-
-      {/* Vertical Direction */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Vertical Loop</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center w-full overflow-hidden">
-              <div className="w-full max-w-md h-64">
-                <LogoLoop logos={sampleLogos} direction="up" speed={60} />
-              </div>
-            </div>
-          }
-          code={logoLoopCode}
-        />
-      </div>
-
-      {/* Fade Effect */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">With Fade Effect</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center w-full overflow-hidden">
-              <div className="w-full max-w-4xl">
-                <LogoLoop logos={sampleLogos} speed={90} fadeOut fadeOutColor="#020617" />
-              </div>
-            </div>
-          }
-          code={logoLoopCode}
-        />
-      </div>
-
       {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">LogoLoop Props</h3>
+        <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -478,20 +432,9 @@ export default function LogoLoopPage() {
         </div>
       </div>
 
-      {/* Dependencies */}
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">Dependencies</h3>
-        <ul className="text-sm text-muted-foreground space-y-2">
-          <li className="flex items-center gap-2">
-            <code className="text-accent">react</code>
-            <span>— Core React</span>
-          </li>
-        </ul>
-      </div>
-
       {/* CSS Required */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">CSS Required</h3>
+        <h3 className="font-semibold">CSS</h3>
         <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">{`import '@/registry/animations/logo-loop.css';`}</pre>
       </div>
 

@@ -212,9 +212,9 @@ export default function FuzzyTextPage() {
         </p>
       </motion.div>
 
-      {/* Default Fuzzy Text */}
+      {/* Preview */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Default Effect</h2>
+        <h2 className="text-xl font-semibold">Preview</h2>
         <PreviewCodeTabs
           preview={
             <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[200px]">
@@ -231,48 +231,9 @@ export default function FuzzyTextPage() {
         />
       </div>
 
-      {/* High Intensity */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">High Intensity</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[200px]">
-              <FuzzyText
-                className="text-5xl font-black text-accent"
-                baseIntensity={0.4}
-                hoverIntensity={0.8}
-              >
-                Glitch Effect
-              </FuzzyText>
-            </div>
-          }
-          code={fuzzyTextCode}
-        />
-      </div>
-
-      {/* With Custom Colors */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Custom Color</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[200px]">
-              <FuzzyText
-                className="text-5xl font-black"
-                color="#14B8A6"
-                baseIntensity={0.25}
-                hoverIntensity={0.6}
-              >
-                Curio UI
-              </FuzzyText>
-            </div>
-          }
-          code={fuzzyTextCode}
-        />
-      </div>
-
       {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">FuzzyText Props</h3>
+        <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>

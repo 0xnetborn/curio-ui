@@ -158,9 +158,9 @@ export default function GradientTextPage() {
         </p>
       </motion.div>
 
-      {/* Default Gradient Text */}
+      {/* Preview */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Default Gradient</h2>
+        <h2 className="text-xl font-semibold">Preview</h2>
         <PreviewCodeTabs
           preview={
             <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[150px]">
@@ -176,85 +176,9 @@ export default function GradientTextPage() {
         />
       </div>
 
-      {/* With Border */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">With Gradient Border</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[150px]">
-              <GradientText
-                className="text-4xl font-bold"
-                showBorder
-                animationSpeed={10}
-              >
-                Gradient Border
-              </GradientText>
-            </div>
-          }
-          code={gradientTextCode}
-        />
-      </div>
-
-      {/* Pause on Hover */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Pause on Hover</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[150px]">
-              <GradientText
-                className="text-5xl font-black"
-                pauseOnHover
-                animationSpeed={6}
-              >
-                Hover to Pause
-              </GradientText>
-            </div>
-          }
-          code={gradientTextCode}
-        />
-      </div>
-
-      {/* Vertical Direction */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Vertical Animation</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[150px]">
-              <GradientText
-                className="text-5xl font-black"
-                direction="vertical"
-                animationSpeed={10}
-              >
-                Vertical Flow
-              </GradientText>
-            </div>
-          }
-          code={gradientTextCode}
-        />
-      </div>
-
-      {/* Custom Colors */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Custom Colors</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[150px]">
-              <GradientText
-                className="text-5xl font-black"
-                colors={['#14B8A6', '#a855f7', '#ec4899', '#f97316', '#14B8A6']}
-                animationSpeed={12}
-              >
-                Rainbow
-              </GradientText>
-            </div>
-          }
-          code={gradientTextCode}
-        />
-      </div>
-
       {/* Props Table */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">GradientText Props</h3>
+        <h3 className="font-semibold">Props</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -326,7 +250,7 @@ export default function GradientTextPage() {
 
       {/* CSS Required */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">CSS Required</h3>
+        <h3 className="font-semibold">CSS</h3>
         <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">{`import '@/registry/text/gradient-text.css';`}</pre>
       </div>
 
