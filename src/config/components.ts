@@ -51,6 +51,24 @@ export const componentCategories = {
 
 // Component Registry
 export const components: ComponentMeta[] = [
+    // Backgrounds
+    {
+        slug: "aurora-glow",
+        name: "Aurora Glow",
+        description: "Ethereal light pillar effect with Three.js raymarching shaders",
+        category: "backgrounds",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["three"],
+    },
+    {
+        slug: "ascii-media",
+        name: "ASCII Media",
+        description: "Convert video and images to real-time ASCII art with WebGL",
+        category: "backgrounds",
+        isPremium: false,
+        isNew: false,
+    },
     // Buttons / Surfaces
     {
         slug: "effects/glass-surface",

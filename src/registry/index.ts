@@ -6,6 +6,9 @@ export * from './backgrounds';
 // Buttons
 export * from './buttons';
 
+// Effects
+export * from './effects/glass-surface';
+
 // Text Animations
 export * from './text';
 
