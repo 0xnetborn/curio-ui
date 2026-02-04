@@ -3,92 +3,82 @@
 import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { FuzzyText, FuzzyTextChars } from "@/registry/text/fuzzy-text";
+import FuzzyText from "@/registry/text/fuzzy-text";
 import { PreviewCodeTabs } from "@/components/ui/tabs";
 
 const fuzzyTextCode = `"use client";
 
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from 'react';
 
 export interface FuzzyTextProps {
-  children: string;
+  children: React.ReactNode;
+  fontSize?: string | number;
+  fontWeight?: string | number;
+  fontFamily?: string;
+  color?: string;
+  enableHover?: boolean;
+  baseIntensity?: number;
+  hoverIntensity?: number;
   className?: string;
-  baseBlur?: number;
-  hoverBlur?: number;
-  duration?: number;
-  easing?: string;
 }
 
-export const FuzzyText = ({
+const FuzzyText = ({
   children,
-  className,
-  baseBlur = 10,
-  hoverBlur = 0,
-  duration = 400,
-  easing = "easeOut",
+  fontSize = 'clamp(2rem, 10vw, 10rem)',
+  fontWeight = 900,
+  fontFamily = 'inherit',
+  color = '#fff',
+  enableHover = true,
+  baseIntensity = 0.18,
+  hoverIntensity = 0.5,
+  className = ''
 }: FuzzyTextProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const blurValue = isHovered ? hoverBlur : baseBlur;
+  const canvasRef = useRef(null);
 
-  return (
-    <motion.span
-      className={className}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{ filter: \`blur(\${blurValue}px)\` }}
-      animate={{ filter: \`blur(\${blurValue}px)\` }}
-      transition={{ duration: duration / 1000, ease: easing }}
-    >
-      {children}
-    </motion.span>
-  );
+  useEffect(() => {
+    let animationFrameId;
+    let isCancelled = false;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const init = async () => {
+      if (document.fonts?.ready) {
+        await document.fonts.ready;
+      }
+      if (isCancelled) return;
+
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+
+      const computedFontFamily =
+        fontFamily === 'inherit' ? window.getComputedStyle(canvas).fontFamily || 'sans-serif' : fontFamily;
+
+      const fontSizeStr = typeof fontSize === 'number' ? \`\${fontSize}px\` : fontSize;
+      let numericFontSize;
+      if (typeof fontSize === 'number') {
+        numericFontSize = fontSize;
+      } else {
+        const temp = document.createElement('span');
+        temp.style.fontSize = fontSize;
+        document.body.appendChild(temp);
+        const computedSize = window.getComputedStyle(temp).fontSize;
+        numericFontSize = parseFloat(computedSize);
+        document.body.removeChild(temp);
+      }
+
+      const text = React.Children.toArray(children).join('');
+
+      // ... canvas rendering logic
+    };
+
+    init();
+    // ... cleanup
+  }, [children, fontSize, fontWeight, fontFamily, color, enableHover, baseIntensity, hoverIntensity]);
+
+  return <canvas ref={canvasRef} className={className} />;
 };
 
 export default FuzzyText;`;
-
-const fuzzyTextCharsCode = `"use client";
-
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-
-export interface FuzzyTextCharsProps {
-  text: string;
-  className?: string;
-  staggerDelay?: number;
-  revealDuration?: number;
-}
-
-export const FuzzyTextChars = ({
-  text,
-  className,
-  staggerDelay = 50,
-  revealDuration = 300,
-}: FuzzyTextCharsProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const characters = text.split("");
-
-  return (
-    <div
-      className={className}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {characters.map((char, index) => (
-        <motion.span
-          key={index}
-          style={{ display: "inline-block", filter: isHovered ? "blur(0px)" : "blur(8px)", opacity: isHovered ? 1 : 0.5 }}
-          animate={{ filter: isHovered ? "blur(0px)" : "blur(8px)", opacity: isHovered ? 1 : 0.5 }}
-          transition={{ duration: revealDuration / 1000, delay: index * (staggerDelay / 1000), ease: "easeOut" }}
-        >
-          {char === " " ? "\\u00A0" : char}
-        </motion.span>
-      ))}
-    </div>
-  );
-};
-
-export default FuzzyTextChars;`;
 
 export default function FuzzyTextPage() {
   return (
@@ -101,28 +91,28 @@ export default function FuzzyTextPage() {
         <div className="flex items-center gap-2">
           <Link
             href="/text-animations"
-            className="p-1 rounded-md hover:bg-secondary transition-colors"
+            className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Fuzzy Text</h1>
         </div>
         <p className="text-muted-foreground max-w-lg">
-          A text effect that transitions from blurred to sharp on hover.
-          Includes both simple blur and character-by-character reveal variants.
+          A canvas-based text effect that creates a fuzzy/glitch blur effect on hover.
+          Uses performant canvas rendering for smooth animations.
         </p>
       </motion.div>
 
-      {/* Simple Fuzzy Text */}
+      {/* Default Fuzzy Text */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Simple Blur</h2>
+        <h2 className="text-xl font-semibold">Default Effect</h2>
         <PreviewCodeTabs
           preview={
-            <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center">
+            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[200px]">
               <FuzzyText
-                className="text-4xl font-bold text-white"
-                baseBlur={10}
-                hoverBlur={0}
+                className="text-5xl font-black text-white"
+                baseIntensity={0.18}
+                hoverIntensity={0.5}
               >
                 Hover Me
               </FuzzyText>
@@ -132,21 +122,42 @@ export default function FuzzyTextPage() {
         />
       </div>
 
-      {/* Character Reveal */}
+      {/* High Intensity */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Character Reveal</h2>
+        <h2 className="text-xl font-semibold">High Intensity</h2>
         <PreviewCodeTabs
           preview={
-            <div className="bg-slate-900 p-8 rounded-lg flex items-center justify-center">
-              <FuzzyTextChars
-                className="text-4xl font-bold text-white"
-                text="Fuzzy Text"
-                staggerDelay={30}
-                revealDuration={200}
-              />
+            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[200px]">
+              <FuzzyText
+                className="text-5xl font-black text-accent"
+                baseIntensity={0.4}
+                hoverIntensity={0.8}
+              >
+                Glitch Effect
+              </FuzzyText>
             </div>
           }
-          code={fuzzyTextCharsCode}
+          code={fuzzyTextCode}
+        />
+      </div>
+
+      {/* With Custom Colors */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">Custom Color</h2>
+        <PreviewCodeTabs
+          preview={
+            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[200px]">
+              <FuzzyText
+                className="text-5xl font-black"
+                color="#14B8A6"
+                baseIntensity={0.25}
+                hoverIntensity={0.6}
+              >
+                Curio UI
+              </FuzzyText>
+            </div>
+          }
+          code={fuzzyTextCode}
         />
       </div>
 
@@ -164,50 +175,51 @@ export default function FuzzyTextPage() {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-b border-border/50">
+              <tr className="border-border/50">
                 <td className="py-2 px-4 font-mono text-accent">children</td>
-                <td className="py-2 px-4">string</td>
+                <td className="py-2 px-4">ReactNode</td>
                 <td className="py-2 px-4">-</td>
                 <td className="py-2 px-4 text-muted-foreground">Text content</td>
               </tr>
-              <tr className="border-b border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">baseBlur</td>
-                <td className="py-2 px-4">number</td>
-                <td className="py-2 px-4">10</td>
-                <td className="py-2 px-4 text-muted-foreground">Blur when not hovered (px)</td>
+              <tr className="border-border/50">
+                <td className="py-2 px-4 font-mono text-accent">fontSize</td>
+                <td className="py-2 px-4">string | number</td>
+                <td className="py-2 px-4">'clamp(2rem, 10vw, 10rem)'</td>
+                <td className="py-2 px-4 text-muted-foreground">Font size (px or CSS)</td>
               </tr>
-              <tr className="border-b border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">hoverBlur</td>
-                <td className="py-2 px-4">number</td>
-                <td className="py-2 px-4">0</td>
-                <td className="py-2 px-4 text-muted-foreground">Blur on hover (px)</td>
+              <tr className="border-border/50">
+                <td className="py-2 px-4 font-mono text-accent">fontWeight</td>
+                <td className="py-2 px-4">string | number</td>
+                <td className="py-2 px-4">900</td>
+                <td className="py-2 px-4 text-muted-foreground">Font weight</td>
               </tr>
-              <tr className="border-b border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">duration</td>
+              <tr className="border-border/50">
+                <td className="py-2 px-4 font-mono text-accent">color</td>
+                <td className="py-2 px-4">string</td>
+                <td className="py-2 px-4">'#fff'</td>
+                <td className="py-2 px-4 text-muted-foreground">Text color</td>
+              </tr>
+              <tr className="border-border/50">
+                <td className="py-2 px-4 font-mono text-accent">baseIntensity</td>
                 <td className="py-2 px-4">number</td>
-                <td className="py-2 px-4">400</td>
-                <td className="py-2 px-4 text-muted-foreground">Transition duration (ms)</td>
+                <td className="py-2 px-4">0.18</td>
+                <td className="py-2 px-4 text-muted-foreground">Blur intensity when idle (0-1)</td>
+              </tr>
+              <tr className="border-border/50">
+                <td className="py-2 px-4 font-mono text-accent">hoverIntensity</td>
+                <td className="py-2 px-4">number</td>
+                <td className="py-2 px-4">0.5</td>
+                <td className="py-2 px-4 text-muted-foreground">Blur intensity on hover (0-1)</td>
               </tr>
               <tr>
-                <td className="py-2 px-4 font-mono text-accent">easing</td>
-                <td className="py-2 px-4">string</td>
-                <td className="py-2 px-4">"easeOut"</td>
-                <td className="py-2 px-4 text-muted-foreground">Easing function</td>
+                <td className="py-2 px-4 font-mono text-accent">enableHover</td>
+                <td className="py-2 px-4">boolean</td>
+                <td className="py-2 px-4">true</td>
+                <td className="py-2 px-4 text-muted-foreground">Enable hover interaction</td>
               </tr>
             </tbody>
           </table>
         </div>
-      </div>
-
-      {/* Dependencies */}
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">Dependencies</h3>
-        <ul className="text-sm text-muted-foreground space-y-2">
-          <li className="flex items-center gap-2">
-            <code className="text-accent">framer-motion</code>
-            <span>— For smooth blur transitions</span>
-          </li>
-        </ul>
       </div>
 
       {/* Source */}
@@ -217,7 +229,7 @@ export default function FuzzyTextPage() {
           href="https://reactbits.dev/text-animations/fuzzy-text"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-accent hover:underline"
+          className="inline-flex items-center gap-1 text-accent hover:underline cursor-pointer"
         >
           reactbits.dev <ExternalLink className="w-3 h-3" />
         </a>

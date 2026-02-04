@@ -3,23 +3,17 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 
-// Text animation components list
-const textAnimationComponents = [
+// Animation components list
+const animationComponents = [
   {
-    name: "fuzzy-text",
-    displayName: "Fuzzy Text",
-    description: "Text that blurs and reveals on hover",
-    href: "/text-animations/fuzzy-text",
-  },
-  {
-    name: "gradient-text",
-    displayName: "Gradient Text",
-    description: "Animated gradient text with framer-motion",
-    href: "/text-animations/gradient-text",
+    name: "logo-loop",
+    displayName: "Logo Loop",
+    description: "Infinite scrolling animation for logos",
+    href: "/animations/logo-loop",
   },
 ];
 
-export default function TextAnimationsPage() {
+export default function AnimationsPage() {
   return (
     <div className="space-y-8">
       <motion.div
@@ -27,15 +21,15 @@ export default function TextAnimationsPage() {
         animate={{ opacity: 1, y: 0 }}
         className="space-y-4"
       >
-        <h1 className="font-display text-4xl font-bold">Text Animations</h1>
+        <h1 className="font-display text-4xl font-bold">Animations</h1>
         <p className="text-muted-foreground max-w-lg">
-          Animated text effects with blur, reveal, and styling transitions.
+          Animated UI components and visual effects.
         </p>
       </motion.div>
 
       {/* Components Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {textAnimationComponents.map((component, i) => (
+        {animationComponents.map((component, i) => (
           <motion.div
             key={component.name}
             initial={{ opacity: 0, y: 20 }}
