@@ -173,7 +173,7 @@ export default function WetButtonPage() {
           >
             {/* Preview */}
             <div className="flex-1 flex flex-col min-h-[400px] lg:min-h-0">
-              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-slate-950 shadow-inner shadow-black/20">
+              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-background">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <WetPaintButton />
                 </div>
