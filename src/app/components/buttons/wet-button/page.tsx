@@ -67,7 +67,14 @@ const Drip = ({ left, height, delay }: DripProps) => {
       <motion.div
         initial={{ y: -8, opacity: 1 }}
         animate={{ y: [-8, 50], opacity: [1, 0] }}
-        transition={{ duration: 2, times: [0, 1], delay, ease: "easeIn", repeat: Infinity, repeatDelay: 2 }}
+        transition={{
+          duration: 2,
+          times: [0, 1],
+          delay,
+          ease: "easeIn",
+          repeat: Infinity,
+          repeatDelay: 2,
+        }}
         className="absolute top-full h-2 w-2 rounded-full bg-accent transition-colors group-hover:bg-accent/90"
       />
     </motion.div>
@@ -86,18 +93,12 @@ export default function WetButtonPage() {
 
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [codeTab, setCodeTab] = useState<"usage" | "component">("usage");
-  const [copiedUsage, setCopiedUsage] = useState(false);
-  const [copiedComponent, setCopiedComponent] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleCopy = (text: string, type: "usage" | "component") => {
-    navigator.clipboard.writeText(text);
-    if (type === "usage") {
-      setCopiedUsage(true);
-      setTimeout(() => setCopiedUsage(false), 2000);
-    } else {
-      setCopiedComponent(true);
-      setTimeout(() => setCopiedComponent(false), 2000);
-    }
+  const handleCopy = () => {
+    navigator.clipboard.writeText(codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -108,9 +109,6 @@ export default function WetButtonPage() {
           <Link href="/components/buttons" className="p-2 rounded-lg hover:bg-secondary transition-colors self-center lg:self-auto">
             <ArrowLeft className="w-5 h-5" />
           </Link>
-          <div className="p-3 bg-accent/10 border border-accent/20 rounded-2xl text-accent">
-            <Droplets className="w-8 h-8" />
-          </div>
           <div>
             <h1 className="text-4xl lg:text-6xl font-black italic tracking-tighter uppercase leading-[0.8]">
               WET <span className="text-accent">PAINT</span>
@@ -207,13 +205,9 @@ export default function WetButtonPage() {
                   <Button
                     variant="outline"
                     size="icon-sm"
-                    onClick={() => handleCopy(codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE, codeTab)}
+                    onClick={handleCopy}
                   >
-                    {(codeTab === "usage" ? copiedUsage : copiedComponent) ? (
-                      <Check className="w-3 h-3" />
-                    ) : (
-                      <Copy className="w-3 h-3" />
-                    )}
+                    {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   </Button>
                 </CardHeader>
                 <CardContent className="p-0">
@@ -247,16 +241,5 @@ export default function WetButtonPage() {
         )}
       </AnimatePresence>
     </div>
-  );
-}
-
-function Droplets({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M12 2.69l5.74 5.74a7.57 7.57 0 01-7.57 7.57 7.57 7.57 0 01-7.57-7.57L12 2.69z" />
-      <path d="M12 2.69v18.62" />
-      <path d="M5.43 8.31L12 2.69" />
-      <path d="M18.57 8.31L12 2.69" />
-    </svg>
   );
 }

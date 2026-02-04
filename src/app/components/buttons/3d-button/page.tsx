@@ -10,9 +10,6 @@ import {
   Check,
   Play,
   FileCode,
-  Terminal,
-  Palette,
-  Box,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -23,63 +20,20 @@ const COMPONENT_CODE = `"use client";
 
 import React from "react";
 
-interface ThreeDButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonColor?: string;
-  textColor?: string;
-  borderColor?: string;
-  rounded?: "none" | "sm" | "md" | "lg" | "xl" | "full";
-  depth?: "shallow" | "medium" | "deep";
-}
-
-const ThreeDButton = ({
-  children = "CurioUI",
-  className = "",
-  buttonColor = "#14B8A6",
-  textColor = "#FFFFFF",
-  borderColor = "#0D9488",
-  rounded = "lg",
-  depth = "medium",
-  ...props
-}: ThreeDButtonProps) => {
-  const depthMap = {
-    shallow: "border-b-[1px]",
-    medium: "border-b-2",
-    deep: "border-b-4",
-  };
-
-  const radiusMap = {
-    none: "0",
-    sm: "0.125rem",
-    md: "0.375rem",
-    lg: "0.5rem",
-    xl: "0.75rem",
-    full: undefined,
-  };
-
+const ThreeDButton = () => {
   return (
-    <button
-      className={\\\`group relative inline-flex cursor-pointer items-center justify-center overflow-hidden px-4 py-1.5 font-medium shadow-lg transition-all duration-100 ease-in-out active:translate-y-0.5 active:shadow-none \${depthMap[depth]} border-l-2 border-r-2 \${className}\\\`}
-      style={{
-        backgroundColor: buttonColor,
-        color: textColor,
-        borderBottomColor: borderColor,
-        borderLeftColor: borderColor,
-        borderRightColor: borderColor,
-        borderRadius: radiusMap[rounded],
-      }}
-      {...props}
-    >
-      <span className="absolute h-0 w-0 rounded-full bg-white opacity-10 transition-all duration-300 ease-out group-hover:h-32 group-hover:w-32" />
-      <span className="relative">{children}</span>
+    <button className="group relative m-1 inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-lg border-b-2 border-l-2 border-r-2 border-accent bg-gradient-to-tr from-accent to-accent-foreground px-4 py-1 text-white shadow-lg transition duration-100 ease-in-out active:translate-y-0.5 active:border-accent-foreground active:shadow-none">
+      <span className="absolute h-0 w-0 rounded-full bg-white opacity-10 transition-all duration-300 ease-out group-hover:h-32 group-hover:w-32"></span>
+      <span className="relative font-medium">CurioUI</span>
     </button>
-  );
-};
+  )
+}
 
 export default ThreeDButton;`;
 
 const USAGE_CODE = `import ThreeDButton from "@/registry/buttons/3d-button";
 
-<ThreeDButton>3D Button</ThreeDButton>`;
+<ThreeDButton />`;
 
 export default function ThreeDButtonPage() {
   const { resolvedTheme } = useTheme();
@@ -103,12 +57,9 @@ export default function ThreeDButtonPage() {
           <Link href="/components/buttons" className="p-2 rounded-lg hover:bg-secondary transition-colors self-center lg:self-auto">
             <ArrowLeft className="w-5 h-5" />
           </Link>
-          <div className="p-3 bg-primary/10 border border-primary/20 rounded-2xl text-primary">
-            <Box className="w-8 h-8" />
-          </div>
           <div>
             <h1 className="text-4xl lg:text-6xl font-black italic tracking-tighter uppercase leading-[0.8]">
-              3D <span className="text-primary">BUTTON</span>
+              3D <span className="text-accent">BUTTON</span>
             </h1>
             <p className="text-muted-foreground text-xs font-mono tracking-[0.2em] uppercase mt-1">
               3D Depth Effect
@@ -116,57 +67,116 @@ export default function ThreeDButtonPage() {
           </div>
         </div>
 
+        {/* Tab Buttons */}
         <div className="flex items-center gap-1 p-1 bg-muted rounded-lg w-fit mx-auto lg:mx-0">
-          <Button variant={activeTab === "preview" ? "default" : "ghost"} size="sm" onClick={() => setActiveTab("preview")} className="text-[10px] uppercase tracking-widest font-bold cursor-pointer">
-            <Play className="w-3 h-3 mr-1" />Preview
+          <Button
+            variant={activeTab === "preview" ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setActiveTab("preview")}
+            className="text-[10px] uppercase tracking-widest font-bold cursor-pointer"
+          >
+            <Play className="w-3 h-3 mr-1" />
+            Preview
           </Button>
-          <Button variant={activeTab === "code" ? "default" : "ghost"} size="sm" onClick={() => setActiveTab("code")} className="text-[10px] uppercase tracking-widest font-bold cursor-pointer">
-            <FileCode className="w-3 h-3 mr-1" />Code
+          <Button
+            variant={activeTab === "code" ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setActiveTab("code")}
+            className="text-[10px] uppercase tracking-widest font-bold cursor-pointer"
+          >
+            <FileCode className="w-3 h-3 mr-1" />
+            Code
           </Button>
         </div>
       </div>
 
       <AnimatePresence mode="wait">
         {activeTab === "preview" ? (
-          <motion.div key="preview" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 flex flex-col lg:flex-row lg:overflow-hidden px-6 lg:px-10 pb-6 lg:pb-10 gap-6">
+          <motion.div
+            key="preview"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex-1 flex flex-col lg:flex-row lg:overflow-hidden px-6 lg:px-10 pb-6 lg:pb-10 gap-6"
+          >
+            {/* Preview */}
             <div className="flex-1 flex flex-col min-h-[400px] lg:min-h-0">
-              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-muted/50 via-background to-background">
+              <div className={`flex-1 relative rounded-xl border border-border overflow-hidden ${isDark ? "bg-slate-950" : "bg-slate-100"}`}>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <ThreeDButton>3D Button</ThreeDButton>
+                  <ThreeDButton />
                 </div>
               </div>
             </div>
           </motion.div>
         ) : (
-          <motion.div key="code" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex-1 overflow-auto px-6 lg:px-10 pb-6 lg:pb-10">
+          <motion.div
+            key="code"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="flex-1 overflow-auto px-6 lg:px-10 pb-6 lg:pb-10"
+          >
             <div className="max-w-4xl mx-auto space-y-6">
+              {/* Tab selector for code */}
               <div className="flex items-center gap-1 p-1 bg-muted rounded-lg w-fit">
-                <Button variant={codeTab === "usage" ? "default" : "ghost"} size="sm" onClick={() => setCodeTab("usage")} className="text-[9px] uppercase cursor-pointer">
-                  <Play className="w-3 h-3 mr-1" />Usage
+                <Button
+                  variant={codeTab === "usage" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setCodeTab("usage")}
+                  className="text-[9px] uppercase cursor-pointer"
+                >
+                  <Play className="w-3 h-3 mr-1" />
+                  Usage
                 </Button>
-                <Button variant={codeTab === "component" ? "default" : "ghost"} size="sm" onClick={() => setCodeTab("component")} className="text-[9px] uppercase cursor-pointer">
-                  <FileCode className="w-3 h-3 mr-1" />Component
+                <Button
+                  variant={codeTab === "component" ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setCodeTab("component")}
+                  className="text-[9px] uppercase cursor-pointer"
+                >
+                  <FileCode className="w-3 h-3 mr-1" />
+                  Component
                 </Button>
               </div>
 
+              {/* Code display */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between py-3 px-4">
                   <CardTitle className="flex items-center gap-2 text-xs">
-                    {codeTab === "usage" ? <Play className="w-4 h-4 text-primary" /> : <FileCode className="w-4 h-4 text-muted-foreground" />}
+                    {codeTab === "usage" ? (
+                      <Play className="w-4 h-4 text-accent" />
+                    ) : (
+                      <FileCode className="w-4 h-4 text-muted-foreground" />
+                    )}
                     {codeTab === "usage" ? "Usage Example" : "ThreeDButton.tsx"}
                   </CardTitle>
-                  <Button variant="outline" size="icon-sm" onClick={handleCopy}>
+                  <Button
+                    variant="outline"
+                    size="icon-sm"
+                    onClick={handleCopy}
+                  >
                     {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   </Button>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <Highlight theme={isDark ? themes.nightOwl : themes.github} code={codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE} language="tsx">
+                  <Highlight
+                    theme={isDark ? themes.nightOwl : themes.github}
+                    code={codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE}
+                    language="tsx"
+                  >
                     {({ style, tokens, getLineProps, getTokenProps }) => (
-                      <pre className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg" style={{ ...style, background: isDark ? "#0d1117" : "#f6f8fa" }}>
+                      <pre
+                        className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg"
+                        style={{ ...style, background: isDark ? "#0d1117" : "#f6f8fa" }}
+                      >
                         {tokens.map((line, i) => (
                           <div key={i} {...getLineProps({ line })}>
-                            <span className="inline-block w-6 text-right mr-4 text-muted-foreground/40 select-none text-[10px]">{i + 1}</span>
-                            {line.map((token, key) => (<span key={key} {...getTokenProps({ token })} />))}
+                            <span className="inline-block w-6 text-right mr-4 text-muted-foreground/40 select-none text-[10px]">
+                              {i + 1}
+                            </span>
+                            {line.map((token, key) => (
+                              <span key={key} {...getTokenProps({ token })} />
+                            ))}
                           </div>
                         ))}
                       </pre>

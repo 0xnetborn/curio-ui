@@ -33,8 +33,8 @@ const BorderGlowButton = () => {
           top: mousePosition.y,
         }}
       />
-      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-[#fb3b53] backdrop-blur-sm">
-        SyntaxUI
+      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-[#14B8A6] backdrop-blur-sm">
+        CurioUI
       </div>
     </button>
   );
