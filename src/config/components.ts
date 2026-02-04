@@ -42,6 +42,11 @@ export const componentCategories = {
         description: "Navigation and header components",
         icon: "Menu",
     },
+    blocks: {
+        name: "Blocks",
+        description: "Standalone UI blocks and sections",
+        icon: "Square",
+    },
 } as const;
 
 // Component Registry
@@ -123,6 +128,15 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
         dependencies: ["framer-motion"],
+    },
+    // Blocks
+    {
+        slug: "blocks/infinite-logos-loop",
+        name: "Infinite Logoss Loop",
+        description: "Continuously scrolling logo cloud animation",
+        category: "blocks",
+        isPremium: false,
+        isNew: true,
     },
 ];
 

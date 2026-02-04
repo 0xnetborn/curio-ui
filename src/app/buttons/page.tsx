@@ -7,14 +7,14 @@ import ThreeDButton from "@/registry/buttons/3d-button";
 import ShineButton from "@/registry/buttons/shine-button";
 import BorderGlowButton from "@/registry/buttons/border-glow-button";
 import GradientFillButton from "@/registry/buttons/gradient-fill-button";
-import WetButton from "@/registry/buttons/wet-button";
+import WetPaintButton from "@/registry/buttons/wet-paint-button";
 
 const buttonPreviews: Partial<Record<ButtonName, React.ReactNode>> = {
   "3d-button": <ThreeDButton />,
   "shine-button": <ShineButton />,
   "border-glow-button": <BorderGlowButton />,
   "gradient-fill-button": <GradientFillButton />,
-  "wet-button": <WetButton />,
+  "wet-paint-button": <WetPaintButton />,
 };
 
 export default function ButtonsPage() {
