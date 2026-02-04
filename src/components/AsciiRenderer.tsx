@@ -48,7 +48,7 @@ export const DEFAULT_CHARSET = " .:-=+*#%@";
  * High-performance WebGL-based ASCII video renderer with Gravity Distortion.
  */
 export const AsciiRenderer: React.FC<AsciiRendererProps> = ({
-    videoSrc = "/videos/nyla_bg_hero.mp4",
+    videoSrc = "/videos/curio-hero.mp4",
     asciiFontSize = 10,
     charset = DEFAULT_CHARSET,
     className = "",

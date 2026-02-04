@@ -174,7 +174,7 @@ export const DEFAULT_CHARSET = " .:-=+*#%@";
  * High-performance WebGL-based ASCII media renderer with Gravity Distortion.
  */
 export const AsciiRenderer: React.FC<AsciiRendererProps> = ({
-    videoSrc = "/videos/nyla_bg_hero.mp4",
+    videoSrc = "/videos/curio-hero.mp4",
     asciiFontSize = 10,
     charset = DEFAULT_CHARSET,
     className = "",
@@ -860,7 +860,7 @@ export const AsciiRenderer: React.FC<AsciiRendererProps> = ({
               <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
                 <div className="absolute inset-0 rounded-2xl overflow-hidden border border-border shadow-2xl" style={{ opacity }}>
                   <AsciiRenderer
-                    videoSrc="/videos/nyla_bg_hero.mp4"
+                    videoSrc="/videos/curio-hero.mp4"
                     asciiFontSize={asciiFontSize}
                     charset={activeCharset}
                     color={color}
