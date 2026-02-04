@@ -163,12 +163,12 @@ export default function GradientTextPage() {
         <h2 className="text-xl font-semibold">Preview</h2>
         <PreviewCodeTabs
           preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[150px]">
+            <div className="border border-border p-8 flex items-center justify-center min-h-[150px]">
               <GradientText
                 className="text-5xl font-black"
                 animationSpeed={8}
               >
-                Curio UI
+                CurioUI
               </GradientText>
             </div>
           }

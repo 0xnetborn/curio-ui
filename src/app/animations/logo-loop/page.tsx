@@ -367,7 +367,7 @@ export default function LogoLoopPage() {
         <h2 className="text-xl font-semibold">Preview</h2>
         <PreviewCodeTabs
           preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center w-full overflow-hidden">
+            <div className="border border-border p-8 flex items-center justify-center w-full overflow-hidden">
               <div className="w-full max-w-4xl">
                 <LogoLoop logos={sampleLogos} speed={80} />
               </div>

@@ -54,7 +54,7 @@ export function Tabs({ tabs, defaultTab, preview, code, codeLanguage = "tsx" }: 
           transition={{ duration: 0.2 }}
         >
           {activeTab === "preview" ? (
-            <div className="relative min-h-[200px] flex items-center justify-center p-8 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-secondary/20 via-background to-background">
+            <div className="relative min-h-[200px] flex items-center justify-center p-8">
               {preview}
             </div>
           ) : (

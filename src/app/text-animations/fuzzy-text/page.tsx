@@ -217,13 +217,13 @@ export default function FuzzyTextPage() {
         <h2 className="text-xl font-semibold">Preview</h2>
         <PreviewCodeTabs
           preview={
-            <div className="bg-slate-950 p-8 rounded-lg flex items-center justify-center min-h-[200px]">
+            <div className="border border-border p-8 flex items-center justify-center min-h-[200px]">
               <FuzzyText
                 className="text-5xl font-black text-white"
                 baseIntensity={0.18}
                 hoverIntensity={0.5}
               >
-                Hover Me
+                CurioUI
               </FuzzyText>
             </div>
           }
