@@ -7,9 +7,10 @@ import BorderGlowButton from './border-glow-button';
 import GradientFillButton from './gradient-fill-button';
 import WetButton from './wet-button';
 import WetPaintButton from './wet-paint-button';
+import DotExpandButton from './dot-expand-button';
 import GlassSurface from './glass-surface';
 
-export { ThreeDButton, ShineButton, BorderGlowButton, GradientFillButton, WetButton, WetPaintButton, GlassSurface };
+export { ThreeDButton, ShineButton, BorderGlowButton, GradientFillButton, WetButton, WetPaintButton, DotExpandButton, GlassSurface };
 
 // Component metadata for the registry
 export const buttons = [
@@ -19,6 +20,7 @@ export const buttons = [
   { name: 'gradient-fill-button', displayName: 'Gradient Fill', description: 'Gradient fill from bottom', category: 'buttons' },
   { name: 'wet-button', displayName: 'Wet Paint', description: 'Dripping paint effect', category: 'buttons' },
   { name: 'wet-paint-button', displayName: 'Wet Paint (Hover.dev)', description: 'Dripping paint effect from hover.dev', category: 'buttons' },
+  { name: 'dot-expand-button', displayName: 'Dot Expand', description: 'Icon expands on hover', category: 'buttons' },
 ] as const;
 
 export type ButtonName = typeof buttons[number]['name'];
