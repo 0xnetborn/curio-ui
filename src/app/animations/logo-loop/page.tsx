@@ -88,8 +88,8 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
     if (seqSize > 0) {
       offsetRef.current = ((offsetRef.current % seqSize) + seqSize) % seqSize;
       const transformValue = isVertical
-        ? \`translate3d(0, \${-offsetRef.current}px, 0)\`
-        : \`translate3d(\${-offsetRef.current}px, 0, 0)\`;
+        ? 'translate3d(0, ' + (-offsetRef.current) + 'px, 0)'
+        : 'translate3d(' + (-offsetRef.current) + 'px, 0, 0)';
       track.style.transform = transformValue;
     }
 
@@ -112,8 +112,8 @@ const useAnimationLoop = (trackRef, targetVelocity, seqWidth, seqHeight, isHover
         offsetRef.current = nextOffset;
 
         const transformValue = isVertical
-          ? \`translate3d(0, \${-offsetRef.current}px, 0)\`
-          : \`translate3d(\${-offsetRef.current}px, 0, 0)\`;
+          ? 'translate3d(0, ' + (-offsetRef.current) + 'px, 0)'
+          : 'translate3d(' + (-offsetRef.current) + 'px, 0, 0)';
         track.style.transform = transformValue;
       }
 
@@ -181,12 +181,159 @@ export const LogoLoop = memo(
     className,
     style
   }: LogoLoopProps) => {
-    // ... component implementation
+    const trackRef = useRef(null);
+    const containerRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
+    const [containerWidth, setContainerWidth] = useState(0);
+    const [containerHeight, setContainerHeight] = useState(0);
+
+    const isVertical = direction === 'up' || direction === 'down';
+    const reverseDirection = direction === 'right' || direction === 'up';
+
+    const handleMouseEnter = useCallback(() => {
+      setIsHovered(true);
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+      setIsHovered(false);
+    }, []);
+
+    useResizeObserver(
+      useCallback(() => {
+        if (containerRef.current) {
+          setContainerWidth(containerRef.current.offsetWidth);
+          setContainerHeight(containerRef.current.offsetHeight);
+        }
+      }, []),
+      [containerRef],
+      []
+    );
+
+    useAnimationLoop(
+      trackRef,
+      reverseDirection ? -speed : speed,
+      containerWidth,
+      containerHeight,
+      isHovered,
+      hoverSpeed ? (reverseDirection ? -hoverSpeed : hoverSpeed) : undefined,
+      isVertical
+    );
+
+    const renderLogoItem = useCallback((logo, index) => {
+      const key = 'logo-' + index + '-' + logo.ariaLabel;
+
+      if (renderItem) {
+        return renderItem(logo, key);
+      }
+
+      if (logo.node) {
+        return (
+          <span key={key} className="logoloop__logo" aria-label={logo.ariaLabel}>
+            {logo.node}
+          </span>
+        );
+      }
+
+      return (
+        <a
+          key={key}
+          href={logo.href || '#'}
+          className="logoloop__logo"
+          aria-label={logo.ariaLabel}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ height: logoHeight }}
+        >
+          <img
+            src={logo.src}
+            srcSet={logo.srcSet}
+            sizes={logo.sizes}
+            alt={logo.alt || logo.title || ''}
+            title={logo.title}
+            width={logo.width}
+            height={logo.height}
+            loading="lazy"
+          />
+        </a>
+      );
+    }, [logoHeight, renderItem]);
+
+    const logosList = useMemo(() => {
+      if (containerWidth === 0 && containerHeight === 0) {
+        return [];
+      }
+
+      const seqSize = isVertical ? containerHeight : containerWidth;
+      const logoSize = logoHeight + gap;
+      const totalLogoSize = logos.length * logoSize;
+      const minCopies = Math.ceil(seqSize / logoSize) + ANIMATION_CONFIG.MIN_COPIES;
+      const totalCopiesNeeded = Math.max(minCopies + ANIMATION_CONFIG.COPY_HEADROOM, Math.ceil(seqSize / totalLogoSize) + ANIMATION_CONFIG.COPY_HEADROOM);
+      const copies = Math.max(Math.ceil(seqSize / logoSize) + 2, totalCopiesNeeded);
+
+      const duplicatedLogos = [];
+      for (let i = 0; i < copies; i++) {
+        const logo = logos[i % logos.length];
+        duplicatedLogos.push(renderLogoItem(logo, i));
+      }
+
+      return duplicatedLogos;
+    }, [logos, containerWidth, containerHeight, logoHeight, gap, isVertical, renderLogoItem]);
+
     return (
-      <div className="logoloop" role="region" aria-label={ariaLabel}>
-        <div className="logoloop__track">
-          {/* logo lists */}
+      <div
+        ref={containerRef}
+        className={'logoloop ' + (className || '')}
+        role="region"
+        aria-label={ariaLabel}
+        style={style}
+        onMouseEnter={pauseOnHover ? handleMouseEnter : undefined}
+        onMouseLeave={pauseOnHover ? handleMouseLeave : undefined}
+      >
+        <div
+          ref={trackRef}
+          className="logoloop__track"
+          style={{
+            display: 'flex',
+            flexDirection: isVertical ? 'column' : 'row',
+            gap: gap,
+            width: isVertical ? '100%' : undefined,
+            height: isVertical ? undefined : '100%',
+          }}
+        >
+          {logosList}
         </div>
+        {fadeOut && (
+          <div
+            className="logoloop__fade"
+            style={{
+              background: fadeOutColor ? 'linear-gradient(to right, ' + fadeOutColor + ', transparent)' : 'linear-gradient(to right, #000, transparent)',
+              insetInlineStart: 0,
+              insetInlineEnd: 0,
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              width: 80,
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+          />
+        )}
+        {fadeOut && (
+          <div
+            className="logoloop__fade"
+            style={{
+              background: fadeOutColor ? 'linear-gradient(to left, ' + fadeOutColor + ', transparent)' : 'linear-gradient(to left, #000, transparent)',
+              insetInlineStart: 0,
+              insetInlineEnd: 0,
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              width: 80,
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+          />
+        )}
       </div>
     );
   }
