@@ -55,62 +55,10 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Premium Minimal Palette - Light Mode */
+/* Dark Mode Only */
 :root {
   --radius: 0.625rem;
 
-  /* Clean white/off-white base */
-  --background: #FAFAFA;
-  --foreground: #0A0A0A;
-
-  /* Cards */
-  --card: #FFFFFF;
-  --card-foreground: #0A0A0A;
-  --popover: #FFFFFF;
-  --popover-foreground: #0A0A0A;
-
-  /* Primary - Pure black */
-  --primary: #0A0A0A;
-  --primary-foreground: #FAFAFA;
-
-  /* Secondary - Subtle gray */
-  --secondary: #F5F5F5;
-  --secondary-foreground: #0A0A0A;
-
-  /* Muted - Elegant gray */
-  --muted: #E5E5E5;
-  --muted-foreground: #737373;
-
-  /* Accent - Sophisticated teal */
-  --accent: #0D9488;
-  --accent-foreground: #FFFFFF;
-
-  /* Utils */
-  --destructive: #DC2626;
-  --border: rgba(10, 10, 10, 0.08);
-  --input: rgba(10, 10, 10, 0.08);
-  --ring: #0D9488;
-
-  /* Charts - Teal spectrum */
-  --chart-1: #0D9488;
-  --chart-2: #14B8A6;
-  --chart-3: #2DD4BF;
-  --chart-4: #5EEAD4;
-  --chart-5: #99F6E4;
-
-  /* Sidebar */
-  --sidebar: #F5F5F5;
-  --sidebar-foreground: #0A0A0A;
-  --sidebar-primary: #0A0A0A;
-  --sidebar-primary-foreground: #FAFAFA;
-  --sidebar-accent: #E5E5E5;
-  --sidebar-accent-foreground: #0A0A0A;
-  --sidebar-border: rgba(10, 10, 10, 0.08);
-  --sidebar-ring: #0D9488;
-}
-
-/* Dark Mode - Premium Deep */
-.dark {
   --background: #0A0A0A;
   --foreground: #FAFAFA;
 
@@ -157,18 +105,12 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
+  html {
     @apply bg-background text-foreground font-sans antialiased;
   }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-display);
-    @apply font-bold tracking-tight;
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
   }
 }
 
@@ -183,7 +125,7 @@ html {
   color: white;
 }
 
-/* Hide scrollbar - awwwards style */
+/* Hide scrollbar */
 html {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -193,7 +135,7 @@ html::-webkit-scrollbar {
   display: none;
 }
 
-/* Custom scrollbar for specific elements */
+/* Custom scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
@@ -210,33 +152,4 @@ html::-webkit-scrollbar {
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) transparent;
-}
-
-/* View Transitions for theme toggle */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 9999;
-}
-
-/* Disable transitions during view transition */
-::view-transition-image-pair(root) {
-  isolation: isolate;
-}
-
-/* Reduce motion preference */
-@media (prefers-reduced-motion: reduce) {
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none !important;
-  }
 }

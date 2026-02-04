@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
+import { Highlight, themes } from "prism-react-renderer";
 
 interface CodeBlockProps {
   code: string;
@@ -19,11 +20,11 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
 
   return (
     <div className="relative rounded-xl border border-border bg-card overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-2 bg-secondary/50 border-b border-border">
+      <div className="flex items-center justify-between px-4 py-2 bg-slate-900/50 border-b border-border">
         <span className="text-xs font-mono text-muted-foreground">{language}</span>
         <button
           onClick={copyToClipboard}
-          className="flex items-center gap-1.5 px-2 py-1 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+          className="flex items-center gap-1.5 px-2 py-1 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors cursor-pointer"
         >
           {copied ? (
             <>
@@ -38,9 +39,22 @@ export function CodeBlock({ code, language = "tsx" }: CodeBlockProps) {
           )}
         </button>
       </div>
-      <pre className="p-4 overflow-x-auto text-sm">
-        <code className="text-foreground font-mono whitespace-pre">{code}</code>
-      </pre>
+      <Highlight theme={themes.nightOwl} code={code.trim()} language={language}>
+        {({ style, tokens, getLineProps, getTokenProps }) => (
+          <pre className="p-4 overflow-x-auto text-sm bg-slate-950" style={style}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line })}>
+                <span className="inline-block w-6 text-right mr-4 text-muted-foreground/40 select-none text-[10px]">
+                  {i + 1}
+                </span>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
     </div>
   );
 }
