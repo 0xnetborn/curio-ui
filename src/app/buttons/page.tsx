@@ -29,10 +29,17 @@ export default function ButtonsPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {buttons.map((button, i) => (
-          <motion.div key={button.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+          <motion.div
+            key={button.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: i * 0.1 }}
+          >
             <Link href={`/components/buttons/${button.name}`}>
-              <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
-                <div className="absolute inset-0 flex items-center justify-center">{buttonPreviews[button.name]}</div>
+              <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
+                <div className="absolute inset-0 flex items-center justify-center h-[calc(100%-4rem)]">
+                  {buttonPreviews[button.name]}
+                </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-card to-transparent rounded-b-xl">
                   <h3 className="font-medium text-sm">{button.displayName}</h3>
                   <p className="text-xs text-muted-foreground line-clamp-2">{button.description}</p>
