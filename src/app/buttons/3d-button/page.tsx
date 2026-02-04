@@ -1,9 +1,54 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import ThreeDButton from "@/registry/buttons/3d-button";
+import { PreviewCodeTabs } from "@/components/PreviewCodeTabs";
+import type { Control } from "@/components/PreviewCodeTabs";
+
+const controls: Control[] = [
+  { type: "text", label: "Text", prop: "children", defaultValue: "CurioUI" },
+  { type: "color", label: "Color", prop: "buttonColor", defaultValue: "#14B8A6" },
+  { type: "color", label: "Text", prop: "textColor", defaultValue: "#FFFFFF" },
+  {
+    type: "select",
+    label: "Rounded",
+    prop: "rounded",
+    options: ["none", "sm", "md", "lg", "xl", "full"],
+    defaultValue: "lg",
+  },
+  {
+    type: "select",
+    label: "Depth",
+    prop: "depth",
+    options: ["shallow", "medium", "deep"],
+    defaultValue: "medium",
+  },
+];
+
+const codeGenerator = (values: Record<string, string | number | boolean>) => {
+  const props: string[] = [];
+  
+  if (values.children !== "CurioUI") {
+    props.push(`  children="${values.children}"`);
+  }
+  if (values.buttonColor !== "#14B8A6") {
+    props.push(`  buttonColor="${values.buttonColor}"`);
+  }
+  if (values.textColor !== "#FFFFFF") {
+    props.push(`  textColor="${values.textColor}"`);
+  }
+  if (values.rounded !== "lg") {
+    props.push(`  rounded="${values.rounded}"`);
+  }
+  if (values.depth !== "medium") {
+    props.push(`  depth="${values.depth}"`);
+  }
+
+  return `import ThreeDButton from "@/registry/buttons/3d-button";
+
+<ThreeDButton${props.length > 0 ? "\n" + props.join("\n") : ""} />`;
+};
 
 export default function ThreeDButtonPage() {
   return (
@@ -16,21 +61,21 @@ export default function ThreeDButtonPage() {
       </header>
 
       <h1 className="font-display text-4xl font-bold">3D Button</h1>
-      <p className="text-muted-foreground max-w-2xl">Button with 3D depth effect.</p>
+      <p className="text-muted-foreground max-w-2xl">Button with 3D depth effect and customizable colors.</p>
 
-      <div className="rounded-xl border border-border bg-card p-8">
-        <div className="flex items-center justify-center min-h-[300px]">
-          <ThreeDButton />
-        </div>
-      </div>
-
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold text-lg">Usage</h3>
-        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm font-mono">{`import ThreeDButton from "@/registry/buttons/3d-button";
-
-<ThreeDButton />`}</pre>
-      </div>
+      <PreviewCodeTabs
+        controls={controls}
+        code={codeGenerator({
+          children: "CurioUI",
+          buttonColor: "#14B8A6",
+          textColor: "#FFFFFF",
+          rounded: "lg",
+          depth: "medium",
+        })}
+        codeGenerator={codeGenerator}
+      >
+        <ThreeDButton />
+      </PreviewCodeTabs>
     </div>
   );
 }
-// Force push

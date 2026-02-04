@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SidebarStateProvider } from "@/hooks/use-sidebar-state";
-import { MainContent } from "@/components/MainContent";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -25,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${jetbrainsMono.variable} font-sans antialiased`}
+        className={`${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"
@@ -33,11 +30,8 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SidebarStateProvider>
-            <Sidebar />
-            <Header />
-            <MainContent>{children}</MainContent>
-          </SidebarStateProvider>
+          <Sidebar />
+          <main className="lg:pl-60 min-h-screen">{children}</main>
         </ThemeProvider>
       </body>
     </html>

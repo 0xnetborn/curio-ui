@@ -35,7 +35,7 @@ export default function ButtonsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
           >
-            <Link href={`/components/buttons/${button.name}`}>
+            <Link href={`/buttons/${button.name}`}>
               <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 cursor-pointer">
                 <div className="absolute inset-0 flex items-center justify-center h-[calc(100%-4rem)]">
                   {buttonPreviews[button.name]}

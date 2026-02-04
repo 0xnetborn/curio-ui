@@ -4,12 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, Component, Terminal, ExternalLink, Github, Menu, PanelLeftClose, PanelLeft, Layers, MousePointer, LayoutGrid, Type, Loader2, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useSidebarState } from "@/hooks/use-sidebar-state";
+import { Home, Component, ExternalLink, Github, Menu, PanelLeftClose, PanelLeft, Layers, MousePointer, LayoutGrid, Type, Loader2, ChevronDown } from "lucide-react";
 import { componentCategories, getComponentsByCategory } from "@/config/components";
 
 const navItems = [
@@ -47,7 +42,6 @@ const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate
                     );
                 })}
 
-                {/* Categories Section */}
                 <div className="pt-4">
                     <div className="px-3 py-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/60">
                         Categories
@@ -72,30 +66,23 @@ const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate
                                         <ChevronDown className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                     </div>
                                 </button>
-                                <AnimatePresence>
-                                    {isExpanded && components.length > 0 && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            className="overflow-hidden"
-                                        >
-                                            {components.map((comp) => (
-                                                <Link
-                                                    key={comp.slug}
-                                                    href={`/${comp.slug}`}
-                                                    onClick={onNavigate}
-                                                    className="flex items-center gap-2 pl-10 pr-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                                                >
-                                                    {comp.name}
-                                                    {comp.isNew && (
-                                                        <span className="px-1 py-0.5 text-[8px] font-semibold uppercase bg-accent text-accent-foreground rounded">New</span>
-                                                    )}
-                                                </Link>
-                                            ))}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                {isExpanded && components.length > 0 && (
+                                    <div className="overflow-hidden">
+                                        {components.map((comp) => (
+                                            <Link
+                                                key={comp.slug}
+                                                href={`/${comp.slug}`}
+                                                onClick={onNavigate}
+                                                className="flex items-center gap-2 pl-10 pr-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                                            >
+                                                {comp.name}
+                                                {comp.isNew && (
+                                                    <span className="px-1 py-0.5 text-[8px] font-semibold uppercase bg-accent text-accent-foreground rounded">New</span>
+                                                )}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                         );
                     })}
@@ -127,114 +114,56 @@ const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate
 
 const Sidebar = () => {
     const pathname = usePathname();
-    const { isCollapsed, setIsCollapsed } = useSidebarState();
     const [mobileOpen, setMobileOpen] = useState(false);
 
     return (
-        <TooltipProvider delayDuration={100}>
+        <>
             {/* Mobile Hamburger Button */}
-            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-                <SheetTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="fixed top-3 left-3 z-50 lg:hidden"
-                    >
-                        <Menu className="w-5 h-5" />
-                    </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-64 p-0 flex flex-col">
-                    <div className="p-4">
-                        <Link href="/" className="flex items-center gap-2.5 group cursor-pointer" onClick={() => setMobileOpen(false)}>
-                            <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
-                                <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
-                            </div>
-                            <span className="font-display text-xl font-bold tracking-tight">
-                                Curio<span className="text-accent">UI</span>
-                            </span>
-                        </Link>
-                    </div>
-                    <SidebarContent pathname={pathname} onNavigate={() => setMobileOpen(false)} />
-                </SheetContent>
-            </Sheet>
+            <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="fixed top-3 left-3 z-50 lg:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
+            >
+                <Menu className="w-5 h-5" />
+            </button>
+
+            {/* Mobile Menu Overlay */}
+            {mobileOpen && (
+                <div className="fixed inset-0 z-40 lg:hidden">
+                    <div className="fixed inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
+                    <aside className="fixed left-0 top-0 bottom-0 w-64 bg-card border-r border-border flex flex-col">
+                        <div className="p-4 pt-12">
+                            <Link href="/" className="flex items-center gap-2.5 group cursor-pointer" onClick={() => setMobileOpen(false)}>
+                                <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
+                                    <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
+                                </div>
+                                <span className="font-display text-xl font-bold tracking-tight">
+                                    Curio<span className="text-accent">UI</span>
+                                </span>
+                            </Link>
+                        </div>
+                        <SidebarContent pathname={pathname} onNavigate={() => setMobileOpen(false)} />
+                    </aside>
+                </div>
+            )}
 
             {/* Desktop Sidebar */}
             <aside
-                className={`hidden lg:flex fixed left-0 top-0 bottom-0 border-r border-border bg-sidebar text-sidebar-foreground z-50 flex-col transition-all duration-300 ${isCollapsed ? 'w-14' : 'w-60'}`}
+                className="hidden lg:flex fixed left-0 top-0 bottom-0 border-r border-border bg-sidebar text-sidebar-foreground z-50 flex-col w-60"
             >
-                <div className={`p-3 flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
-                    {!isCollapsed && (
-                        <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
-                            <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
-                                <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
-                            </div>
-                            <span className="font-display text-xl font-bold tracking-tight">
-                                Curio<span className="text-accent">UI</span>
-                            </span>
-                        </Link>
-                    )}
-                    {isCollapsed && (
-                        <Link href="/" className="flex items-center justify-center cursor-pointer">
-                            <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
-                                <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
-                            </div>
-                        </Link>
-                    )}
-                    {!isCollapsed && (
-                        <Button
-                            variant="ghost"
-                            size="icon-sm"
-                            onClick={() => setIsCollapsed(true)}
-                            className="shrink-0"
-                        >
-                            <PanelLeftClose className="w-4 h-4" />
-                        </Button>
-                    )}
+                <div className="p-3 flex items-center justify-between">
+                    <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
+                        <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
+                            <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
+                        </div>
+                        <span className="font-display text-xl font-bold tracking-tight">
+                            Curio<span className="text-accent">UI</span>
+                        </span>
+                    </Link>
                 </div>
 
-                {isCollapsed ? (
-                    <nav className="flex-1 px-2 space-y-1 pt-2">
-                        {[...navItems].map((item) => {
-                            const isActive = pathname === item.href;
-                            return (
-                                <Tooltip key={item.name}>
-                                    <TooltipTrigger asChild>
-                                        <Link
-                                            href={item.href}
-                                            className={`flex items-center justify-center p-2 rounded-lg transition-all cursor-pointer ${isActive ? "text-accent bg-accent/5" : "text-muted-foreground hover:text-foreground hover:bg-secondary"}`}
-                                        >
-                                            <item.icon className="w-4 h-4" />
-                                        </Link>
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">
-                                        <p>{item.name}</p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            );
-                        })}
-                        <div className="pt-3">
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button
-                                        variant="ghost"
-                                        size="icon-sm"
-                                        onClick={() => setIsCollapsed(false)}
-                                        className="w-full"
-                                    >
-                                        <PanelLeft className="w-4 h-4" />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent side="right">
-                                    <p>Expand</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </div>
-                    </nav>
-                ) : (
-                    <SidebarContent pathname={pathname} />
-                )}
+                <SidebarContent pathname={pathname} />
             </aside>
-        </TooltipProvider>
+        </>
     );
 };
 

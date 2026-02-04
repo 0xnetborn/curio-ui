@@ -18,10 +18,10 @@ export const WetPaintButton = ({
       {...props}
     >
       {children}
-      <Drip left="10%" height={24} delay={0.5} />
-      <Drip left="30%" height={20} delay={3} />
-      <Drip left="57%" height={10} delay={4.25} />
-      <Drip left="85%" height={16} delay={1.5} />
+      <Drip left="10%" height={24} delay={0.5} uniqueId="1" />
+      <Drip left="30%" height={20} delay={3} uniqueId="2" />
+      <Drip left="57%" height={10} delay={4.25} uniqueId="3" />
+      <Drip left="85%" height={16} delay={1.5} uniqueId="4" />
     </button>
   );
 };
@@ -30,9 +30,12 @@ interface DripProps {
   left: string;
   height: number;
   delay: number;
+  uniqueId: string;
 }
 
-const Drip = ({ left, height, delay }: DripProps) => {
+const Drip = ({ left, height, delay, uniqueId }: DripProps) => {
+  const clipId = `clip-${uniqueId}`;
+  
   return (
     <motion.div
       className="absolute top-[99%] origin-top"
@@ -60,13 +63,7 @@ const Drip = ({ left, height, delay }: DripProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="absolute left-full top-0"
       >
-        <g clipPath="url(#clip0_1077_28)">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-accent transition-colors group-hover:fill-accent/90"
-          />
+        <g clipPath={`url(#${clipId}-left)`}>
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -75,7 +72,7 @@ const Drip = ({ left, height, delay }: DripProps) => {
           />
         </g>
         <defs>
-          <clipPath id="clip0_1077_28">
+          <clipPath id={`${clipId}-left`}>
             <rect width="6" height="6" fill="white" />
           </clipPath>
         </defs>
@@ -88,13 +85,7 @@ const Drip = ({ left, height, delay }: DripProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="absolute right-full top-0 rotate-90"
       >
-        <g clipPath="url(#clip0_1077_28)">
-          <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-accent transition-colors group-hover:fill-accent/90"
-          />
+        <g clipPath={`url(#${clipId}-right)`}>
           <path
             fillRule="evenodd"
             clipRule="evenodd"
@@ -103,7 +94,7 @@ const Drip = ({ left, height, delay }: DripProps) => {
           />
         </g>
         <defs>
-          <clipPath id="clip0_1077_28">
+          <clipPath id={`${clipId}-right`}>
             <rect width="6" height="6" fill="white" />
           </clipPath>
         </defs>

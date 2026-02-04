@@ -4,11 +4,13 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import GradientFillButton from "@/registry/buttons/gradient-fill-button";
 
+export const dynamic = "force-dynamic";
+
 export default function GradientFillButtonPage() {
   return (
     <div className="space-y-8">
       <header className="flex items-center justify-between">
-        <Link href="/components/buttons" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+        <Link href="/buttons" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
           <ArrowLeft className="w-4 h-4" />
           <span>Buttons</span>
         </Link>
