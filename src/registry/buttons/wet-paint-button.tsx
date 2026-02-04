@@ -1,183 +1,105 @@
 "use client";
 
-import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-
-export interface WetPaintButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: React.ReactNode;
-}
-
-/**
- * Wet Paint Button - From hover.dev
- * A button with dripping paint effect on hover using SVG filters
- */
-export const WetPaintButton = ({
-  children = "Wet Paint",
-  className,
-  ...props
-}: WetPaintButtonProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div className="relative inline-flex items-center justify-center">
-      {/* SVG Filters for liquid effect */}
-      <svg className="absolute w-0 h-0 pointer-events-none">
-        <defs>
-          <filter id="wet-paint-filter">
-            <feTurbulence
-              id="turbulence"
-              baseFrequency="0.8"
-              numOctaves="3"
-              result="noise"
-              seed={isHovered ? 1 : 0}
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale={isHovered ? 12 : 0}
-              xChannelSelector="R"
-              yChannelSelector="G"
-            />
-          </filter>
-        </defs>
-      </svg>
-
-      <button
-        className={cn(
-          "group relative rounded-lg bg-accent px-8 py-3 font-semibold text-accent-foreground transition-all duration-300",
-          "hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30",
-          className
-        )}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        {...props}
-      >
-        {children}
-
-        {/* Drip effects - mimicking hover.dev wet paint */}
-        <Drip
-          left="15%"
-          delay={0}
-          duration={1.5}
-          width={8}
-          height={24}
-        />
-        <Drip
-          left="35%"
-          delay={0.3}
-          duration={2}
-          width={6}
-          height={18}
-        />
-        <Drip
-          left="55%"
-          delay={0.6}
-          duration={1.8}
-          width={10}
-          height={28}
-        />
-        <Drip
-          left="75%"
-          delay={0.2}
-          duration={2.2}
-          width={7}
-          height={20}
-        />
-        <Drip
-          left="90%"
-          delay={0.9}
-          duration={1.6}
-          width={5}
-          height={16}
-        />
-      </button>
-    </div>
-  );
-};
 
 interface DripProps {
   left: string;
-  delay: number;
-  duration: number;
-  width: number;
   height: number;
+  delay: number;
 }
 
-/**
- * Drip component for the wet paint effect
- * Creates animated dripping paint drops
- */
-const Drip = ({ left, delay, duration, width, height }: DripProps) => {
+const Drip = ({ left, height, delay }: DripProps) => {
+  const clipId = `clip-${Math.random().toString(36).substr(2, 9)}`;
+  
   return (
     <motion.div
-      className="absolute top-full origin-top z-10"
+      className="absolute top-[99%] origin-top"
       style={{ left }}
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: [0, 1, 1, 0],
-        scaleY: [0, 1, 1.2, 1],
-      }}
+      initial={{ scaleY: 0.75 }}
+      animate={{ scaleY: [0.75, 1, 0.75] }}
       transition={{
-        duration: 4,
-        times: [0, 0.1, 0.8, 1],
+        duration: 2,
+        times: [0, 0.25, 1],
         delay,
-        ease: "easeInOut",
+        ease: "easeIn",
         repeat: Infinity,
         repeatDelay: 2,
       }}
     >
-      {/* Main drip body */}
       <div
-        className="bg-accent"
-        style={{
-          width: width,
-          height: height,
-          borderRadius: `0 0 ${width}px ${width}px`,
-        }}
+        style={{ height }}
+        className="w-2 rounded-b-full bg-violet-500 transition-colors group-hover:bg-violet-600"
       />
-
-      {/* Drip tip on left */}
       <svg
-        width={width}
-        height={width}
-        viewBox="0 0 10 10"
-        className="absolute top-0 left-full"
-        style={{ transform: "translateX(-50%)" }}
+        width="6"
+        height="6"
+        viewBox="0 0 6 6"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute left-full top-0"
       >
-        <path
-          d={`M0,${width / 2} Q${width / 2},0 ${width},${width / 2}`}
-          fill="currentColor"
-          className="text-accent"
-        />
+        <g clipPath={`url(#${clipId}-left)`}>
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+            className="fill-violet-500 transition-colors group-hover:bg-violet-600"
+          />
+        </g>
+        <defs>
+          <clipPath id={`${clipId}-left`}>
+            <rect width="6" height="6" fill="white" />
+          </clipPath>
+        </defs>
       </svg>
-
-      {/* Falling droplet */}
+      <svg
+        width="6"
+        height="6"
+        viewBox="0 0 6 6"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute right-full top-0 rotate-90"
+      >
+        <g clipPath={`url(#${clipId}-right)`}>
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+            className="fill-violet-500 transition-colors group-hover:bg-violet-600"
+          />
+        </g>
+        <defs>
+          <clipPath id={`${clipId}-right`}>
+            <rect width="6" height="6" fill="white" />
+          </clipPath>
+        </defs>
+      </svg>
       <motion.div
-        className="absolute left-1/2 top-full -translate-x-1/2"
-        initial={{ y: 0, opacity: 1 }}
-        animate={{
-          y: [0, 40],
-          opacity: [1, 0],
-        }}
+        initial={{ y: -8, opacity: 1 }}
+        animate={{ y: [-8, 50], opacity: [1, 0] }}
         transition={{
-          duration: duration,
+          duration: 2,
           times: [0, 1],
-          delay: delay,
+          delay,
           ease: "easeIn",
           repeat: Infinity,
           repeatDelay: 2,
         }}
-      >
-        <div
-          className="bg-accent rounded-full"
-          style={{
-            width: width * 0.6,
-            height: width * 0.6,
-          }}
-        />
-      </motion.div>
+        className="absolute top-full h-2 w-2 rounded-full bg-violet-500 transition-colors group-hover:bg-violet-600"
+      />
     </motion.div>
+  );
+};
+
+const WetPaintButton = () => {
+  return (
+    <button className="group relative rounded bg-violet-500 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-violet-600">
+      Wet Paint Button
+      <Drip left="10%" height={24} delay={0.5} />
+      <Drip left="30%" height={20} delay={3} />
+      <Drip left="57%" height={10} delay={4.25} />
+      <Drip left="85%" height={16} delay={1.5} />
+    </button>
   );
 };
 
