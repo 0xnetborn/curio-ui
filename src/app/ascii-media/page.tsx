@@ -949,7 +949,7 @@ export const AsciiRenderer: React.FC<AsciiRendererProps> = ({
                   </Button>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <Highlight theme={isDark ? themes.nightOwl : themes.github} code={codeTab === "usage" ? USAGE_CODE : FULL_COMPONENT_CODE} language="tsx">
+                  <Highlight theme={themes.nightOwl} code={codeTab === "usage" ? USAGE_CODE : FULL_COMPONENT_CODE} language="tsx">
                     {({ style, tokens, getLineProps, getTokenProps }) => (
                       <pre className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg" style={{ ...style, background: 'transparent' }}>
                         {tokens.map((line, i) => (
