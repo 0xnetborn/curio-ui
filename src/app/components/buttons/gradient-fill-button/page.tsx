@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Highlight, themes } from "prism-react-renderer";
-import { useTheme } from "next-themes";
 import {
   ArrowLeft,
   Copy,
@@ -22,7 +21,7 @@ import React from "react";
 
 const GradientFillButton = () => {
   return (
-    <button className="group/button relative overflow-hidden rounded-md border border-accent/20 bg-white px-4 py-1 text-xs font-medium text-accent transition-all duration-150 hover:border-accent active:scale-95">
+    <button className="group/button relative overflow-hidden rounded-md border border-accent/20 bg-white px-4 py-1 text-xs font-medium text-accent transition-all duration-150 hover:border-accent active:scale-95 cursor-pointer">
       <span className="absolute bottom-0 left-0 z-0 h-0 w-full bg-gradient-to-t from-accent to-accent-foreground transition-all duration-500 group-hover/button:h-full"></span>
       <span className="relative z-10 transition-all duration-500 group-hover/button:text-white">CurioUI</span>
     </button>
@@ -36,9 +35,6 @@ const USAGE_CODE = `import GradientFillButton from "@/registry/buttons/gradient-
 <GradientFillButton />`;
 
 export default function GradientFillButtonPage() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [codeTab, setCodeTab] = useState<"usage" | "component">("usage");
   const [copied, setCopied] = useState(false);
@@ -101,7 +97,7 @@ export default function GradientFillButtonPage() {
           >
             {/* Preview */}
             <div className="flex-1 flex flex-col min-h-[400px] lg:min-h-0">
-              <div className={`flex-1 relative rounded-xl border border-border overflow-hidden ${isDark ? "bg-slate-950" : "bg-slate-100"}`}>
+              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-slate-100">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <GradientFillButton />
                 </div>
@@ -160,14 +156,14 @@ export default function GradientFillButtonPage() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <Highlight
-                    theme={isDark ? themes.nightOwl : themes.github}
+                    theme={themes.github}
                     code={codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE}
                     language="tsx"
                   >
                     {({ style, tokens, getLineProps, getTokenProps }) => (
                       <pre
                         className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg"
-                        style={{ ...style, background: isDark ? "#0d1117" : "#f6f8fa" }}
+                        style={{ ...style, background: "#f6f8fa" }}
                       >
                         {tokens.map((line, i) => (
                           <div key={i} {...getLineProps({ line })}>

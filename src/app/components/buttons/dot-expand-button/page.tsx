@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Highlight, themes } from "prism-react-renderer";
-import { useTheme } from "next-themes";
 import {
   ArrowLeft,
   Copy,
@@ -23,7 +22,7 @@ import { FiArrowRight } from 'react-icons/fi';
 
 const DotExpandButton = () => {
   return (
-    <button className="group flex h-10 items-center gap-2 rounded-full bg-neutral-200 pl-3 pr-4 transition-all duration-300 ease-in-out hover:bg-black hover:pl-2 hover:text-white active:bg-neutral-700">
+    <button className="group flex h-10 items-center gap-2 rounded-full bg-neutral-200 pl-3 pr-4 transition-all duration-300 ease-in-out hover:bg-black hover:pl-2 hover:text-white active:bg-neutral-700 cursor-pointer">
       <span className="rounded-full bg-black p-1 text-sm transition-colors duration-300 group-hover:bg-white">
         <FiArrowRight className="-translate-x-[200%] text-[0px] transition-all duration-300 group-hover:translate-x-0 group-hover:text-lg group-hover:text-black group-active:-rotate-45" />
       </span>
@@ -39,9 +38,6 @@ const USAGE_CODE = `import DotExpandButton from "@/registry/buttons/dot-expand-b
 <DotExpandButton />`;
 
 export default function DotExpandButtonPage() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [codeTab, setCodeTab] = useState<"usage" | "component">("usage");
   const [copied, setCopied] = useState(false);
@@ -104,7 +100,7 @@ export default function DotExpandButtonPage() {
           >
             {/* Preview */}
             <div className="flex-1 flex flex-col min-h-[400px] lg:min-h-0">
-              <div className={`flex-1 relative rounded-xl border border-border overflow-hidden ${isDark ? "bg-slate-950" : "bg-slate-100"}`}>
+              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-slate-100">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <DotExpandButton />
                 </div>
@@ -163,14 +159,14 @@ export default function DotExpandButtonPage() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <Highlight
-                    theme={isDark ? themes.nightOwl : themes.github}
+                    theme={themes.github}
                     code={codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE}
                     language="tsx"
                   >
                     {({ style, tokens, getLineProps, getTokenProps }) => (
                       <pre
                         className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg"
-                        style={{ ...style, background: isDark ? "#0d1117" : "#f6f8fa" }}
+                        style={{ ...style, background: "#f6f8fa" }}
                       >
                         {tokens.map((line, i) => (
                           <div key={i} {...getLineProps({ line })}>

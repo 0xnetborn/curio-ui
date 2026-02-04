@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Highlight, themes } from "prism-react-renderer";
-import { useTheme } from "next-themes";
 import {
   ArrowLeft,
   Copy,
@@ -22,7 +21,7 @@ import { motion } from "framer-motion";
 
 const WetPaintButton = () => {
   return (
-    <button className="group relative rounded bg-accent px-4 py-2.5 font-semibold text-white transition-colors hover:bg-accent/90">
+    <button className="group relative rounded bg-accent px-4 py-2.5 font-semibold text-white transition-colors hover:bg-accent/90 cursor-pointer">
       Wet Paint Button
       <Drip left="10%" height={24} delay={0.5} />
       <Drip left="30%" height={20} delay={3} />
@@ -58,11 +57,35 @@ const Drip = ({ left, height, delay }: DripProps) => {
         style={{ height }}
         className="w-2 rounded-b-full bg-accent transition-colors group-hover:bg-accent/90"
       />
-      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute left-full top-0">
-        <path fillRule="evenodd" clipRule="evenodd" d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z" className="fill-accent transition-colors group-hover:bg-accent/90" />
+      <svg
+        width="6"
+        height="6"
+        viewBox="0 0 6 6"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute left-full top-0"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+          className="fill-accent transition-colors group-hover:bg-accent/90"
+        />
       </svg>
-      <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute right-full top-0 rotate-90">
-        <path fillRule="evenodd" clipRule="evenodd" d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z" className="fill-accent transition-colors group-hover:bg-accent/90" />
+      <svg
+        width="6"
+        height="6"
+        viewBox="0 0 6 6"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute right-full top-0 rotate-90"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+          className="fill-accent transition-colors group-hover:bg-accent/90"
+        />
       </svg>
       <motion.div
         initial={{ y: -8, opacity: 1 }}
@@ -88,9 +111,6 @@ const USAGE_CODE = `import WetPaintButton from "@/registry/buttons/wet-paint-but
 <WetPaintButton />`;
 
 export default function WetButtonPage() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
-
   const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [codeTab, setCodeTab] = useState<"usage" | "component">("usage");
   const [copied, setCopied] = useState(false);
@@ -153,7 +173,7 @@ export default function WetButtonPage() {
           >
             {/* Preview */}
             <div className="flex-1 flex flex-col min-h-[400px] lg:min-h-0">
-              <div className={`flex-1 relative rounded-xl border border-border overflow-hidden ${isDark ? "bg-slate-950" : "bg-slate-100"}`}>
+              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-slate-100">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <WetPaintButton />
                 </div>
@@ -212,14 +232,14 @@ export default function WetButtonPage() {
                 </CardHeader>
                 <CardContent className="p-0">
                   <Highlight
-                    theme={isDark ? themes.nightOwl : themes.github}
+                    theme={themes.github}
                     code={codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE}
                     language="tsx"
                   >
                     {({ style, tokens, getLineProps, getTokenProps }) => (
                       <pre
                         className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg"
-                        style={{ ...style, background: isDark ? "#0d1117" : "#f6f8fa" }}
+                        style={{ ...style, background: "#f6f8fa" }}
                       >
                         {tokens.map((line, i) => (
                           <div key={i} {...getLineProps({ line })}>

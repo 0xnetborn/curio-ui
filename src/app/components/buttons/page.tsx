@@ -31,11 +31,11 @@ export default function ComponentsButtonsPage() {
           <motion.div key={button.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
             <Link href={button.href}>
               <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10 overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-900">
+                <div className="absolute inset-0 flex items-center justify-center bg-slate-100">
                   <button.component />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                  <h3 className="font-medium text-sm text-white">{button.displayName}</h3>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white/90 to-transparent">
+                  <h3 className="font-medium text-sm">{button.displayName}</h3>
                 </div>
               </div>
             </Link>
