@@ -2,6 +2,26 @@
 
 import { motion } from "framer-motion";
 
+const Example = () => {
+  return (
+    <div className="grid min-h-[200px] place-content-center bg-slate-900 p-4">
+      <WetPaintButton />
+    </div>
+  );
+};
+
+const WetPaintButton = () => {
+  return (
+    <button className="group relative rounded bg-accent px-4 py-2.5 font-semibold text-white transition-colors hover:bg-accent/90">
+      Wet Paint Button
+      <Drip left="10%" height={24} delay={0.5} />
+      <Drip left="30%" height={20} delay={3} />
+      <Drip left="57%" height={10} delay={4.25} />
+      <Drip left="85%" height={16} delay={1.5} />
+    </button>
+  );
+};
+
 interface DripProps {
   left: string;
   height: number;
@@ -9,8 +29,6 @@ interface DripProps {
 }
 
 const Drip = ({ left, height, delay }: DripProps) => {
-  const clipId = `clip-${Math.random().toString(36).substr(2, 9)}`;
-  
   return (
     <motion.div
       className="absolute top-[99%] origin-top"
@@ -28,7 +46,7 @@ const Drip = ({ left, height, delay }: DripProps) => {
     >
       <div
         style={{ height }}
-        className="w-2 rounded-b-full bg-violet-500 transition-colors group-hover:bg-violet-600"
+        className="w-2 rounded-b-full bg-accent transition-colors group-hover:bg-accent/90"
       />
       <svg
         width="6"
@@ -38,16 +56,22 @@ const Drip = ({ left, height, delay }: DripProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="absolute left-full top-0"
       >
-        <g clipPath={`url(#${clipId}-left)`}>
+        <g clipPath="url(#clip0_1077_28)">
           <path
             fillRule="evenodd"
             clipRule="evenodd"
             d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-violet-500 transition-colors group-hover:bg-violet-600"
+            className="fill-accent transition-colors group-hover:bg-accent/90"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+            className="fill-accent transition-colors group-hover:bg-accent/90"
           />
         </g>
         <defs>
-          <clipPath id={`${clipId}-left`}>
+          <clipPath id="clip0_1077_28">
             <rect width="6" height="6" fill="white" />
           </clipPath>
         </defs>
@@ -60,16 +84,22 @@ const Drip = ({ left, height, delay }: DripProps) => {
         xmlns="http://www.w3.org/2000/svg"
         className="absolute right-full top-0 rotate-90"
       >
-        <g clipPath={`url(#${clipId}-right)`}>
+        <g clipPath="url(#clip0_1077_28)">
           <path
             fillRule="evenodd"
             clipRule="evenodd"
             d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
-            className="fill-violet-500 transition-colors group-hover:bg-violet-600"
+            className="fill-accent transition-colors group-hover:bg-accent/90"
+          />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+            className="fill-accent transition-colors group-hover:bg-accent/90"
           />
         </g>
         <defs>
-          <clipPath id={`${clipId}-right`}>
+          <clipPath id="clip0_1077_28">
             <rect width="6" height="6" fill="white" />
           </clipPath>
         </defs>
@@ -85,21 +115,9 @@ const Drip = ({ left, height, delay }: DripProps) => {
           repeat: Infinity,
           repeatDelay: 2,
         }}
-        className="absolute top-full h-2 w-2 rounded-full bg-violet-500 transition-colors group-hover:bg-violet-600"
+        className="absolute top-full h-2 w-2 rounded-full bg-accent transition-colors group-hover:bg-accent/90"
       />
     </motion.div>
-  );
-};
-
-const WetPaintButton = () => {
-  return (
-    <button className="group relative rounded bg-violet-500 px-4 py-2.5 font-semibold text-white transition-colors hover:bg-violet-600">
-      Wet Paint Button
-      <Drip left="10%" height={24} delay={0.5} />
-      <Drip left="30%" height={20} delay={3} />
-      <Drip left="57%" height={10} delay={4.25} />
-      <Drip left="85%" height={16} delay={1.5} />
-    </button>
   );
 };
 

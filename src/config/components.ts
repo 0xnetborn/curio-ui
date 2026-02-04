@@ -55,15 +55,6 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: false,
     },
-    {
-        slug: "aurora-glow",
-        name: "Aurora Glow",
-        description: "Ethereal light pillar effect with Three.js raymarching shaders",
-        category: "backgrounds",
-        isPremium: false,
-        isNew: true,
-        dependencies: ["three"],
-    },
     // Buttons / Surfaces
     {
         slug: "glass-surface",
