@@ -1,35 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Highlight, themes } from "prism-react-renderer";
-import {
-  ArrowLeft,
-  Copy,
-  Check,
-  Play,
-  FileCode,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import BorderGlowButton from "@/registry/buttons/border-glow-button";
+import { PreviewCodeTabs } from "@/components/ui/tabs";
 
-const COMPONENT_CODE = `"use client";
+const componentCode = `"use client";
 
 import React, { useEffect, useRef, useState } from 'react';
 
 const BorderGlowButton = () => {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: '-100%', y: '-100%' });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e) => {
       if (!ref.current) return;
       const rect = ref.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      setMousePosition({ x: \\\`\${x}px\\\`, y: \\\`\${y}px\\\` });
+      setMousePosition({ x: x + 'px', y: y + 'px' });
     };
 
     document.addEventListener('mousemove', handleMouseMove);
@@ -59,161 +50,36 @@ const BorderGlowButton = () => {
 
 export default BorderGlowButton;`;
 
-const USAGE_CODE = `import BorderGlowButton from "@/registry/buttons/border-glow-button";
+const usageCode = `import BorderGlowButton from "@/registry/buttons/border-glow-button";
 
 <BorderGlowButton />`;
 
 export default function BorderGlowButtonPage() {
-  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
-  const [codeTab, setCodeTab] = useState<"usage" | "component">("usage");
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
-    <div className="min-h-screen flex flex-col -m-8 lg:-m-12">
-      {/* Header */}
-      <div className="shrink-0 p-6 lg:p-10 pb-4 lg:pb-5 space-y-3">
-        <div className="flex flex-col lg:flex-row items-center gap-4 text-center lg:text-left">
-          <Link href="/components/buttons" className="p-2 rounded-lg hover:bg-secondary transition-colors self-center lg:self-auto">
-            <ArrowLeft className="w-5 h-5" />
+    <div className="space-y-8">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+        <div className="flex items-center gap-2">
+          <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer">
+            <ArrowLeft className="w-4 h-4" />
           </Link>
-          <div>
-            <h1 className="text-4xl lg:text-6xl font-black italic tracking-tighter uppercase leading-[0.8]">
-              BORDER <span className="text-accent">GLOW</span>
-            </h1>
-            <p className="text-muted-foreground text-xs font-mono tracking-[0.2em] uppercase mt-1">
-              Mouse-Tracking Glow
-            </p>
+          <h1 className="font-display text-4xl font-bold">Border Glow</h1>
+        </div>
+        <p className="text-muted-foreground max-w-lg">Button with mouse-tracking glow.</p>
+      </motion.div>
+
+      <PreviewCodeTabs
+        preview={
+          <div className="flex items-center justify-center min-h-[200px]">
+            <BorderGlowButton />
           </div>
-        </div>
+        }
+        code={componentCode}
+      />
 
-        {/* Tab Buttons */}
-        <div className="flex items-center gap-1 p-1 bg-secondary rounded-lg w-fit mx-auto lg:mx-0">
-          <Button
-            variant={activeTab === "preview" ? "default" : "ghost"}
-            size="sm"
-            onClick={() => setActiveTab("preview")}
-            className="text-[10px] uppercase tracking-widest font-bold cursor-pointer"
-          >
-            <Play className="w-3 h-3 mr-1" />
-            Preview
-          </Button>
-          <Button
-            variant={activeTab === "code" ? "default" : "ghost"}
-            size="sm"
-            onClick={() => setActiveTab("code")}
-            className="text-[10px] uppercase tracking-widest font-bold cursor-pointer"
-          >
-            <FileCode className="w-3 h-3 mr-1" />
-            Code
-          </Button>
-        </div>
+      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+        <h3 className="font-semibold">Usage</h3>
+        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm font-mono">{usageCode}</pre>
       </div>
-
-      <AnimatePresence mode="wait">
-        {activeTab === "preview" ? (
-          <motion.div
-            key="preview"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex-1 flex flex-col lg:flex-row lg:overflow-hidden px-6 lg:px-10 pb-6 lg:pb-10 gap-6"
-          >
-            {/* Preview */}
-            <div className="flex-1 flex flex-col min-h-[400px] lg:min-h-0">
-              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-background">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <BorderGlowButton />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="code"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="flex-1 overflow-auto px-6 lg:px-10 pb-6 lg:pb-10"
-          >
-            <div className="max-w-4xl mx-auto space-y-6">
-              {/* Tab selector for code */}
-              <div className="flex items-center gap-1 p-1 bg-secondary rounded-lg w-fit">
-                <Button
-                  variant={codeTab === "usage" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setCodeTab("usage")}
-                  className="text-[9px] uppercase cursor-pointer"
-                >
-                  <Play className="w-3 h-3 mr-1" />
-                  Usage
-                </Button>
-                <Button
-                  variant={codeTab === "component" ? "default" : "ghost"}
-                  size="sm"
-                  onClick={() => setCodeTab("component")}
-                  className="text-[9px] uppercase cursor-pointer"
-                >
-                  <FileCode className="w-3 h-3 mr-1" />
-                  Component
-                </Button>
-              </div>
-
-              {/* Code display */}
-              <Card className="bg-slate-900/50 border-border">
-                <CardHeader className="flex flex-row items-center justify-between py-3 px-4 border-b border-border">
-                  <CardTitle className="flex items-center gap-2 text-xs">
-                    {codeTab === "usage" ? (
-                      <Play className="w-4 h-4 text-accent" />
-                    ) : (
-                      <FileCode className="w-4 h-4 text-muted-foreground" />
-                    )}
-                    {codeTab === "usage" ? "Usage Example" : "BorderGlowButton.tsx"}
-                  </CardTitle>
-                  <Button
-                    variant="outline"
-                    size="icon-sm"
-                    onClick={handleCopy}
-                    className="cursor-pointer"
-                  >
-                    {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                  </Button>
-                </CardHeader>
-                <CardContent className="p-0">
-                  <Highlight
-                    theme={themes.nightOwl}
-                    code={codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE}
-                    language="tsx"
-                  >
-                    {({ style, tokens, getLineProps, getTokenProps }) => (
-                      <pre
-                        className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg"
-                        style={{ ...style, background: "#0d1117" }}
-                      >
-                        {tokens.map((line, i) => (
-                          <div key={i} {...getLineProps({ line })}>
-                            <span className="inline-block w-6 text-right mr-4 text-muted-foreground/40 select-none text-[10px]">
-                              {i + 1}
-                            </span>
-                            {line.map((token, key) => (
-                              <span key={key} {...getTokenProps({ token })} />
-                            ))}
-                          </div>
-                        ))}
-                      </pre>
-                    )}
-                  </Highlight>
-                </CardContent>
-              </Card>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
