@@ -24,6 +24,10 @@ interface FuzzyTextProps {
   className?: string;
 }
 
+interface CanvasWithCleanup extends HTMLCanvasElement {
+  cleanupFuzzyText?: () => void;
+}
+
 const FuzzyText: React.FC<FuzzyTextProps> = ({
   children,
   fontSize = 'clamp(2rem, 8vw, 8rem)',
@@ -45,7 +49,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   letterSpacing = 0,
   className = ''
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement & { cleanupFuzzyText?: () => void }>(null);
+  const canvasRef = useRef<CanvasWithCleanup>(null);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -61,10 +65,9 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      const computedFontFamily =
-        fontFamily === 'inherit'
-          ? window.getComputedStyle(canvas).fontFamily || 'sans-serif'
-          : fontFamily;
+      const computedFontFamily = fontFamily === 'inherit'
+        ? window.getComputedStyle(canvas).fontFamily || 'sans-serif'
+        : fontFamily;
 
       const fontSizeStr = typeof fontSize === 'number' ? `${fontSize}px` : fontSize;
       const fontString = `${fontWeight} ${fontSizeStr} ${computedFontFamily}`;
@@ -109,8 +112,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
       const metrics = offCtx.measureText(text);
       const actualLeft = metrics.actualBoundingBoxLeft ?? 0;
-      const actualRight =
-        letterSpacing !== 0 ? totalWidth : (metrics.actualBoundingBoxRight ?? metrics.width);
+      const actualRight = letterSpacing !== 0 ? totalWidth : (metrics.actualBoundingBoxRight ?? metrics.width);
       const actualAscent = metrics.actualBoundingBoxAscent ?? numericFontSize;
       const actualDescent = metrics.actualBoundingBoxDescent ?? numericFontSize * 0.2;
 
@@ -217,8 +219,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         }
 
         for (let j = 0; j < tightHeight; j++) {
-          let dx = 0,
-            dy = 0;
+          let dx = 0, dy = 0;
           if (direction === 'horizontal' || direction === 'both') {
             dx = Math.floor(currentIntensity * (Math.random() - 0.5) * fuzzRange);
           }
@@ -338,5 +339,3 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 };
 
 export default FuzzyText;
-export { FuzzyText };
-export type { FuzzyTextProps };

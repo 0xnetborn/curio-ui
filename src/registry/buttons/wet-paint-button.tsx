@@ -1,19 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ButtonHTMLAttributes } from "react";
 
-export interface WetPaintButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface WetPaintButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
 }
 
 export const WetPaintButton = ({
-  children = "Wet Paint",
+  children = "CurioUI",
   className,
   ...props
 }: WetPaintButtonProps) => {
   return (
     <button
-      className={`group relative rounded-lg bg-accent px-6 py-3 font-semibold text-accent-foreground transition-colors hover:bg-accent/90 ${className || ""}`}
+      className={`group relative rounded bg-accent px-4 py-2.5 font-semibold text-accent-foreground transition-colors hover:bg-accent/90 ${className || ""}`}
       {...props}
     >
       {children}
@@ -66,6 +67,12 @@ const Drip = ({ left, height, delay }: DripProps) => {
             d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
             className="fill-accent transition-colors group-hover:fill-accent/90"
           />
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+            className="fill-accent transition-colors group-hover:fill-accent/90"
+          />
         </g>
         <defs>
           <clipPath id="clip0_1077_28">
@@ -82,6 +89,12 @@ const Drip = ({ left, height, delay }: DripProps) => {
         className="absolute right-full top-0 rotate-90"
       >
         <g clipPath="url(#clip0_1077_28)">
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M5.4 0H0V5.4C0 2.41765 2.41766 0 5.4 0Z"
+            className="fill-accent transition-colors group-hover:fill-accent/90"
+          />
           <path
             fillRule="evenodd"
             clipRule="evenodd"
