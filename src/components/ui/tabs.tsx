@@ -25,16 +25,16 @@ export function Tabs({ tabs, defaultTab, preview, code, codeLanguage = "tsx" }: 
 
   return (
     <div className="rounded-xl border border-border bg-card overflow-hidden">
-      <div className="flex items-center border-b border-border px-1 py-1 bg-secondary/30">
+      <div className="flex items-center px-1 py-1 bg-gradient-to-r from-accent/5 to-transparent">
         <div className="flex gap-0.5">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={cn(
-                "flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all",
+                "flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all",
                 activeTab === tab.id
-                  ? "bg-background text-foreground shadow-sm"
+                  ? "bg-accent text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
               )}
             >
