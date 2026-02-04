@@ -38,13 +38,13 @@ export default function TextAnimationsPage() {
           >
             <Link href={component.href}>
               <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-100 rounded-xl">
-                  <span className="text-2xl font-bold text-slate-900 group-hover:blur-sm transition-all duration-300">
+                <div className="absolute inset-0 flex items-center justify-center bg-slate-950 rounded-xl">
+                  <span className="text-2xl font-bold text-white group-hover:blur-sm transition-all duration-300">
                     {component.displayName}
                   </span>
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-white to-transparent rounded-b-xl">
-                  <h3 className="font-medium text-sm">{component.displayName}</h3>
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
+                  <h3 className="font-medium text-sm text-white">{component.displayName}</h3>
                   <p className="text-xs text-muted-foreground line-clamp-2">
                     {component.description}
                   </p>

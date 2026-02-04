@@ -93,7 +93,7 @@ export default function BorderGlowButtonPage() {
         </div>
 
         {/* Tab Buttons */}
-        <div className="flex items-center gap-1 p-1 bg-muted rounded-lg w-fit mx-auto lg:mx-0">
+        <div className="flex items-center gap-1 p-1 bg-secondary rounded-lg w-fit mx-auto lg:mx-0">
           <Button
             variant={activeTab === "preview" ? "default" : "ghost"}
             size="sm"
@@ -126,7 +126,7 @@ export default function BorderGlowButtonPage() {
           >
             {/* Preview */}
             <div className="flex-1 flex flex-col min-h-[400px] lg:min-h-0">
-              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-slate-100">
+              <div className="flex-1 relative rounded-xl border border-border overflow-hidden bg-slate-950 shadow-inner shadow-black/20">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <BorderGlowButton />
                 </div>
@@ -143,7 +143,7 @@ export default function BorderGlowButtonPage() {
           >
             <div className="max-w-4xl mx-auto space-y-6">
               {/* Tab selector for code */}
-              <div className="flex items-center gap-1 p-1 bg-muted rounded-lg w-fit">
+              <div className="flex items-center gap-1 p-1 bg-secondary rounded-lg w-fit">
                 <Button
                   variant={codeTab === "usage" ? "default" : "ghost"}
                   size="sm"
@@ -165,8 +165,8 @@ export default function BorderGlowButtonPage() {
               </div>
 
               {/* Code display */}
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between py-3 px-4">
+              <Card className="bg-slate-900/50 border-border">
+                <CardHeader className="flex flex-row items-center justify-between py-3 px-4 border-b border-border">
                   <CardTitle className="flex items-center gap-2 text-xs">
                     {codeTab === "usage" ? (
                       <Play className="w-4 h-4 text-accent" />
@@ -179,20 +179,21 @@ export default function BorderGlowButtonPage() {
                     variant="outline"
                     size="icon-sm"
                     onClick={handleCopy}
+                    className="cursor-pointer"
                   >
                     {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                   </Button>
                 </CardHeader>
                 <CardContent className="p-0">
                   <Highlight
-                    theme={themes.github}
+                    theme={themes.nightOwl}
                     code={codeTab === "usage" ? USAGE_CODE : COMPONENT_CODE}
                     language="tsx"
                   >
                     {({ style, tokens, getLineProps, getTokenProps }) => (
                       <pre
                         className="p-4 text-xs font-mono overflow-x-auto rounded-b-lg"
-                        style={{ ...style, background: "#f6f8fa" }}
+                        style={{ ...style, background: "#0d1117" }}
                       >
                         {tokens.map((line, i) => (
                           <div key={i} {...getLineProps({ line })}>
