@@ -42,16 +42,19 @@ export const componentCategories = {
         description: "Navigation and header components",
         icon: "Menu",
     },
-    blocks: {
-        name: "Blocks",
-        description: "Standalone UI blocks and sections",
-        icon: "Square",
-    },
 } as const;
 
 // Component Registry
 export const components: ComponentMeta[] = [
     // Backgrounds
+    {
+        slug: "ascii-media",
+        name: "ASCII Media",
+        description: "Convert video and images to real-time ASCII art with WebGL",
+        category: "backgrounds",
+        isPremium: false,
+        isNew: false,
+    },
     {
         slug: "aurora-glow",
         name: "Aurora Glow",
@@ -61,17 +64,9 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["three"],
     },
-    {
-        slug: "ascii-media",
-        name: "ASCII Media",
-        description: "Convert video and images to real-time ASCII art with WebGL",
-        category: "backgrounds",
-        isPremium: false,
-        isNew: false,
-    },
     // Buttons / Surfaces
     {
-        slug: "effects/glass-surface",
+        slug: "glass-surface",
         name: "Glass Surface",
         description: "Glassmorphism container with chromatic aberration distortion",
         category: "buttons",
@@ -111,7 +106,7 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "buttons/wet-paint-button",
+        slug: "components/buttons/wet-button",
         name: "Wet Paint Button",
         description: "Dripping paint effect on hover",
         category: "buttons",
@@ -123,19 +118,11 @@ export const components: ComponentMeta[] = [
     {
         slug: "text-animations/fuzzy-text",
         name: "Fuzzy Text",
-        description: "Canvas-based fuzzy text effect with glitch animations",
+        description: "Text that blurs and reveals on hover",
         category: "text",
         isPremium: false,
         isNew: true,
-    },
-    // Blocks
-    {
-        slug: "blocks/infinite-logos-loop",
-        name: "Infinite Logos Loop",
-        description: "Continuously scrolling logo cloud animation",
-        category: "blocks",
-        isPremium: false,
-        isNew: true,
+        dependencies: ["framer-motion"],
     },
 ];
 
