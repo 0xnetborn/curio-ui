@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 
-interface FuzzyTextProps {
+export interface FuzzyTextProps {
   children: React.ReactNode;
   fontSize?: number | string;
   fontWeight?: string | number;
@@ -28,7 +28,7 @@ interface CanvasWithCleanup extends HTMLCanvasElement {
   cleanupFuzzyText?: () => void;
 }
 
-const FuzzyText: React.FC<FuzzyTextProps> = ({
+export const FuzzyText: React.FC<FuzzyTextProps> = ({
   children,
   fontSize = 'clamp(2rem, 8vw, 8rem)',
   fontWeight = 900,
