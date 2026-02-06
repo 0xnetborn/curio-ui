@@ -115,6 +115,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
+    // Cards
+    {
+        slug: "components/spotlight-card",
+        name: "Spotlight Card",
+        description: "Card with gradient spotlight effect on hover",
+        category: "cards",
+        isPremium: false,
+        isNew: true,
+    },
 ];
 
 // Helper functions
