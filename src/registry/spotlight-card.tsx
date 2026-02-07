@@ -1,35 +1,72 @@
-import React from "react";
-import { cn } from "@/lib/utils";
+"use client";
 
-interface SpotlightCardProps {
-  children: React.ReactNode;
+import React, { useRef, useState } from "react";
+
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface SpotlightCardProps extends React.PropsWithChildren {
   className?: string;
-  gradient?: "blue" | "purple" | "teal" | "orange";
+  spotlightColor?: string;
 }
 
 export function SpotlightCard({
   children,
-  className,
-  gradient = "teal",
+  className = "",
+  spotlightColor = "rgba(255, 255, 255, 0.25)",
 }: SpotlightCardProps) {
-  const gradients = {
-    blue: "bg-gradient-to-br from-blue-500/20 via-blue-500/10 to-transparent",
-    purple: "bg-gradient-to-br from-purple-500/20 via-purple-500/10 to-transparent",
-    teal: "bg-gradient-to-br from-teal-500/20 via-teal-500/10 to-transparent",
-    orange: "bg-gradient-to-br from-orange-500/20 via-orange-500/10 to-transparent",
+  const divRef = useRef<HTMLDivElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
+
+  const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    if (!divRef.current || isFocused) return;
+
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setOpacity(0.6);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    setOpacity(0);
+  };
+
+  const handleMouseEnter = () => {
+    setOpacity(0.6);
+  };
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
   };
 
   return (
     <div
-      className={cn(
-        "relative overflow-hidden rounded-xl border border-white/10 bg-slate-950 p-6",
-        gradients[gradient],
-        className
-      )}
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative rounded-3xl border border-white/10 bg-slate-950 overflow-hidden p-8 ${className}`}
     >
-      {/* Spotlight effect */}
-      <div className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100" />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
+        style={{
+          opacity,
+          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`,
+        }}
+      />
       {children}
     </div>
   );
 }
+
+export default SpotlightCard;

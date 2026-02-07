@@ -53,7 +53,7 @@ export const components: ComponentMeta[] = [
         description: "Convert video and images to real-time ASCII art with WebGL",
         category: "backgrounds",
         isPremium: false,
-        isNew: false,
+        isNew: true,
     },
     // Buttons / Surfaces
     {
@@ -62,7 +62,7 @@ export const components: ComponentMeta[] = [
         description: "Glassmorphism container with chromatic aberration distortion",
         category: "buttons",
         isPremium: false,
-        isNew: true,
+        isNew: false,
     },
     {
         slug: "buttons/3d-button",
@@ -70,7 +70,7 @@ export const components: ComponentMeta[] = [
         description: "Button with 3D depth effect and ripple on hover",
         category: "buttons",
         isPremium: false,
-        isNew: true,
+        isNew: false,
     },
     {
         slug: "buttons/shine-button",
@@ -78,7 +78,7 @@ export const components: ComponentMeta[] = [
         description: "Button with diagonal light sweep effect on hover",
         category: "buttons",
         isPremium: false,
-        isNew: true,
+        isNew: false,
     },
     {
         slug: "buttons/border-glow-button",
@@ -86,7 +86,7 @@ export const components: ComponentMeta[] = [
         description: "Button with mouse-tracking glow effect on border",
         category: "buttons",
         isPremium: false,
-        isNew: true,
+        isNew: false,
     },
     {
         slug: "buttons/gradient-fill-button",
@@ -94,7 +94,7 @@ export const components: ComponentMeta[] = [
         description: "Button that fills with gradient from bottom on hover",
         category: "buttons",
         isPremium: false,
-        isNew: true,
+        isNew: false,
     },
     {
         slug: "components/buttons/wet-button",
@@ -102,7 +102,7 @@ export const components: ComponentMeta[] = [
         description: "Dripping paint effect on hover",
         category: "buttons",
         isPremium: false,
-        isNew: true,
+        isNew: false,
         dependencies: ["framer-motion"],
     },
     // Text Animations
@@ -112,7 +112,7 @@ export const components: ComponentMeta[] = [
         description: "Text that blurs and reveals on hover",
         category: "text",
         isPremium: false,
-        isNew: true,
+        isNew: false,
         dependencies: ["framer-motion"],
     },
     // Cards
@@ -122,7 +122,7 @@ export const components: ComponentMeta[] = [
         description: "Card with gradient spotlight effect on hover",
         category: "cards",
         isPremium: false,
-        isNew: true,
+        isNew: false,
     },
 ];
 

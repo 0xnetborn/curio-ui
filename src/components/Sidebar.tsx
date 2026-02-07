@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, Component, Terminal, ExternalLink, Github, Menu, PanelLeftClose, PanelLeft, Layers, MousePointer, LayoutGrid, Type, Loader2, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Home, Component, Terminal, ExternalLink, Github, Menu, PanelLeftClose, PanelLeft, Layers, MousePointer, LayoutGrid, Type, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -27,7 +27,8 @@ const categoryIcons = {
 };
 
 const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) => {
-    const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+    // Keep all categories expanded by default
+    const expandedCategory = useRef<string | null>(Object.keys(componentCategories)[0]);
 
     return (
         <>
@@ -55,47 +56,37 @@ const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate
                     {Object.entries(componentCategories).map(([key, category]) => {
                         const Icon = categoryIcons[key as keyof typeof categoryIcons];
                         const components = getComponentsByCategory(key as keyof typeof componentCategories);
-                        const isExpanded = expandedCategory === key;
+                        // All categories are always expanded
+                        const isExpanded = true;
 
                         return (
                             <div key={key}>
-                                <button
-                                    onClick={() => setExpandedCategory(isExpanded ? null : key)}
-                                    className="w-full flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-all cursor-pointer"
+                                {/* Category header - no toggle needed since always expanded */}
+                                <div className="flex items-center gap-3 px-3 py-2 rounded-lg text-foreground bg-secondary/50">
+                                    <Icon className="w-4 h-4 text-accent" />
+                                    <span className="text-sm font-medium">{category.name}</span>
+                                    <span className="text-[10px] text-muted-foreground/60 ml-auto">{components.length}</span>
+                                </div>
+                                {/* Always show components */}
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    className="overflow-hidden"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <Icon className="w-4 h-4" />
-                                        <span className="text-sm font-medium">{category.name}</span>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-[10px] text-muted-foreground/60">{components.length}</span>
-                                        <ChevronDown className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
-                                    </div>
-                                </button>
-                                <AnimatePresence>
-                                    {isExpanded && components.length > 0 && (
-                                        <motion.div
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            className="overflow-hidden"
+                                    {components.map((comp) => (
+                                        <Link
+                                            key={comp.slug}
+                                            href={`/${comp.slug}`}
+                                            onClick={onNavigate}
+                                            className="flex items-center gap-2 pl-10 pr-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
                                         >
-                                            {components.map((comp) => (
-                                                <Link
-                                                    key={comp.slug}
-                                                    href={`/${comp.slug}`}
-                                                    onClick={onNavigate}
-                                                    className="flex items-center gap-2 pl-10 pr-3 py-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                                                >
-                                                    {comp.name}
-                                                    {comp.isNew && (
-                                                        <span className="px-1 py-0.5 text-[8px] font-semibold uppercase bg-accent text-accent-foreground rounded">New</span>
-                                                    )}
-                                                </Link>
-                                            ))}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
+                                            {comp.name}
+                                            {comp.isNew && (
+                                                <span className="px-1 py-0.5 text-[8px] font-semibold uppercase bg-accent text-accent-foreground rounded">New</span>
+                                            )}
+                                        </Link>
+                                    ))}
+                                </motion.div>
                             </div>
                         );
                     })}

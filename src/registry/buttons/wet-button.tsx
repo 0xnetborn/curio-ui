@@ -13,7 +13,7 @@ export interface WetButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEle
  * A button with dripping paint effect on hover
  */
 export const WetButton = ({
-  children = "Wet Paint",
+  children = "CurioUI",
   className,
   ...props
 }: WetButtonProps) => {
