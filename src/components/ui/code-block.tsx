@@ -1,17 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy, ChevronDown, ChevronUp } from "lucide-react";
+import { Check, Copy, ChevronDown, ChevronUp, FileCode, Terminal } from "lucide-react";
 import { Highlight, themes } from "prism-react-renderer";
+import { cn } from "@/lib/utils";
 
 interface CodeBlockProps {
   code: string;
   language?: string;
   title?: string;
   collapsed?: boolean;
+  showLineNumbers?: boolean;
 }
 
-export function CodeBlock({ code, language = "tsx", title, collapsed = false }: CodeBlockProps) {
+export function CodeBlock({
+  code,
+  language = "tsx",
+  title,
+  collapsed = false,
+  showLineNumbers = true,
+}: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
 
@@ -21,39 +29,98 @@ export function CodeBlock({ code, language = "tsx", title, collapsed = false }: 
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const lineCount = code.trim().split('\n').length;
+  const lineCount = code.trim().split("\n").length;
   const isLong = lineCount > 15;
 
+  // Language icon mapping
+  const getLanguageIcon = (lang: string) => {
+    switch (lang.toLowerCase()) {
+      case "tsx":
+      case "typescript":
+      case "ts":
+        return "TS";
+      case "css":
+        return "CSS";
+      case "json":
+        return "JSON";
+      default:
+        return lang.toUpperCase().slice(0, 3);
+    }
+  };
+
   return (
-    <div className="relative rounded-lg border border-border bg-card overflow-hidden">
+    <div
+      className={cn(
+        "rounded-xl border border-border bg-card overflow-hidden",
+        "transition-all duration-200 ease-in-out"
+      )}
+    >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gradient-to-r from-accent/10 to-accent/5 border-b border-border">
+      <div
+        className={cn(
+          "flex items-center justify-between px-4 py-3",
+          "border-b border-border",
+          "bg-secondary/30"
+        )}
+      >
         <div className="flex items-center gap-3">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
+          {/* Language badge */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-secondary/50">
+              <Terminal className="w-3.5 h-3.5 text-accent" />
+              <span className="text-xs font-mono font-medium text-foreground">
+                {getLanguageIcon(language)}
+              </span>
+            </div>
+            {title && (
+              <span className="text-xs text-muted-foreground">
+                / {title}
+              </span>
+            )}
           </div>
-          <span className="text-xs font-mono text-muted-foreground">{title || language}</span>
         </div>
+
         <div className="flex items-center gap-2">
+          {/* Collapse/Expand button */}
           {isLong && (
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="flex items-center gap-1 px-2 py-1 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors cursor-pointer"
+              className={cn(
+                "flex items-center gap-1.5 px-2 py-1 rounded-md",
+                "text-xs text-muted-foreground",
+                "hover:text-foreground hover:bg-secondary/50",
+                "transition-colors cursor-pointer"
+              )}
             >
-              {isCollapsed ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
-              {isCollapsed ? 'Expand' : 'Collapse'}
+              {isCollapsed ? (
+                <>
+                  <ChevronDown className="w-3.5 h-3.5" />
+                  <span>Expand</span>
+                </>
+              ) : (
+                <>
+                  <ChevronUp className="w-3.5 h-3.5" />
+                  <span>Collapse</span>
+                </>
+              )}
             </button>
           )}
+
+          {/* Copy button */}
           <button
             onClick={copyToClipboard}
-            className="flex items-center gap-1.5 px-2 py-1 rounded-md text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors cursor-pointer"
+            className={cn(
+              "flex items-center gap-1.5 px-2 py-1 rounded-md",
+              "text-xs transition-colors cursor-pointer",
+              copied
+                ? "text-green-500 bg-green-500/10"
+                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+            )}
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-green-500" />
-                <span className="text-green-500">Copied!</span>
+                <Check className="w-3.5 h-3.5" />
+                <span>Copied!</span>
               </>
             ) : (
               <>
@@ -65,31 +132,63 @@ export function CodeBlock({ code, language = "tsx", title, collapsed = false }: 
         </div>
       </div>
 
-      {/* Code */}
+      {/* Code content */}
       {isCollapsed ? (
-        <div className="p-4 bg-slate-950/50">
-          <code className="text-xs font-mono text-muted-foreground">
-            {code.slice(0, 200)}... ({lineCount} lines)
-          </code>
+        <div className="px-4 py-3 bg-secondary/20">
+          <div className="flex items-center gap-3">
+            <code className="text-xs font-mono text-muted-foreground">
+              {code.slice(0, 150).trim()}
+              {code.length > 150 && "..."}
+            </code>
+            <span className="text-xs text-muted-foreground/50">
+              ({lineCount} lines)
+            </span>
+          </div>
         </div>
       ) : (
-        <Highlight theme={themes.nightOwl} code={code.trim()} language={language}>
-          {({ style, tokens, getLineProps, getTokenProps }) => (
-            <pre className="p-4 overflow-x-auto text-sm bg-slate-950 max-h-[500px] overflow-y-auto scrollbar-thin" style={style}>
-              {tokens.map((line, i) => (
-                <div key={i} {...getLineProps({ line })}>
-                  <span className="inline-block w-6 text-right mr-4 text-muted-foreground/40 select-none text-[10px]">
-                    {i + 1}
-                  </span>
-                  {line.map((token, key) => (
-                    <span key={key} {...getTokenProps({ token })} />
-                  ))}
-                </div>
-              ))}
-            </pre>
-          )}
-        </Highlight>
+        <div className="relative">
+          <Highlight
+            theme={themes.nightOwl}
+            code={code.trim()}
+            language={language}
+          >
+            {({ style, tokens, getLineProps, getTokenProps }) => (
+              <pre
+                className="p-4 overflow-x-auto text-sm font-mono"
+                style={{
+                  ...style,
+                  background: "transparent",
+                  margin: 0,
+                }}
+              >
+                {tokens.map((line, i) => (
+                  <div
+                    key={i}
+                    {...getLineProps({ line })}
+                    className="hover:bg-secondary/20 -mx-4 px-4"
+                  >
+                    {showLineNumbers && (
+                      <span
+                        className={cn(
+                          "inline-block w-6 text-right mr-4",
+                          "text-xs text-muted-foreground/40 select-none"
+                        )}
+                      >
+                        {i + 1}
+                      </span>
+                    )}
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+            )}
+          </Highlight>
+        </div>
       )}
     </div>
   );
 }
+
+export default CodeBlock;

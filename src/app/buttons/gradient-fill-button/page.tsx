@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import GradientFillButton from "@/registry/buttons/gradient-fill-button";
-import { PreviewCodeTabs } from "@/components/ui/tabs";
+import { CodeBlock } from "@/components/ui/code-block";
 
 const componentCode = `const GradientFillButton = () => {
   return (
@@ -24,28 +24,45 @@ const usageCode = `import GradientFillButton from "@/registry/buttons/gradient-f
 export default function GradientFillButtonPage() {
   return (
     <div className="space-y-8">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="space-y-4"
+      >
         <div className="flex items-center gap-2">
-          <Link href="/components/buttons" className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer">
+          <Link
+            href="/components/buttons"
+            className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer"
+          >
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Gradient Fill</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">Button with gradient fill from bottom.</p>
+        <p className="text-muted-foreground max-w-lg">
+          Button with gradient fill from bottom.
+        </p>
       </motion.div>
 
-      <PreviewCodeTabs
-        preview={
-          <div className="flex items-center justify-center min-h-[200px]">
-            <GradientFillButton />
-          </div>
-        }
+      <CodeBlock
         code={componentCode}
+        language="tsx"
+        title="gradient-fill-button.tsx"
       />
 
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+      <div className="space-y-4">
         <h3 className="font-semibold">Usage</h3>
-        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">{usageCode}</pre>
+        <div className="rounded-xl border border-border bg-card p-4">
+          <pre className="text-sm font-mono text-muted-foreground overflow-x-auto">
+            {usageCode}
+          </pre>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <h3 className="font-semibold">Preview</h3>
+        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
+          <GradientFillButton />
+        </div>
       </div>
     </div>
   );

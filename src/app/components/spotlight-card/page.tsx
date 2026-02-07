@@ -108,13 +108,15 @@ export default function SpotlightCardPage() {
         </p>
       </motion.div>
 
-      <CodeBlock code={componentCode} language="tsx" title="tsx" />
+      <CodeBlock code={componentCode} language="tsx" title="SpotlightCard.tsx" />
 
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
+      <div className="space-y-4">
         <h3 className="font-semibold">Usage</h3>
-        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm font-mono">
-          {usageCode}
-        </pre>
+        <div className="rounded-xl border border-border bg-card p-4">
+          <pre className="text-sm font-mono text-muted-foreground overflow-x-auto">
+            {usageCode}
+          </pre>
+        </div>
       </div>
 
       <div className="space-y-4">

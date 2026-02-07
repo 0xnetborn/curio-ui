@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import FuzzyText from "@/registry/text/fuzzy-text";
-import { PreviewCodeTabs } from "@/components/ui/tabs";
+import { CodeBlock } from "@/components/ui/code-block";
 
 const fuzzyTextCode = `"use client";
 
@@ -189,6 +189,16 @@ const FuzzyText = ({
 
 export default FuzzyText;`;
 
+const propsData = [
+  { prop: "children", type: "ReactNode", default: "-", desc: "Text content" },
+  { prop: "fontSize", type: "string | number", default: "'clamp(2rem, 10vw, 10rem)'", desc: "Font size (px or CSS)" },
+  { prop: "fontWeight", type: "string | number", default: "900", desc: "Font weight" },
+  { prop: "color", type: "string", default: "'#fff'", desc: "Text color" },
+  { prop: "baseIntensity", type: "number", default: "0.18", desc: "Blur intensity when idle (0-1)" },
+  { prop: "hoverIntensity", type: "number", default: "0.5", desc: "Blur intensity on hover (0-1)" },
+  { prop: "enableHover", type: "boolean", default: "true", desc: "Enable hover interaction" },
+];
+
 export default function FuzzyTextPage() {
   return (
     <div className="space-y-8">
@@ -207,33 +217,17 @@ export default function FuzzyTextPage() {
           <h1 className="font-display text-4xl font-bold">Fuzzy Text</h1>
         </div>
         <p className="text-muted-foreground max-w-lg">
-          A canvas-based text effect that creates a fuzzy/glitch blur effect on hover.
+          Canvas-based text effect with fuzzy/glitch blur on hover.
           Uses performant canvas rendering for smooth animations.
         </p>
       </motion.div>
 
-      {/* Preview */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Preview</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="border border-border p-8 flex items-center justify-center min-h-[200px]">
-              <FuzzyText
-                className="text-5xl font-black text-white"
-                baseIntensity={0.18}
-                hoverIntensity={0.5}
-              >
-                CurioUI
-              </FuzzyText>
-            </div>
-          }
-          code={fuzzyTextCode}
-        />
-      </div>
+      <CodeBlock code={fuzzyTextCode} language="tsx" title="fuzzy-text.tsx" />
 
-      {/* Props Table */}
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">Props</h3>
+      <div className="rounded-xl border border-border bg-card overflow-hidden">
+        <div className="px-4 py-3 border-b border-border bg-secondary/30">
+          <h3 className="font-semibold text-sm">Props Reference</h3>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -245,54 +239,32 @@ export default function FuzzyTextPage() {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">children</td>
-                <td className="py-2 px-4">ReactNode</td>
-                <td className="py-2 px-4">-</td>
-                <td className="py-2 px-4 text-muted-foreground">Text content</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">fontSize</td>
-                <td className="py-2 px-4">string | number</td>
-                <td className="py-2 px-4">'clamp(2rem, 10vw, 10rem)'</td>
-                <td className="py-2 px-4 text-muted-foreground">Font size (px or CSS)</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">fontWeight</td>
-                <td className="py-2 px-4">string | number</td>
-                <td className="py-2 px-4">900</td>
-                <td className="py-2 px-4 text-muted-foreground">Font weight</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">color</td>
-                <td className="py-2 px-4">string</td>
-                <td className="py-2 px-4">'#fff'</td>
-                <td className="py-2 px-4 text-muted-foreground">Text color</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">baseIntensity</td>
-                <td className="py-2 px-4">number</td>
-                <td className="py-2 px-4">0.18</td>
-                <td className="py-2 px-4 text-muted-foreground">Blur intensity when idle (0-1)</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">hoverIntensity</td>
-                <td className="py-2 px-4">number</td>
-                <td className="py-2 px-4">0.5</td>
-                <td className="py-2 px-4 text-muted-foreground">Blur intensity on hover (0-1)</td>
-              </tr>
-              <tr>
-                <td className="py-2 px-4 font-mono text-accent">enableHover</td>
-                <td className="py-2 px-4">boolean</td>
-                <td className="py-2 px-4">true</td>
-                <td className="py-2 px-4 text-muted-foreground">Enable hover interaction</td>
-              </tr>
+              {propsData.map((item) => (
+                <tr key={item.prop} className="border-border/50 last:border-0">
+                  <td className="py-2 px-4 font-mono text-accent">{item.prop}</td>
+                  <td className="py-2 px-4 font-mono text-xs text-muted-foreground">{item.type}</td>
+                  <td className="py-2 px-4 font-mono text-xs text-muted-foreground">{item.default}</td>
+                  <td className="py-2 px-4 text-muted-foreground">{item.desc}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* Source */}
+      <div className="space-y-4">
+        <h3 className="font-semibold">Preview</h3>
+        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
+          <FuzzyText
+            className="text-5xl font-black text-white"
+            baseIntensity={0.18}
+            hoverIntensity={0.5}
+          >
+            CurioUI
+          </FuzzyText>
+        </div>
+      </div>
+
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a
