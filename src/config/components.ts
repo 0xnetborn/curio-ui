@@ -106,6 +106,14 @@ export const components: ComponentMeta[] = [
         isNew: false,
         dependencies: ["framer-motion"],
     },
+    {
+        slug: "star-border",
+        name: "Star Border",
+        description: "Button with animated star border effect",
+        category: "buttons",
+        isPremium: false,
+        isNew: true,
+    },
     // Text Animations
     {
         slug: "text-animations/fuzzy-text",
@@ -116,6 +124,24 @@ export const components: ComponentMeta[] = [
         isNew: false,
         dependencies: ["framer-motion"],
     },
+    {
+        slug: "text-animations/gradient-text",
+        name: "Gradient Text",
+        description: "Animated gradient text with customizable colors",
+        category: "text",
+        isPremium: false,
+        isNew: false,
+        dependencies: ["framer-motion"],
+    },
+    {
+        slug: "shiny-text",
+        name: "Shiny Text",
+        description: "Text with animated shine effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["framer-motion"],
+    },
     // Cards
     {
         slug: "components/spotlight-card",
@@ -124,6 +150,15 @@ export const components: ComponentMeta[] = [
         category: "cards",
         isPremium: false,
         isNew: false,
+    },
+    {
+        slug: "tilted-card",
+        name: "Tilted Card",
+        description: "Card with 3D tilt effect that follows mouse",
+        category: "cards",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["framer-motion"],
     },
 ];
 
