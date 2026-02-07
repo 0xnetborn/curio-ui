@@ -55,15 +55,16 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-    // Buttons / Surfaces
+    // Glass Surface
     {
         slug: "glass-surface",
         name: "Glass Surface",
-        description: "Glassmorphism container with chromatic aberration distortion",
+        description: "Premium glassmorphism container with chromatic aberration",
         category: "buttons",
         isPremium: false,
         isNew: false,
     },
+    // Buttons / Surfaces
     {
         slug: "buttons/3d-button",
         name: "3D Button",

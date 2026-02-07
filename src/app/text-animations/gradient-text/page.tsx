@@ -5,7 +5,7 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import GradientText from "@/registry/text/gradient-text";
 import "@/registry/text/gradient-text.css";
-import { PreviewCodeTabs } from "@/components/ui/tabs";
+import { CodeBlock } from "@/components/ui/code-block";
 
 const gradientTextCode = `"use client";
 
@@ -135,6 +135,16 @@ export default function GradientText({
   );
 }`;
 
+const propsData = [
+  { prop: "children", type: "ReactNode", default: "-", desc: "Text content" },
+  { prop: "colors", type: "string[]", default: "['#14B8A6', ...]", desc: "Gradient colors (Curio accent)" },
+  { prop: "animationSpeed", type: "number", default: "8", desc: "Animation duration (seconds)" },
+  { prop: "direction", type: "'horizontal' | 'vertical' | 'diagonal'", default: "'horizontal'", desc: "Gradient direction" },
+  { prop: "showBorder", type: "boolean", default: "false", desc: "Show gradient border" },
+  { prop: "pauseOnHover", type: "boolean", default: "false", desc: "Pause animation on hover" },
+  { prop: "yoyo", type: "boolean", default: "true", desc: "Yoyo animation (back and forth)" },
+];
+
 export default function GradientTextPage() {
   return (
     <div className="space-y-8">
@@ -158,27 +168,12 @@ export default function GradientTextPage() {
         </p>
       </motion.div>
 
-      {/* Preview */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Preview</h2>
-        <PreviewCodeTabs
-          preview={
-            <div className="border border-border p-8 flex items-center justify-center min-h-[150px]">
-              <GradientText
-                className="text-5xl font-black"
-                animationSpeed={8}
-              >
-                CurioUI
-              </GradientText>
-            </div>
-          }
-          code={gradientTextCode}
-        />
-      </div>
+      <CodeBlock code={gradientTextCode} language="tsx" title="gradient-text.tsx" />
 
-      {/* Props Table */}
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">Props</h3>
+      <div className="rounded-xl border border-border bg-card overflow-hidden">
+        <div className="px-4 py-3 border-b border-border bg-secondary/30">
+          <h3 className="font-semibold text-sm"> Props Reference</h3>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -190,71 +185,33 @@ export default function GradientTextPage() {
               </tr>
             </thead>
             <tbody>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">children</td>
-                <td className="py-2 px-4">ReactNode</td>
-                <td className="py-2 px-4">-</td>
-                <td className="py-2 px-4 text-muted-foreground">Text content</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">colors</td>
-                <td className="py-2 px-4">string[]</td>
-                <td className="py-2 px-4">['#14B8A6', ...]</td>
-                <td className="py-2 px-4 text-muted-foreground">Gradient colors (Curio accent)</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">animationSpeed</td>
-                <td className="py-2 px-4">number</td>
-                <td className="py-2 px-4">8</td>
-                <td className="py-2 px-4 text-muted-foreground">Animation duration (seconds)</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">direction</td>
-                <td className="py-2 px-4">'horizontal' | 'vertical' | 'diagonal'</td>
-                <td className="py-2 px-4">'horizontal'</td>
-                <td className="py-2 px-4 text-muted-foreground">Gradient direction</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">showBorder</td>
-                <td className="py-2 px-4">boolean</td>
-                <td className="py-2 px-4">false</td>
-                <td className="py-2 px-4 text-muted-foreground">Show gradient border</td>
-              </tr>
-              <tr className="border-border/50">
-                <td className="py-2 px-4 font-mono text-accent">pauseOnHover</td>
-                <td className="py-2 px-4">boolean</td>
-                <td className="py-2 px-4">false</td>
-                <td className="py-2 px-4 text-muted-foreground">Pause animation on hover</td>
-              </tr>
-              <tr>
-                <td className="py-2 px-4 font-mono text-accent">yoyo</td>
-                <td className="py-2 px-4">boolean</td>
-                <td className="py-2 px-4">true</td>
-                <td className="py-2 px-4 text-muted-foreground">Yoyo animation (back and forth)</td>
-              </tr>
+              {propsData.map((item) => (
+                <tr key={item.prop} className="border-border/50 last:border-0">
+                  <td className="py-2 px-4 font-mono text-accent">{item.prop}</td>
+                  <td className="py-2 px-4 font-mono text-xs text-muted-foreground">{item.type}</td>
+                  <td className="py-2 px-4 font-mono text-xs text-muted-foreground">{item.default}</td>
+                  <td className="py-2 px-4 text-muted-foreground">{item.desc}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* Dependencies */}
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">Dependencies</h3>
-        <ul className="text-sm text-muted-foreground space-y-2">
-          <li className="flex items-center gap-2">
-            <code className="text-accent">framer-motion</code>
-            <span>— For smooth animations</span>
-          </li>
-        </ul>
+      <div className="space-y-4">
+        <h3 className="font-semibold">Preview</h3>
+        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
+          <GradientText className="text-5xl font-black" animationSpeed={8}>
+            CurioUI
+          </GradientText>
+        </div>
       </div>
 
-      {/* CSS Required */}
       <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">CSS</h3>
-        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">{`import '@/registry/text/gradient-text.css';`}</pre>
+        <h3 className="font-semibold">CSS Required</h3>
+        <CodeBlock code={`import '@/registry/text/gradient-text.css';`} language="css" title="gradient-text.css" />
       </div>
 
-      {/* Source */}
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
         <span>Source:</span>
         <a
