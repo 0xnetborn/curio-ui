@@ -58,6 +58,37 @@ const usageCode = `import { StarBorder } from "@/registry/star-border";
   CurioUI
 </StarBorder>`;
 
+const globalCSSCode = `/* StarBorder Animations - Add to globals.css */
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}
+
+.animate-star-movement-bottom {
+  animation: star-movement-bottom linear infinite alternate;
+}
+
+.animate-star-movement-top {
+  animation: star-movement-top linear infinite alternate;
+}`;
+
 export default function StarBorderPage() {
   return (
     <div className="space-y-8">
@@ -90,6 +121,14 @@ export default function StarBorderPage() {
             {usageCode}
           </pre>
         </div>
+      </div>
+
+      <div className="space-y-4">
+        <h3 className="font-semibold">Required Global CSS</h3>
+        <p className="text-muted-foreground text-sm">
+          Add these keyframes and animations to your global CSS file.
+        </p>
+        <CodeBlock code={globalCSSCode} language="css" title="globals.css" />
       </div>
 
       <div className="space-y-4">
