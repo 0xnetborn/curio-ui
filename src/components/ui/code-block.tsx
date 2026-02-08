@@ -135,15 +135,38 @@ export function CodeBlock({
       {/* Code content */}
       {isCollapsed ? (
         <div className="px-4 py-3 bg-secondary/20">
-          <div className="flex items-center gap-3">
-            <code className="text-xs font-mono text-muted-foreground">
-              {code.slice(0, 150).trim()}
-              {code.length > 150 && "..."}
-            </code>
-            <span className="text-xs text-muted-foreground/50">
+          <Highlight
+            theme={themes.nightOwl}
+            code={code.trim().slice(0, 200)}
+            language={language}
+          >
+            {({ style, tokens, getLineProps, getTokenProps }) => (
+              <pre
+                className="overflow-x-auto text-sm font-mono"
+                style={{
+                  ...style,
+                  background: "transparent",
+                  margin: 0,
+                }}
+              >
+                {tokens.map((line, i) => (
+                  <div
+                    key={i}
+                    {...getLineProps({ line })}
+                    className="hover:bg-secondary/10"
+                  >
+                    {line.map((token, key) => (
+                      <span key={key} {...getTokenProps({ token })} />
+                    ))}
+                  </div>
+                ))}
+                {code.length > 200 && <span className="text-muted-foreground">...</span>}
+              </pre>
+            )}
+          </Highlight>
+          <span className="text-xs text-muted-foreground/50 mt-2 block">
               ({lineCount} lines)
-            </span>
-          </div>
+          </span>
         </div>
       ) : (
         <div className="relative">

@@ -23,17 +23,18 @@ const BorderGlowButton = () => {
 
   return (
     <button
-      className="relative overflow-hidden rounded-lg bg-[#e5e7eb] transform transition-transform ease-in-out active:scale-90 cursor-pointer"
+      className="relative overflow-hidden rounded-lg bg-background border border-border transform transition-transform ease-in-out active:scale-95 cursor-pointer"
       ref={ref}
+      style={{ padding: '2px' }}
     >
       <span
-        className="absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(#fb3b53_0%,transparent_70%)]"
+        className="absolute z-0 h-full w-full -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(circle,var(--accent)_0%,transparent_70%)] opacity-50"
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
         }}
       />
-      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-[#14B8A6] backdrop-blur-sm">
+      <div className="relative z-10 rounded-md bg-background/80 px-4 py-2 text-sm font-medium text-foreground backdrop-blur-sm">
         CurioUI
       </div>
     </button>
