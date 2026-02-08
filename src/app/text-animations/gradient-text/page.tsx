@@ -6,6 +6,7 @@ import Link from "next/link";
 import GradientText from "@/registry/text/gradient-text";
 import "@/registry/text/gradient-text.css";
 import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeTabs } from "@/components/ui/tabs";
 
 const gradientTextCode = `"use client";
 
@@ -135,6 +136,12 @@ export default function GradientText({
   );
 }`;
 
+const usageCode = `import GradientText from "@/registry/text/gradient-text";
+
+<GradientText animationSpeed={8}>
+  CurioUI
+</GradientText>`;
+
 const propsData = [
   { prop: "children", type: "ReactNode", default: "-", desc: "Text content" },
   { prop: "colors", type: "string[]", default: "['#14B8A6', ...]", desc: "Gradient colors (Curio accent)" },
@@ -144,6 +151,26 @@ const propsData = [
   { prop: "pauseOnHover", type: "boolean", default: "false", desc: "Pause animation on hover" },
   { prop: "yoyo", type: "boolean", default: "true", desc: "Yoyo animation (back and forth)" },
 ];
+
+const cssCode = `/* Required CSS for Gradient Text */
+.gradient-text-border {
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+}
+
+.gradient-text-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(to right, #14B8A6, #06b6d4, #14B8A6);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}`;
 
 export default function GradientTextPage() {
   return (
@@ -168,11 +195,20 @@ export default function GradientTextPage() {
         </p>
       </motion.div>
 
-      <CodeBlock code={gradientTextCode} language="tsx" title="gradient-text.tsx" />
+      <PreviewCodeTabs
+        preview={
+          <div className="flex items-center justify-center min-h-[200px]">
+            <GradientText className="text-5xl font-black" animationSpeed={8}>
+              CurioUI
+            </GradientText>
+          </div>
+        }
+        code={gradientTextCode}
+      />
 
       <div className="rounded-xl border border-border bg-card overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-secondary/30">
-          <h3 className="font-semibold text-sm"> Props Reference</h3>
+          <h3 className="font-semibold text-sm">Props Reference</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -199,17 +235,8 @@ export default function GradientTextPage() {
       </div>
 
       <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
-          <GradientText className="text-5xl font-black" animationSpeed={8}>
-            CurioUI
-          </GradientText>
-        </div>
-      </div>
-
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">CSS Required</h3>
-        <CodeBlock code={`import '@/registry/text/gradient-text.css';`} language="css" title="gradient-text.css" />
+        <h3 className="font-semibold">Usage</h3>
+        <CodeBlock code={usageCode} language="tsx" />
       </div>
 
       <div className="flex items-center gap-2 text-sm text-muted-foreground">
