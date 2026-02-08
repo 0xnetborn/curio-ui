@@ -55,8 +55,6 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-    // Glass Surface
-    {
     // Buttons / Surfaces
     {
         slug: "buttons/3d-button",
