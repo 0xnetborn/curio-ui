@@ -10,6 +10,11 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    turbo: {
+      resolveAlias: {},
+    },
+  },
 };
 
 export default nextConfig;
