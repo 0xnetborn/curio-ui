@@ -8,9 +8,8 @@ import GradientFillButton from './gradient-fill-button';
 import WetButton from './wet-button';
 import WetPaintButton from './wet-paint-button';
 import DotExpandButton from './dot-expand-button';
-import GlassSurface from './glass-surface';
 
-export { ThreeDButton, ShineButton, BorderGlowButton, GradientFillButton, WetButton, WetPaintButton, DotExpandButton, GlassSurface };
+export { ThreeDButton, ShineButton, BorderGlowButton, GradientFillButton, WetButton, WetPaintButton, DotExpandButton };
 
 // Component metadata for the registry
 export const buttons = [
