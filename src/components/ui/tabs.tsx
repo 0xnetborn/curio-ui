@@ -32,7 +32,7 @@ export function Tabs({ tabs, defaultTab, preview, code, codeLanguage = "tsx" }: 
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={cn(
-                "flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all cursor-pointer",
+                "flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all",
                 activeTab === tab.id
                   ? "bg-accent text-white shadow-md"
                   : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"

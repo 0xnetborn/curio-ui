@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const WetPaintButton = () => {
   return (
     <button className="group relative rounded bg-accent px-4 py-2.5 font-semibold text-white transition-colors hover:bg-accent/90 cursor-pointer">
-      CurioUI
+      Wet Paint Button
       <Drip left="10%" height={24} delay={0.5} />
       <Drip left="30%" height={20} delay={3} />
       <Drip left="57%" height={10} delay={4.25} />
