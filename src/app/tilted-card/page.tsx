@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { TiltedCard } from "@/registry/tilted-card";
-import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
+import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const tiltedCardCode = `"use client";
 
@@ -106,6 +106,22 @@ const usageCode = `import { TiltedCard } from "@/registry/tilted-card";
   imageWidth="300px"
 />`;
 
+const props: PropItem[] = [
+  { name: "imageSrc", type: "string", description: "Image URL to display" },
+  { name: "altText", type: "string", default: "Image", description: "Alt text for accessibility" },
+  { name: "captionText", type: "string", default: "", description: "Tooltip caption text" },
+  { name: "containerHeight", type: "CSSProperties", default: "300px", description: "Container height" },
+  { name: "containerWidth", type: "CSSProperties", default: "100%", description: "Container width" },
+  { name: "imageHeight", type: "CSSProperties", default: "300px", description: "Image height" },
+  { name: "imageWidth", type: "CSSProperties", default: "300px", description: "Image width" },
+  { name: "scaleOnHover", type: "number", default: "1.1", description: "Scale factor on hover" },
+  { name: "rotateAmplitude", type: "number", default: "14", description: "Rotation intensity" },
+  { name: "showTooltip", type: "boolean", default: "true", description: "Show/hide caption tooltip" },
+  { name: "className", type: "string", description: "Additional CSS classes" },
+];
+
+const dependencies = ["framer-motion"];
+
 export default function TiltedCardPage() {
   return (
     <div className="space-y-8">
@@ -144,6 +160,8 @@ export default function TiltedCardPage() {
         }
         code={tiltedCardCode}
         usage={usageCode}
+        props={props}
+        dependencies={dependencies}
       />
     </div>
   );

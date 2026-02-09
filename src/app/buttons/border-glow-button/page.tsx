@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import BorderGlowButton from "@/registry/buttons/border-glow-button";
-import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
+import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
@@ -31,17 +31,17 @@ const BorderGlowButton = () => {
 
   return (
     <button
-      className="relative overflow-hidden rounded-lg bg-[#e5e7eb] transform transition-transform ease-in-out active:scale-90 cursor-pointer"
+      className="relative overflow-hidden rounded-lg bg-[#e5e7eb] transform transition-transform ease-in-out active:scale-90 cursor-pointer border border-accent/20"
       ref={ref}
     >
       <span
-        className="absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(#14B8A6_0%,transparent_70%)]"
+        className="absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(var(--accent)_0%,transparent_70%)]"
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
         }}
       />
-      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-[#14B8A6] backdrop-blur-sm">
+      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs text-accent backdrop-blur-sm">
         CurioUI
       </div>
     </button>
@@ -53,6 +53,11 @@ export default BorderGlowButton;`;
 const usageCode = `import BorderGlowButton from "@/registry/buttons/border-glow-button";
 
 <BorderGlowButton />`;
+
+const props: PropItem[] = [
+  { name: "children", type: "ReactNode", description: "Button content" },
+  { name: "className", type: "string", description: "Additional CSS classes" },
+];
 
 export default function BorderGlowButtonPage() {
   return (
@@ -84,6 +89,7 @@ export default function BorderGlowButtonPage() {
         }
         code={componentCode}
         usage={usageCode}
+        props={props}
       />
     </div>
   );

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { SpotlightCard } from "@/registry/spotlight-card";
-import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
+import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
@@ -63,6 +63,14 @@ const usageCode = `import { SpotlightCard } from "@/registry/spotlight-card";
   <p className="text-slate-300">Description here.</p>
 </SpotlightCard>`;
 
+const props: PropItem[] = [
+  { name: "children", type: "ReactNode", description: "Card content" },
+  { name: "spotlightColor", type: "string", default: "rgba(255,255,255,0.25)", description: "Spotlight gradient color" },
+  { name: "className", type: "string", description: "Additional CSS classes" },
+];
+
+const dependencies = ["framer-motion"];
+
 export default function SpotlightCardPage() {
   return (
     <div className="space-y-8">
@@ -104,6 +112,8 @@ export default function SpotlightCardPage() {
         }
         code={componentCode}
         usage={usageCode}
+        props={props}
+        dependencies={dependencies}
       />
     </div>
   );

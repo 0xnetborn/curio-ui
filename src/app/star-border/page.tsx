@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { StarBorder } from "@/registry/star-border";
-import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
+import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const starBorderCode = `"use client";
 
@@ -53,8 +53,7 @@ export function StarBorder<T extends React.ElementType = "button">({
 
 export default StarBorder;`;
 
-// Required CSS for animations
-const starBorderCSS = `/* globals.css - Required Animations */
+const starBorderCSS = `/* globals.css */
 @keyframes star-movement-bottom {
   0% { transform: translate(0%, 0%); opacity: 1; }
   100% { transform: translate(-100%, 0%); opacity: 0; }
@@ -73,17 +72,20 @@ const starBorderCSS = `/* globals.css - Required Animations */
   animation: star-movement-top linear infinite alternate;
 }`;
 
-const fullCode = `/* Add to globals.css */
-${starBorderCSS}
-
-/* Component: star-border.tsx */
-${starBorderCode}`;
-
 const usageCode = `import { StarBorder } from "@/registry/star-border";
 
 <StarBorder color="#14B8A6" speed="4s">
   CurioUI
 </StarBorder>`;
+
+const props: PropItem[] = [
+  { name: "as", type: "ElementType", default: "button", description: "Component type to render" },
+  { name: "children", type: "ReactNode", description: "Button content" },
+  { name: "color", type: "string", default: "white", description: "Star border color" },
+  { name: "speed", type: "AnimationDuration", default: "6s", description: "Animation speed" },
+  { name: "thickness", type: "number", default: "1", description: "Border thickness" },
+  { name: "className", type: "string", description: "Additional CSS classes" },
+];
 
 export default function StarBorderPage() {
   return (
@@ -121,8 +123,10 @@ export default function StarBorderPage() {
             </StarBorder>
           </div>
         }
-        code={fullCode}
+        code={starBorderCode}
+        cssCode={starBorderCSS}
         usage={usageCode}
+        props={props}
       />
     </div>
   );

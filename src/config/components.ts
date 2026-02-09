@@ -159,17 +159,16 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
-,
-    {
-        slug: "text-animations/decrypted-text",
+{
+        slug: "components/text/decrypted-text",
         name: "DecryptedText",
         description: "DecryptedText animation effect",
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
     {
-        slug: "text-animations/variable-proximity",
+        slug: "components/text/variable-proximity",
         name: "VariableProximity",
         description: "VariableProximity animation effect",
         category: "text",

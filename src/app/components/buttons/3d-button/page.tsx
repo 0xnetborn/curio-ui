@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import ThreeDButton from "@/registry/buttons/3d-button";
-import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
+import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
@@ -24,6 +24,11 @@ export default ThreeDButton;`;
 const usageCode = `import ThreeDButton from "@/registry/buttons/3d-button";
 
 <ThreeDButton />`;
+
+const props: PropItem[] = [
+  { name: "children", type: "ReactNode", description: "Button content" },
+  { name: "className", type: "string", description: "Additional CSS classes" },
+];
 
 export default function ThreeDButtonPage() {
   return (
@@ -46,6 +51,7 @@ export default function ThreeDButtonPage() {
         }
         code={componentCode}
         usage={usageCode}
+        props={props}
       />
     </div>
   );
