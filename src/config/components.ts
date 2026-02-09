@@ -236,6 +236,15 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
+    {
+        slug: "text-animations/kinetic-typography",
+        name: "Kinetic Typography",
+        description: "High-end text reveal animation using Anime.js",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["animejs"],
+    },
 ];
 
 // Helper functions
