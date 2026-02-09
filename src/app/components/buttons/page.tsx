@@ -8,6 +8,7 @@ import BorderGlowButton from "@/registry/buttons/border-glow-button";
 import GradientFillButton from "@/registry/buttons/gradient-fill-button";
 import WetPaintButton from "@/registry/buttons/wet-paint-button";
 import DotExpandButton from "@/registry/buttons/dot-expand-button";
+import { StarBorder } from "@/registry/star-border";
 
 const buttons = [
   { name: "3d-button", displayName: "3D Button", component: ThreeDButton, href: "/components/buttons/3d-button" },
@@ -16,6 +17,7 @@ const buttons = [
   { name: "gradient-fill-button", displayName: "Gradient Fill", component: GradientFillButton, href: "/components/buttons/gradient-fill-button" },
   { name: "wet-button", displayName: "Wet Paint", component: WetPaintButton, href: "/components/buttons/wet-button" },
   { name: "dot-expand-button", displayName: "Dot Expand", component: DotExpandButton, href: "/components/buttons/dot-expand-button" },
+  { name: "star-border", displayName: "Star Border", component: StarBorder, href: "/star-border" },
 ];
 
 export default function ComponentsButtonsPage() {

@@ -2,20 +2,54 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import FuzzyText from "@/registry/text/fuzzy-text";
+import GradientText from "@/registry/text/gradient-text";
+import BlurText from "@/registry/text/blur-text";
+import DecryptedText from "@/registry/text/decrypted-text";
+import VariableProximity from "@/registry/text/variable-proximity";
 
-// Text animation components list
+import { ShinyText } from "@/registry/shiny-text";
+
 const textAnimationComponents = [
-  {
-    name: "fuzzy-text",
-    displayName: "Fuzzy Text",
-    description: "Text that blurs and reveals on hover",
-    href: "/text-animations/fuzzy-text",
+  { 
+    name: "fuzzy-text", 
+    displayName: "Fuzzy Text", 
+    component: FuzzyText, 
+    href: "/text-animations/fuzzy-text" 
   },
-  {
-    name: "gradient-text",
-    displayName: "Gradient Text",
-    description: "Animated gradient text with framer-motion",
-    href: "/text-animations/gradient-text",
+  { 
+    name: "gradient-text", 
+    displayName: "Gradient Text", 
+    component: GradientText, 
+    href: "/text-animations/gradient-text" 
+  },
+  { 
+    name: "shiny-text", 
+    displayName: "Shiny Text", 
+    component: ShinyText, 
+    href: "/shiny-text",
+    props: { text: "Shiny Text" }
+  },
+  { 
+    name: "blur-text", 
+    displayName: "Blur Text", 
+    component: BlurText, 
+    href: "/text-animations/blur-text",
+    props: { text: "Blur Text", delay: 150 }
+  },
+  { 
+    name: "decrypted-text", 
+    displayName: "DecryptedText", 
+    component: DecryptedText, 
+    href: "/text-animations/decrypted-text",
+    props: { text: "Decrypted" }
+  },
+  { 
+    name: "variable-proximity", 
+    displayName: "VariableProximity", 
+    component: VariableProximity, 
+    href: "/text-animations/variable-proximity",
+    props: { label: "Variable" }
   },
 ];
 
@@ -44,16 +78,11 @@ export default function TextAnimationsPage() {
           >
             <Link href={component.href}>
               <div className="group relative aspect-square rounded-xl border border-border bg-card p-6 transition-all hover:border-accent/50 hover:shadow-lg hover:shadow-accent/10">
-                <div className="absolute inset-0 flex items-center justify-center bg-background rounded-xl">
-                  <span className="text-2xl font-bold text-white group-hover:blur-sm transition-all duration-300">
-                    {component.displayName}
-                  </span>
+                <div className="absolute inset-0 flex items-center justify-center bg-background rounded-xl p-4">
+                  <component.component {...component.props} />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
                   <h3 className="font-medium text-sm text-white">{component.displayName}</h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2">
-                    {component.description}
-                  </p>
                 </div>
               </div>
             </Link>
