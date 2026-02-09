@@ -245,15 +245,7 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
-,
-    {
-        slug: "text-animations/blur-text",
-        name: "BlurText",
-        description: "BlurText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },];
+];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {

@@ -15,6 +15,17 @@ const BorderGlowButton = ({
 }: BorderGlowButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: "-100%", y: "-100%" });
+  const [isLight, setIsLight] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      setIsLight(document.documentElement.classList.contains("light"));
+    };
+    checkTheme();
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -31,6 +42,11 @@ const BorderGlowButton = ({
     };
   }, []);
 
+  // Auto-adapt text color to theme if using default glowColor
+  const textColor = glowColor === "#fb3b53" 
+    ? (isLight ? "#1e293b" : "#f8fafc")
+    : glowColor;
+
   return (
     <button
       className={`relative overflow-hidden rounded-lg bg-[#e5e7eb] transform transition-transform ease-in-out active:scale-90 cursor-pointer ${className}`}
@@ -41,11 +57,12 @@ const BorderGlowButton = ({
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
-          background: `radial-gradient(${glowColor}_0%,transparent_70%)`,
+          background: `radial-gradient(${textColor}_0%,transparent_70%)`,
         }}
       />
-      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs backdrop-blur-sm"
-        style={{ color: glowColor }}
+      <div
+        className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs backdrop-blur-sm"
+        style={{ color: textColor }}
       >
         {children}
       </div>
