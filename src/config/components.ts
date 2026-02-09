@@ -186,15 +186,41 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
-,
     {
-        slug: "text-animations/blur-text",
-        name: "BlurText",
-        description: "BlurText animation effect",
+        slug: "components/text/count-up",
+        name: "CountUp",
+        description: "Animated number counter with spring physics",
         category: "text",
         isPremium: false,
         isNew: true,
-    },];
+        dependencies: ["framer-motion"],
+    },
+    {
+        slug: "text-animations/circular-text",
+        name: "Circular Text",
+        description: "Rotating text arranged in a circle with hover effects",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["framer-motion"],
+    },
+    {
+        slug: "text-animations/text-pressure",
+        name: "Text Pressure",
+        description: "Text that responds to mouse movement with variable font weights",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "text-animations/glitch-text",
+        name: "Glitch Text",
+        description: "Text with glitch animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {

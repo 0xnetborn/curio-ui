@@ -7,8 +7,11 @@ import GradientText from "@/registry/text/gradient-text";
 import BlurText from "@/registry/text/blur-text";
 import DecryptedText from "@/registry/text/decrypted-text";
 import VariableProximity from "@/registry/text/variable-proximity";
+import CircularText from "@/registry/text/circular-text";
 
 import { ShinyText } from "@/registry/shiny-text";
+import TextPressure from "@/registry/text/text-pressure";
+import GlitchText from "@/registry/text/glitch-text";
 
 const textAnimationComponents = [
   { 
@@ -50,6 +53,27 @@ const textAnimationComponents = [
     component: VariableProximity, 
     href: "/text-animations/variable-proximity",
     props: { label: "Variable" }
+  },
+  { 
+    name: "circular-text", 
+    displayName: "Circular Text", 
+    component: CircularText, 
+    href: "/text-animations/circular-text",
+    props: { text: "CURIO UI • " }
+  },
+  { 
+    name: "text-pressure", 
+    displayName: "Text Pressure", 
+    component: TextPressure, 
+    href: "/text-animations/text-pressure",
+    props: { text: "CurioUI" }
+  },
+  { 
+    name: "glitch-text", 
+    displayName: "Glitch Text", 
+    component: GlitchText, 
+    href: "/text-animations/glitch-text",
+    props: { children: "Glitch" }
   },
 ];
 
