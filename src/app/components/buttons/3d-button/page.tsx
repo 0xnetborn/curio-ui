@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import ThreeDButton from "@/registry/buttons/3d-button";
-import { PreviewCodeTabs } from "@/components/ui/tabs";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
@@ -38,19 +38,15 @@ export default function ThreeDButtonPage() {
         <p className="text-muted-foreground max-w-lg">Button with 3D depth effect.</p>
       </motion.div>
 
-      <PreviewCodeTabs
+      <PreviewCodeUsageTabs
         preview={
           <div className="flex items-center justify-center min-h-[200px]">
             <ThreeDButton />
           </div>
         }
         code={componentCode}
+        usage={usageCode}
       />
-
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">Usage</h3>
-        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm font-mono">{usageCode}</pre>
-      </div>
     </div>
   );
 }

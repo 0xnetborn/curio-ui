@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Eye, Code2 } from "lucide-react";
+import { Eye, Code2, Package2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CodeBlock } from "@/components/ui/code-block";
 
@@ -68,7 +68,7 @@ export function Tabs({ tabs, defaultTab, preview, code, codeLanguage = "tsx" }: 
   );
 }
 
-// Convenience component
+// Convenience component for preview/code tabs
 export function PreviewCodeTabs({ preview, code, codeLanguage }: { preview: React.ReactNode; code: string; codeLanguage?: string }) {
   return (
     <Tabs
@@ -81,5 +81,71 @@ export function PreviewCodeTabs({ preview, code, codeLanguage }: { preview: Reac
       code={code}
       codeLanguage={codeLanguage}
     />
+  );
+}
+
+// Extended tabs with preview/code/usage
+interface PreviewCodeUsageTabsProps {
+  preview: React.ReactNode;
+  code: string;
+  usage: string;
+  codeLanguage?: string;
+}
+
+export function PreviewCodeUsageTabs({ preview, code, usage, codeLanguage = "tsx" }: PreviewCodeUsageTabsProps) {
+  const tabs: Tab[] = [
+    { id: "preview", label: "Preview", icon: <Eye className="w-4 h-4" /> },
+    { id: "code", label: "Code", icon: <Code2 className="w-4 h-4" /> },
+    { id: "usage", label: "Usage", icon: <Package2 className="w-4 h-4" /> },
+  ];
+
+  const [activeTab, setActiveTab] = useState("preview");
+
+  return (
+    <div className="rounded-xl border border-border bg-card overflow-hidden">
+      <div className="flex items-center px-1 py-1 bg-gradient-to-r from-accent/5 to-transparent">
+        <div className="flex gap-0.5">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={cn(
+                "flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium transition-all",
+                activeTab === tab.id
+                  ? "bg-accent text-white shadow-md"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+              )}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2 }}
+        >
+          {activeTab === "preview" ? (
+            <div className="relative min-h-[200px] flex items-center justify-center p-8">
+              {preview}
+            </div>
+          ) : activeTab === "code" ? (
+            <div className="p-0">
+              <CodeBlock code={code} language={codeLanguage} />
+            </div>
+          ) : (
+            <div className="p-0">
+              <CodeBlock code={usage} language="tsx" />
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+    </div>
   );
 }

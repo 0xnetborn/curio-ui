@@ -133,6 +133,14 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
+    {
+        slug: "text-animations/blur-text",
+        name: "Blur Text",
+        description: "Text that blurs in with staggered animation",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
     // Cards
     {
         slug: "components/spotlight-card",
