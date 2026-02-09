@@ -2,7 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const BorderGlowButton = () => {
+interface BorderGlowButtonProps {
+  children?: React.ReactNode;
+  glowColor?: string;
+  className?: string;
+}
+
+const BorderGlowButton = ({
+  children = "SyntaxUI",
+  glowColor = "#fb3b53",
+  className = "",
+}: BorderGlowButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: "-100%", y: "-100%" });
 
@@ -23,18 +33,21 @@ const BorderGlowButton = () => {
 
   return (
     <button
-      className="relative overflow-hidden rounded-lg bg-secondary transform transition-transform ease-in-out active:scale-90 cursor-pointer"
+      className={`relative overflow-hidden rounded-lg bg-[#e5e7eb] transform transition-transform ease-in-out active:scale-90 cursor-pointer ${className}`}
       ref={ref}
     >
       <span
-        className="absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2 bg-[radial-gradient(var(--accent)_0%,transparent_70%)]"
+        className="absolute z-0 h-28 w-28 -translate-x-1/2 -translate-y-1/2"
         style={{
           left: mousePosition.x,
           top: mousePosition.y,
+          background: `radial-gradient(${glowColor}_0%,transparent_70%)`,
         }}
       />
-      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-background/90 px-4 py-1 text-xs text-accent backdrop-blur-sm">
-        CurioUI
+      <div className="relative z-10 m-[1px] rounded-[calc(0.5rem-1px)] bg-white/90 px-4 py-1 text-xs backdrop-blur-sm"
+        style={{ color: glowColor }}
+      >
+        {children}
       </div>
     </button>
   );
