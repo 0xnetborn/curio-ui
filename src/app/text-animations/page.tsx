@@ -8,6 +8,7 @@ import BlurText from "@/registry/text/blur-text";
 import DecryptedText from "@/registry/text/decrypted-text";
 import VariableProximity from "@/registry/text/variable-proximity";
 import CircularText from "@/registry/text/circular-text";
+import RotatingText from "@/registry/text/rotating-text";
 
 import { ShinyText } from "@/registry/shiny-text";
 import TextPressure from "@/registry/text/text-pressure";
@@ -74,6 +75,13 @@ const textAnimationComponents = [
     component: GlitchText, 
     href: "/text-animations/glitch-text",
     props: { children: "Glitch" }
+  },
+  { 
+    name: "rotating-text", 
+    displayName: "Rotating Text", 
+    component: RotatingText, 
+    href: "/text-animations/rotating-text",
+    props: { texts: ["Rotating", "Text", "Effect"] }
   },
 ];
 

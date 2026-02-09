@@ -236,6 +236,15 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
+    {
+        slug: "text-animations/rotating-text",
+        name: "Rotating Text",
+        description: "Animated text that rotates through strings with character-by-character transitions",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["framer-motion"],
+    },
 ];
 
 // Helper functions
