@@ -9,6 +9,7 @@ import DecryptedText from "@/registry/text/decrypted-text";
 import VariableProximity from "@/registry/text/variable-proximity";
 import CircularText from "@/registry/text/circular-text";
 import RotatingText from "@/registry/text/rotating-text";
+import TrueFocus from "@/registry/text/true-focus";
 
 import { ShinyText } from "@/registry/shiny-text";
 import TextPressure from "@/registry/text/text-pressure";
@@ -82,6 +83,13 @@ const textAnimationComponents = [
     component: RotatingText, 
     href: "/text-animations/rotating-text",
     props: { texts: ["Rotating", "Text", "Effect"] }
+  },
+  { 
+    name: "true-focus", 
+    displayName: "True Focus", 
+    component: TrueFocus, 
+    href: "/text-animations/true-focus",
+    props: { sentence: "True Focus" }
   },
 ];
 

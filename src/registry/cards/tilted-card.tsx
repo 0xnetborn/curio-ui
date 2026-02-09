@@ -12,7 +12,6 @@ interface TiltedCardProps {
   containerWidth?: React.CSSProperties["width"];
   imageHeight?: React.CSSProperties["height"];
   imageWidth?: React.CSSProperties["width"];
-  scaleOnHover?: number;
   rotateAmplitude?: number;
   showMobileWarning?: boolean;
   showTooltip?: boolean;
@@ -35,7 +34,6 @@ export function TiltedCard({
   containerWidth = "100%",
   imageHeight = "300px",
   imageWidth = "300px",
-  scaleOnHover = 1.1,
   rotateAmplitude = 14,
   showMobileWarning = true,
   showTooltip = true,
@@ -48,7 +46,6 @@ export function TiltedCard({
   const y = useMotionValue(0);
   const rotateX = useSpring(useMotionValue(0), springValues);
   const rotateY = useSpring(useMotionValue(0), springValues);
-  const scale = useSpring(1, springValues);
   const opacity = useSpring(0);
   const rotateFigcaption = useSpring(0, {
     stiffness: 350,
@@ -80,13 +77,11 @@ export function TiltedCard({
   }
 
   function handleMouseEnter() {
-    scale.set(scaleOnHover);
     opacity.set(1);
   }
 
   function handleMouseLeave() {
     opacity.set(0);
-    scale.set(1);
     rotateX.set(0);
     rotateY.set(0);
     rotateFigcaption.set(0);
@@ -120,7 +115,6 @@ export function TiltedCard({
           height: imageHeight,
           rotateX,
           rotateY,
-          scale,
         }}
       >
         <motion.img

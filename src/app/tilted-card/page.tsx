@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { TiltedCard } from "@/registry/cards";
@@ -20,7 +19,6 @@ interface TiltedCardProps {
   containerWidth?: React.CSSProperties["width"];
   imageHeight?: React.CSSProperties["height"];
   imageWidth?: React.CSSProperties["width"];
-  scaleOnHover?: number;
   rotateAmplitude?: number;
   showTooltip?: boolean;
   className?: string;
@@ -36,7 +34,6 @@ export function TiltedCard({
   containerWidth = "100%",
   imageHeight = "300px",
   imageWidth = "300px",
-  scaleOnHover = 1.1,
   rotateAmplitude = 14,
   showTooltip = true,
   className,
@@ -46,7 +43,6 @@ export function TiltedCard({
   const y = useMotionValue(0);
   const rotateX = useSpring(useMotionValue(0), springValues);
   const rotateY = useSpring(useMotionValue(0), springValues);
-  const scale = useSpring(1, springValues);
   const opacity = useSpring(0);
   const rotateFigcaption = useSpring(0, { stiffness: 350, damping: 30, mass: 1 });
 
@@ -74,12 +70,12 @@ export function TiltedCard({
       className={cn("relative w-full h-full [perspective:800px]", className)}
       style={{ height: containerHeight, width: containerWidth }}
       onMouseMove={handleMouse}
-      onMouseEnter={() => { scale.set(scaleOnHover); opacity.set(1); }}
-      onMouseLeave={() => { opacity.set(0); scale.set(1); rotateX.set(0); rotateY.set(0); }}
+      onMouseEnter={() => { opacity.set(1); }}
+      onMouseLeave={() => { opacity.set(0); rotateX.set(0); rotateY.set(0); rotateFigcaption.set(0); }}
     >
       <motion.div
         className="relative [transform-style:preserve-3d]"
-        style={{ width: imageWidth, height: imageHeight, rotateX, rotateY, scale }}
+        style={{ width: imageWidth, height: imageHeight, rotateX, rotateY }}
       >
         <motion.img src={imageSrc} alt={altText} className="absolute top-0 left-0 object-cover rounded-[15px]" />
       </motion.div>
@@ -114,7 +110,6 @@ const props: PropItem[] = [
   { name: "containerWidth", type: "CSSProperties", default: "100%", description: "Container width" },
   { name: "imageHeight", type: "CSSProperties", default: "300px", description: "Image height" },
   { name: "imageWidth", type: "CSSProperties", default: "300px", description: "Image width" },
-  { name: "scaleOnHover", type: "number", default: "1.1", description: "Scale factor on hover" },
   { name: "rotateAmplitude", type: "number", default: "14", description: "Rotation intensity" },
   { name: "showTooltip", type: "boolean", default: "true", description: "Show/hide caption tooltip" },
   { name: "className", type: "string", description: "Additional CSS classes" },
@@ -125,7 +120,7 @@ const dependencies = ["framer-motion"];
 export default function TiltedCardPage() {
   return (
     <div className="space-y-8">
-      <motion.div
+      <div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="space-y-4"
@@ -142,7 +137,7 @@ export default function TiltedCardPage() {
         <p className="text-muted-foreground max-w-lg">
           Card with 3D tilt effect that follows mouse movement.
         </p>
-      </motion.div>
+      </div>
 
       <PreviewCodeUsageTabs
         preview={

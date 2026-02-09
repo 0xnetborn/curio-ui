@@ -245,6 +245,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
+    {
+        slug: "text-animations/true-focus",
+        name: "True Focus",
+        description: "Word-by-word focus animation with blur effect and animated corner brackets",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["framer-motion"],
+    },
 ];
 
 // Helper functions
