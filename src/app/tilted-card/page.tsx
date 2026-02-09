@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { TiltedCard } from "@/registry/tilted-card";
+import { TiltedCard } from "@/registry/cards";
 import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const tiltedCardCode = `"use client";
@@ -97,7 +97,7 @@ export function TiltedCard({
 
 export default TiltedCard;`;
 
-const usageCode = `import { TiltedCard } from "@/registry/tilted-card";
+const usageCode = `import { TiltedCard } from "@/registry/cards";
 
 <TiltedCard
   imageSrc="/path/to/image.jpg"

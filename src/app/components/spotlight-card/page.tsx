@@ -1,74 +1,73 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { SpotlightCard } from "@/registry/spotlight-card";
+import { SpotlightCard } from "@/registry/cards";
 import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
-import React, { useRef, useState } from "react";
+import { useRef, MouseEvent, ReactNode } from "react";
 
-interface SpotlightCardProps extends React.PropsWithChildren {
+interface SpotlightCardProps {
+  children: ReactNode;
   className?: string;
   spotlightColor?: string;
 }
 
-export function SpotlightCard({
+const SpotlightCard = ({
   children,
   className = "",
-  spotlightColor = "hsl(var(--accent) / 0.4)",
-}: SpotlightCardProps) {
-  const divRef = useRef<HTMLDivElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [opacity, setOpacity] = useState(0);
+  spotlightColor = "rgba(0, 255, 153, 0.15)",
+}: SpotlightCardProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!divRef.current || isFocused) return;
-    const rect = divRef.current.getBoundingClientRect();
-    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    container.style.setProperty("--spotlight-x", \`\${x}px\`);
+    container.style.setProperty("--spotlight-y", \`\${y}px\`);
   };
 
   return (
     <div
-      ref={divRef}
+      ref={containerRef}
       onMouseMove={handleMouseMove}
-      onFocus={() => { setIsFocused(true); setOpacity(0.6); }}
-      onBlur={() => { setIsFocused(false); setOpacity(0); }}
-      onMouseEnter={() => setOpacity(0.6)}
-      onMouseLeave={() => setOpacity(0)}
-      className={\`relative rounded-3xl border border-accent/20 bg-card overflow-hidden p-8 \${className}\`}
+      className={\`relative overflow-hidden \${className}\`}
+      style={{
+        background: \`radial-gradient(
+          400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),
+          \${spotlightColor},
+          transparent 60%
+        )\`,
+      }}
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
-        style={{
-          opacity,
-          background: \`radial-gradient(circle at \${position.x}px \${position.y}px, \${spotlightColor}, transparent 80%)\`,
-        }}
-      />
       {children}
     </div>
   );
-}
+};
 
 export default SpotlightCard;`;
 
-const usageCode = `import { SpotlightCard } from "@/registry/spotlight-card";
+const usageCode = `import { SpotlightCard } from "@/registry/cards";
 
-<SpotlightCard>
-  <h3 className="text-xl font-semibold">Title</h3>
-  <p className="text-muted-foreground">Description here.</p>
+<SpotlightCard className="p-6 rounded-xl border border-border bg-card">
+  <h3 className="text-lg font-semibold">Title</h3>
+  <p className="text-muted-foreground text-sm">Description here.</p>
 </SpotlightCard>`;
 
 const props: PropItem[] = [
   { name: "children", type: "ReactNode", description: "Card content" },
-  { name: "spotlightColor", type: "string", default: "hsl(var(--accent) / 0.4)", description: "Spotlight gradient color" },
+  { name: "spotlightColor", type: "string", default: "rgba(0, 255, 153, 0.15)", description: "Spotlight gradient color" },
   { name: "className", type: "string", description: "Additional CSS classes" },
 ];
 
-const dependencies = ["framer-motion"];
+const dependencies: string[] = [];
 
 export default function SpotlightCardPage() {
   return (
@@ -87,18 +86,21 @@ export default function SpotlightCardPage() {
 
       <PreviewCodeUsageTabs
         preview={
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <SpotlightCard>
-              <h3 className="text-xl font-semibold mb-2">Curiositas Studio</h3>
-              <p className="text-muted-foreground">We build intelligent systems with craft.</p>
+          <div className="grid gap-4 md:grid-cols-2">
+            <SpotlightCard className="p-6 rounded-xl border border-border bg-card">
+              <h3 className="text-lg font-semibold mb-2">Spotlight Effect</h3>
+              <p className="text-muted-foreground text-sm">
+                Move your cursor over this card to see the gradient follow you.
+              </p>
             </SpotlightCard>
-            <SpotlightCard spotlightColor="hsl(var(--accent) / 0.3)">
-              <h3 className="text-xl font-semibold mb-2">AI Automation</h3>
-              <p className="text-muted-foreground">Eliminate manual work with AI-powered workflows.</p>
-            </SpotlightCard>
-            <SpotlightCard spotlightColor="hsl(var(--accent) / 0.2)">
-              <h3 className="text-xl font-semibold mb-2">Custom Software</h3>
-              <p className="text-muted-foreground">Tailored platforms engineered for your team.</p>
+            <SpotlightCard
+              className="p-6 rounded-xl border border-border bg-card"
+              spotlightColor="rgba(20, 184, 166, 0.2)"
+            >
+              <h3 className="text-lg font-semibold mb-2">Custom Color</h3>
+              <p className="text-muted-foreground text-sm">
+                You can customize the spotlight color to match your theme.
+              </p>
             </SpotlightCard>
           </div>
         }
