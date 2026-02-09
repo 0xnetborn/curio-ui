@@ -159,7 +159,8 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
-{
+    // Text
+    {
         slug: "components/text/decrypted-text",
         name: "DecryptedText",
         description: "DecryptedText animation effect",
@@ -174,15 +175,18 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
+    // Loaders
     {
-        slug: "text-animations/blur-text",
-        name: "BlurText",
-        description: "BlurText animation effect",
-        category: "text",
+        slug: "loaders/spiral-loader",
+        name: "Spiral Loader",
+        description: "Animated spiral loader with pulsing dots",
+        category: "loaders",
         isPremium: false,
         isNew: true,
-    },];
+        dependencies: ["framer-motion"],
+    },
+];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {

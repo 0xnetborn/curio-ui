@@ -26,13 +26,27 @@ const categoryIcons = {
     headers: Menu,
 };
 
-const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) => {
-    // Keep all categories expanded by default
-    const expandedCategory = useRef<string | null>(Object.keys(componentCategories)[0]);
+// Custom scrollbar with accent color
+const sidebarScrollbarStyles = `
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--accent));
+    border-radius: 3px;
+  }
+  .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--accent) / 0.8);
+  }
+`;
 
+const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) => {
     return (
         <>
-            <nav className="flex-1 px-3 space-y-0.5">
+            <nav className="flex-1 px-3 space-y-0.5 sidebar-scroll overflow-y-auto">
                 {navItems.map((item) => {
                     const isActive = pathname === item.href;
                     return (
@@ -56,12 +70,10 @@ const SidebarContent = ({ pathname, onNavigate }: { pathname: string; onNavigate
                     {Object.entries(componentCategories).map(([key, category]) => {
                         const Icon = categoryIcons[key as keyof typeof categoryIcons];
                         const components = getComponentsByCategory(key as keyof typeof componentCategories);
-                        // All categories are always expanded
-                        const isExpanded = true;
 
                         return (
                             <div key={key}>
-                                {/* Category header - no toggle needed since always expanded */}
+                                {/* Category header */}
                                 <div className="flex items-center gap-3 px-3 py-2 rounded-lg text-foreground bg-secondary/50">
                                     <Icon className="w-4 h-4 text-accent" />
                                     <span className="text-sm font-medium">{category.name}</span>
@@ -123,6 +135,8 @@ const Sidebar = () => {
 
     return (
         <TooltipProvider delayDuration={100}>
+            <style>{sidebarScrollbarStyles}</style>
+            
             {/* Mobile Hamburger Button */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
                 <SheetTrigger asChild>
@@ -149,81 +163,22 @@ const Sidebar = () => {
                 </SheetContent>
             </Sheet>
 
-            {/* Desktop Sidebar */}
+            {/* Desktop Sidebar - Always expanded */}
             <aside
-                className={`hidden lg:flex fixed left-0 top-0 bottom-0 border-r border-border bg-sidebar text-sidebar-foreground z-50 flex-col transition-all duration-300 ${isCollapsed ? 'w-14' : 'w-60'}`}
+                className="hidden lg:flex fixed left-0 top-0 bottom-0 border-r border-border bg-sidebar text-sidebar-foreground z-50 flex-col"
             >
-                <div className={`p-3 flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'}`}>
-                    {!isCollapsed && (
-                        <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
-                            <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
-                                <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
-                            </div>
-                            <span className="font-display text-xl font-bold tracking-tight">
-                                Curio<span className="text-accent">UI</span>
-                            </span>
-                        </Link>
-                    )}
-                    {isCollapsed && (
-                        <Link href="/" className="flex items-center justify-center cursor-pointer">
-                            <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
-                                <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
-                            </div>
-                        </Link>
-                    )}
-                    {!isCollapsed && (
-                        <Button
-                            variant="ghost"
-                            size="icon-sm"
-                            onClick={() => setIsCollapsed(true)}
-                            className="shrink-0"
-                        >
-                            <PanelLeftClose className="w-4 h-4" />
-                        </Button>
-                    )}
+                <div className="p-3 flex items-center justify-between">
+                    <Link href="/" className="flex items-center gap-2.5 group cursor-pointer">
+                        <div className="w-7 h-7 bg-accent flex items-center justify-center rounded-lg overflow-hidden">
+                            <Image src="/imgs/logos/curiositas-logo.webp" alt="Curiositas" width={20} height={20} className="object-contain" unoptimized />
+                        </div>
+                        <span className="font-display text-xl font-bold tracking-tight">
+                            Curio<span className="text-accent">UI</span>
+                        </span>
+                    </Link>
                 </div>
 
-                {isCollapsed ? (
-                    <nav className="flex-1 px-2 space-y-1 pt-2">
-                        {[...navItems].map((item) => {
-                            const isActive = pathname === item.href;
-                            return (
-                                <Tooltip key={item.name}>
-                                    <TooltipTrigger asChild>
-                                        <Link
-                                            href={item.href}
-                                            className={`flex items-center justify-center p-2 rounded-lg transition-all cursor-pointer ${isActive ? "text-accent bg-accent/5" : "text-muted-foreground hover:text-foreground hover:bg-secondary"}`}
-                                        >
-                                            <item.icon className="w-4 h-4" />
-                                        </Link>
-                                    </TooltipTrigger>
-                                    <TooltipContent side="right">
-                                        <p>{item.name}</p>
-                                    </TooltipContent>
-                                </Tooltip>
-                            );
-                        })}
-                        <div className="pt-3">
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Button
-                                        variant="ghost"
-                                        size="icon-sm"
-                                        onClick={() => setIsCollapsed(false)}
-                                        className="w-full"
-                                    >
-                                        <PanelLeft className="w-4 h-4" />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent side="right">
-                                    <p>Expand</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </div>
-                    </nav>
-                ) : (
-                    <SidebarContent pathname={pathname} />
-                )}
+                <SidebarContent pathname={pathname} />
             </aside>
         </TooltipProvider>
     );
