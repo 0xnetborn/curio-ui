@@ -139,7 +139,7 @@ export default function BlurTextPage() {
 
       <PreviewCodeUsageTabs
         preview={
-          <div className="flex items-center justify-center min-h-[200px]">
+          <div className="flex items-center justify-center min-h-[200px] bg-card rounded-xl border border-border/50 p-8">
             <BlurText
               text="CurioUI Animation"
               delay={150}

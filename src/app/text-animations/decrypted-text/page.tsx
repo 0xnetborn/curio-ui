@@ -98,7 +98,7 @@ export default function DecryptedTextPage() {
 
       <PreviewCodeUsageTabs
         preview={
-          <div className="flex flex-wrap gap-6">
+          <div className="flex items-center justify-center min-h-[200px] bg-card rounded-xl border border-border/50 p-8">
             <DecryptedText text="CurioUI" className="text-4xl font-bold" />
           </div>
         }

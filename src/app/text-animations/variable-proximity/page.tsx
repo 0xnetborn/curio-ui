@@ -74,7 +74,7 @@ export default function VariableProximityPage() {
 
       <PreviewCodeUsageTabs
         preview={
-          <div className="flex items-center justify-center min-h-[200px]" ref={containerRef}>
+          <div className="flex items-center justify-center min-h-[200px] bg-card rounded-xl border border-border/50 p-8" ref={containerRef}>
             <VariableProximity 
               label="CurioUI"
               fromFontVariationSettings="'wght' 100"
