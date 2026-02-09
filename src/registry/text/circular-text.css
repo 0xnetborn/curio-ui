@@ -1,21 +1,14 @@
 .circular-text {
+  display: inline-block;
   position: relative;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: default;
+  font-size: 1em;
+  text-align: center;
   user-select: none;
 }
 
 .circular-text span {
   position: absolute;
   left: 50%;
-  font-size: 1em;
-  transform-origin: 0 100px;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
+  top: 50%;
+  transform-origin: 0 0;
 }
