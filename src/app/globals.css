@@ -160,24 +160,6 @@
   }
 }
 
-/* Theme Transition - Smooth color transitions */
-*,
-*::before,
-*::after {
-  transition-property: background-color, border-color, color, fill, stroke;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 150ms;
-}
-
-/* Faster transitions for specific properties */
-.bg-*,
-.border-*,
-.text-* {
-  transition-property: background-color, border-color, color;
-  transition-duration: 200ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
