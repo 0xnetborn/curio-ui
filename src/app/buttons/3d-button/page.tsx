@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import ThreeDButton from "@/registry/buttons/3d-button";
-import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
@@ -47,23 +47,15 @@ export default function ThreeDButtonPage() {
         </p>
       </motion.div>
 
-      <CodeBlock code={componentCode} language="tsx" title="3d-button.tsx" />
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Usage</h3>
-        <div className="rounded-xl border border-border bg-card p-4">
-          <pre className="text-sm font-mono text-muted-foreground overflow-x-auto">
-            {usageCode}
-          </pre>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
-          <ThreeDButton />
-        </div>
-      </div>
+      <PreviewCodeUsageTabs
+        preview={
+          <div className="flex items-center justify-center min-h-[200px]">
+            <ThreeDButton />
+          </div>
+        }
+        code={componentCode}
+        usage={usageCode}
+      />
     </div>
   );
 }

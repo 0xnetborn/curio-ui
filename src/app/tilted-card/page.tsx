@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { TiltedCard } from "@/registry/tilted-card";
-import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const tiltedCardCode = `"use client";
 
@@ -22,22 +22,15 @@ interface TiltedCardProps {
   imageWidth?: React.CSSProperties["width"];
   scaleOnHover?: number;
   rotateAmplitude?: number;
-  showMobileWarning?: boolean;
   showTooltip?: boolean;
-  overlayContent?: React.ReactNode;
-  displayOverlayContent?: boolean;
   className?: string;
 }
 
-const springValues = {
-  damping: 30,
-  stiffness: 100,
-  mass: 2,
-};
+const springValues = { damping: 30, stiffness: 100, mass: 2 };
 
 export function TiltedCard({
   imageSrc,
-  altText = "Tilted card image",
+  altText = "Image",
   captionText = "",
   containerHeight = "300px",
   containerWidth = "100%",
@@ -45,10 +38,7 @@ export function TiltedCard({
   imageWidth = "300px",
   scaleOnHover = 1.1,
   rotateAmplitude = 14,
-  showMobileWarning = true,
   showTooltip = true,
-  overlayContent = null,
-  displayOverlayContent = false,
   className,
 }: TiltedCardProps) {
   const ref = useRef<HTMLElement>(null);
@@ -58,11 +48,7 @@ export function TiltedCard({
   const rotateY = useSpring(useMotionValue(0), springValues);
   const scale = useSpring(1, springValues);
   const opacity = useSpring(0);
-  const rotateFigcaption = useSpring(0, {
-    stiffness: 350,
-    damping: 30,
-    mass: 1,
-  });
+  const rotateFigcaption = useSpring(0, { stiffness: 350, damping: 30, mass: 1 });
 
   const [lastY, setLastY] = useState(0);
 
@@ -82,37 +68,20 @@ export function TiltedCard({
     setLastY(offsetY);
   }
 
-  function handleMouseEnter() {
-    scale.set(scaleOnHover);
-    opacity.set(1);
-  }
-
-  function handleMouseLeave() {
-    opacity.set(0);
-    scale.set(1);
-    rotateX.set(0);
-    rotateY.set(0);
-    rotateFigcaption.set(0);
-  }
-
   return (
     <figure
       ref={ref}
       className={cn("relative w-full h-full [perspective:800px]", className)}
       style={{ height: containerHeight, width: containerWidth }}
       onMouseMove={handleMouse}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => { scale.set(scaleOnHover); opacity.set(1); }}
+      onMouseLeave={() => { opacity.set(0); scale.set(1); rotateX.set(0); rotateY.set(0); }}
     >
       <motion.div
         className="relative [transform-style:preserve-3d]"
         style={{ width: imageWidth, height: imageHeight, rotateX, rotateY, scale }}
       >
-        <motion.img
-          src={imageSrc}
-          alt={altText}
-          className="absolute top-0 left-0 object-cover rounded-[15px]"
-        />
+        <motion.img src={imageSrc} alt={altText} className="absolute top-0 left-0 object-cover rounded-[15px]" />
       </motion.div>
       {showTooltip && (
         <motion.figcaption
@@ -156,36 +125,26 @@ export default function TiltedCardPage() {
         </div>
         <p className="text-muted-foreground max-w-lg">
           Card with 3D tilt effect that follows mouse movement.
-          Uses framer-motion springs for smooth animations.
         </p>
       </motion.div>
 
-      <CodeBlock code={tiltedCardCode} language="tsx" title="tilted-card.tsx" />
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Usage</h3>
-        <div className="rounded-xl border border-border bg-card p-4">
-          <pre className="text-sm font-mono text-muted-foreground overflow-x-auto">
-            {usageCode}
-          </pre>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="flex items-center justify-center min-h-[400px] rounded-xl border border-border bg-card p-8">
-          <TiltedCard
-            imageSrc="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop"
-            altText="Abstract gradient"
-            captionText="CurioUI"
-            containerHeight="400px"
-            containerWidth="100%"
-            imageWidth="300px"
-            imageHeight="400px"
-            rotateAmplitude={12}
-          />
-        </div>
-      </div>
+      <PreviewCodeUsageTabs
+        preview={
+          <div className="flex items-center justify-center min-h-[400px]">
+            <TiltedCard
+              imageSrc="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop"
+              altText="Abstract gradient"
+              captionText="CurioUI"
+              containerHeight="400px"
+              imageWidth="300px"
+              imageHeight="400px"
+              rotateAmplitude={12}
+            />
+          </div>
+        }
+        code={tiltedCardCode}
+        usage={usageCode}
+      />
     </div>
   );
 }

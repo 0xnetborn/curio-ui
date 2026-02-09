@@ -1,0 +1,9 @@
+/* VariableProximity Component Styles */
+
+.variable-proximity {
+  display: inline-block;
+  cursor: pointer;
+  font-variation-settings: 'wght' 400;
+}
+
+/* Font variation settings are controlled via JavaScript */

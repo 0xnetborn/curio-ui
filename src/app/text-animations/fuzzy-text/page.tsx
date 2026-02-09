@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import FuzzyText from "@/registry/text/fuzzy-text";
-import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const fuzzyTextCode = `"use client";
 
@@ -199,6 +199,12 @@ const propsData = [
   { prop: "enableHover", type: "boolean", default: "true", desc: "Enable hover interaction" },
 ];
 
+const usageCode = `import FuzzyText from "@/registry/text/fuzzy-text";
+
+<FuzzyText className="text-5xl">
+  CurioUI
+</FuzzyText>`;
+
 export default function FuzzyTextPage() {
   return (
     <div className="space-y-8">
@@ -218,11 +224,24 @@ export default function FuzzyTextPage() {
         </div>
         <p className="text-muted-foreground max-w-lg">
           Canvas-based text effect with fuzzy/glitch blur on hover.
-          Uses performant canvas rendering for smooth animations.
         </p>
       </motion.div>
 
-      <CodeBlock code={fuzzyTextCode} language="tsx" title="fuzzy-text.tsx" />
+      <PreviewCodeUsageTabs
+        preview={
+          <div className="flex items-center justify-center min-h-[200px]">
+            <FuzzyText
+              className="text-5xl font-black text-white"
+              baseIntensity={0.18}
+              hoverIntensity={0.5}
+            >
+              CurioUI
+            </FuzzyText>
+          </div>
+        }
+        code={fuzzyTextCode}
+        usage={usageCode}
+      />
 
       <div className="rounded-xl border border-border bg-card overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-secondary/30">
@@ -249,19 +268,6 @@ export default function FuzzyTextPage() {
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
-          <FuzzyText
-            className="text-5xl font-black text-white"
-            baseIntensity={0.18}
-            hoverIntensity={0.5}
-          >
-            CurioUI
-          </FuzzyText>
         </div>
       </div>
 

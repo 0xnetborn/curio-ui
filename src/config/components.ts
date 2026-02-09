@@ -159,7 +159,31 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
-];
+,
+    {
+        slug: "text-animations/decrypted-text",
+        name: "DecryptedText",
+        description: "DecryptedText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/variable-proximity",
+        name: "VariableProximity",
+        description: "VariableProximity animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/blur-text",
+        name: "BlurText",
+        description: "BlurText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {

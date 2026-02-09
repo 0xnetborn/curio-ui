@@ -1,9 +1,10 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { StarBorder } from "@/registry/star-border";
-import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const starBorderCode = `"use client";
 
@@ -52,33 +53,16 @@ export function StarBorder<T extends React.ElementType = "button">({
 
 export default StarBorder;`;
 
-const usageCode = `import { StarBorder } from "@/registry/star-border";
-
-<StarBorder color="#14B8A6" speed="4s">
-  CurioUI
-</StarBorder>`;
-
-const globalCSSCode = `/* StarBorder Animations - Add to globals.css */
+// Required CSS for animations
+const starBorderCSS = `/* globals.css - Required Animations */
 @keyframes star-movement-bottom {
-  0% {
-    transform: translate(0%, 0%);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-100%, 0%);
-    opacity: 0;
-  }
+  0% { transform: translate(0%, 0%); opacity: 1; }
+  100% { transform: translate(-100%, 0%); opacity: 0; }
 }
 
 @keyframes star-movement-top {
-  0% {
-    transform: translate(0%, 0%);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(100%, 0%);
-    opacity: 0;
-  }
+  0% { transform: translate(0%, 0%); opacity: 1; }
+  100% { transform: translate(100%, 0%); opacity: 0; }
 }
 
 .animate-star-movement-bottom {
@@ -89,10 +73,22 @@ const globalCSSCode = `/* StarBorder Animations - Add to globals.css */
   animation: star-movement-top linear infinite alternate;
 }`;
 
+const fullCode = `/* Add to globals.css */
+${starBorderCSS}
+
+/* Component: star-border.tsx */
+${starBorderCode}`;
+
+const usageCode = `import { StarBorder } from "@/registry/star-border";
+
+<StarBorder color="#14B8A6" speed="4s">
+  CurioUI
+</StarBorder>`;
+
 export default function StarBorderPage() {
   return (
     <div className="space-y-8">
-      <div
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="space-y-4"
@@ -108,43 +104,26 @@ export default function StarBorderPage() {
         </div>
         <p className="text-muted-foreground max-w-lg">
           Button with animated star border effect.
-          Stars move continuously around the button.
         </p>
-      </div>
+      </motion.div>
 
-      <CodeBlock code={starBorderCode} language="tsx" title="star-border.tsx" />
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Usage</h3>
-        <div className="rounded-xl border border-border bg-card p-4">
-          <pre className="text-sm font-mono text-muted-foreground overflow-x-auto">
-            {usageCode}
-          </pre>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Required Global CSS</h3>
-        <p className="text-muted-foreground text-sm">
-          Add these keyframes and animations to your global CSS file.
-        </p>
-        <CodeBlock code={globalCSSCode} language="css" title="globals.css" />
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="flex flex-wrap gap-4 rounded-xl border border-border bg-card p-8">
-          <StarBorder color="white" speed="6s">
-            CurioUI
-          </StarBorder>
-          <StarBorder color="#14B8A6" speed="4s">
-            Teal
-          </StarBorder>
-          <StarBorder color="#9945FF" speed="3s">
-            Purple
-          </StarBorder>
-        </div>
-      </div>
+      <PreviewCodeUsageTabs
+        preview={
+          <div className="flex flex-wrap gap-4">
+            <StarBorder color="white" speed="6s">
+              CurioUI
+            </StarBorder>
+            <StarBorder color="#14B8A6" speed="4s">
+              Teal
+            </StarBorder>
+            <StarBorder color="#9945FF" speed="3s">
+              Purple
+            </StarBorder>
+          </div>
+        }
+        code={fullCode}
+        usage={usageCode}
+      />
     </div>
   );
 }

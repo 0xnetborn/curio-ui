@@ -5,7 +5,7 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import GradientText from "@/registry/text/gradient-text";
 import "@/registry/text/gradient-text.css";
-import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const gradientTextCode = `"use client";
 
@@ -135,14 +135,21 @@ export default function GradientText({
   );
 }`;
 
+const usageCode = `import GradientText from "@/registry/text/gradient-text";
+import "@/registry/text/gradient-text.css";
+
+<GradientText className="text-5xl" animationSpeed={8}>
+  CurioUI
+</GradientText>`;
+
 const propsData = [
   { prop: "children", type: "ReactNode", default: "-", desc: "Text content" },
-  { prop: "colors", type: "string[]", default: "['#14B8A6', ...]", desc: "Gradient colors (Curio accent)" },
+  { prop: "colors", type: "string[]", default: "['#14B8A6', ...]", desc: "Gradient colors" },
   { prop: "animationSpeed", type: "number", default: "8", desc: "Animation duration (seconds)" },
   { prop: "direction", type: "'horizontal' | 'vertical' | 'diagonal'", default: "'horizontal'", desc: "Gradient direction" },
   { prop: "showBorder", type: "boolean", default: "false", desc: "Show gradient border" },
   { prop: "pauseOnHover", type: "boolean", default: "false", desc: "Pause animation on hover" },
-  { prop: "yoyo", type: "boolean", default: "true", desc: "Yoyo animation (back and forth)" },
+  { prop: "yoyo", type: "boolean", default: "true", desc: "Yoyo animation" },
 ];
 
 export default function GradientTextPage() {
@@ -164,15 +171,25 @@ export default function GradientTextPage() {
         </div>
         <p className="text-muted-foreground max-w-lg">
           Animated gradient text with customizable colors, speed, and direction.
-          Uses framer-motion for smooth animations.
         </p>
       </motion.div>
 
-      <CodeBlock code={gradientTextCode} language="tsx" title="gradient-text.tsx" />
+      <PreviewCodeUsageTabs
+        preview={
+          <div className="flex items-center justify-center min-h-[200px]">
+            <GradientText className="text-5xl font-black" animationSpeed={8}>
+              CurioUI
+            </GradientText>
+          </div>
+        }
+        code={gradientTextCode}
+        usage={usageCode}
+      />
 
+      {/* Props Table */}
       <div className="rounded-xl border border-border bg-card overflow-hidden">
         <div className="px-4 py-3 border-b border-border bg-secondary/30">
-          <h3 className="font-semibold text-sm"> Props Reference</h3>
+          <h3 className="font-semibold text-sm">Props Reference</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -196,20 +213,6 @@ export default function GradientTextPage() {
             </tbody>
           </table>
         </div>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
-          <GradientText className="text-5xl font-black" animationSpeed={8}>
-            CurioUI
-          </GradientText>
-        </div>
-      </div>
-
-      <div className="rounded-xl border border-border bg-card p-6 space-y-4">
-        <h3 className="font-semibold">CSS Required</h3>
-        <CodeBlock code={`import '@/registry/text/gradient-text.css';`} language="css" title="gradient-text.css" />
       </div>
 
       <div className="flex items-center gap-2 text-sm text-muted-foreground">

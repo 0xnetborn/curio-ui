@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import ShineButton from "@/registry/buttons/shine-button";
-import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
-const componentCode = `const ShineButton = () => {
+const componentCode = `"use client";
+
+const ShineButton = () => {
   return (
     <button className="group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-accent px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-accent/30 cursor-pointer">
       <span className="text-sm">CurioUI</span>
@@ -45,23 +47,15 @@ export default function ShineButtonPage() {
         </p>
       </motion.div>
 
-      <CodeBlock code={componentCode} language="tsx" title="shine-button.tsx" />
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Usage</h3>
-        <div className="rounded-xl border border-border bg-card p-4">
-          <pre className="text-sm font-mono text-muted-foreground overflow-x-auto">
-            {usageCode}
-          </pre>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="flex items-center justify-center min-h-[200px] rounded-xl border border-border bg-card p-8">
-          <ShineButton />
-        </div>
-      </div>
+      <PreviewCodeUsageTabs
+        preview={
+          <div className="flex items-center justify-center min-h-[200px]">
+            <ShineButton />
+          </div>
+        }
+        code={componentCode}
+        usage={usageCode}
+      />
     </div>
   );
 }

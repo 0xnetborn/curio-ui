@@ -4,18 +4,14 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { SpotlightCard } from "@/registry/spotlight-card";
-import { CodeBlock } from "@/components/ui/code-block";
+import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
 import React, { useRef, useState } from "react";
 
-interface Position {
-  x: number;
-  y: number;
-}
-
-interface SpotlightCardProps extends React.PropsWithChildren {
+interface SpotlightCardProps {
+  children: React.ReactNode;
   className?: string;
   spotlightColor?: string;
 }
@@ -27,42 +23,23 @@ export function SpotlightCard({
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
-  const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
 
-  const handleMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current || isFocused) return;
-
     const rect = divRef.current.getBoundingClientRect();
     setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
-  const handleFocus = () => {
-    setIsFocused(true);
-    setOpacity(0.6);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-    setOpacity(0);
-  };
-
-  const handleMouseEnter = () => {
-    setOpacity(0.6);
-  };
-
-  const handleMouseLeave = () => {
-    setOpacity(0);
   };
 
   return (
     <div
       ref={divRef}
       onMouseMove={handleMouseMove}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
+      onMouseEnter={() => setOpacity(isFocused ? 0.6 : 0.6)}
+      onMouseLeave={() => setOpacity(0)}
       className={\`relative rounded-3xl border border-white/10 bg-slate-950 overflow-hidden p-8 \${className}\`}
     >
       <div
@@ -108,34 +85,26 @@ export default function SpotlightCardPage() {
         </p>
       </motion.div>
 
-      <CodeBlock code={componentCode} language="tsx" title="SpotlightCard.tsx" />
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Usage</h3>
-        <div className="rounded-xl border border-border bg-card p-4">
-          <pre className="text-sm font-mono text-muted-foreground overflow-x-auto">
-            {usageCode}
-          </pre>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <h3 className="font-semibold">Preview</h3>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <SpotlightCard>
-            <h3 className="text-xl font-semibold text-white mb-2">Curiositas Studio</h3>
-            <p className="text-slate-300">We build intelligent systems with craft.</p>
-          </SpotlightCard>
-          <SpotlightCard spotlightColor="rgba(59, 130, 246, 0.25)">
-            <h3 className="text-xl font-semibold text-white mb-2">AI Automation</h3>
-            <p className="text-slate-300">Eliminate manual work with AI-powered workflows.</p>
-          </SpotlightCard>
-          <SpotlightCard spotlightColor="rgba(168, 85, 247, 0.25)">
-            <h3 className="text-xl font-semibold text-white mb-2">Custom Software</h3>
-            <p className="text-slate-300">Tailored platforms engineered for your team.</p>
-          </SpotlightCard>
-        </div>
-      </div>
+      <PreviewCodeUsageTabs
+        preview={
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <SpotlightCard>
+              <h3 className="text-xl font-semibold text-white mb-2">Curiositas Studio</h3>
+              <p className="text-slate-300">We build intelligent systems with craft.</p>
+            </SpotlightCard>
+            <SpotlightCard spotlightColor="rgba(59, 130, 246, 0.25)">
+              <h3 className="text-xl font-semibold text-white mb-2">AI Automation</h3>
+              <p className="text-slate-300">Eliminate manual work with AI-powered workflows.</p>
+            </SpotlightCard>
+            <SpotlightCard spotlightColor="rgba(168, 85, 247, 0.25)">
+              <h3 className="text-xl font-semibold text-white mb-2">Custom Software</h3>
+              <p className="text-slate-300">Tailored platforms engineered for your team.</p>
+            </SpotlightCard>
+          </div>
+        }
+        code={componentCode}
+        usage={usageCode}
+      />
     </div>
   );
 }
