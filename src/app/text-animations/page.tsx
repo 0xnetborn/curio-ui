@@ -6,14 +6,10 @@ import FuzzyText from "@/registry/text/fuzzy-text";
 import GradientText from "@/registry/text/gradient-text";
 import BlurText from "@/registry/text/blur-text";
 import DecryptedText from "@/registry/text/decrypted-text";
-import VariableProximity from "@/registry/text/variable-proximity";
 import CircularText from "@/registry/text/circular-text";
 import RotatingText from "@/registry/text/rotating-text";
-import TrueFocus from "@/registry/text/true-focus";
-
 import { ShinyText } from "@/registry/shiny-text";
 import TextPressure from "@/registry/text/text-pressure";
-import GlitchText from "@/registry/text/glitch-text";
 
 const textAnimationComponents = [
   { 
@@ -50,13 +46,6 @@ const textAnimationComponents = [
     props: { text: "Decrypted" }
   },
   { 
-    name: "variable-proximity", 
-    displayName: "VariableProximity", 
-    component: VariableProximity, 
-    href: "/text-animations/variable-proximity",
-    props: { label: "Variable" }
-  },
-  { 
     name: "circular-text", 
     displayName: "Circular Text", 
     component: CircularText, 
@@ -71,25 +60,11 @@ const textAnimationComponents = [
     props: { text: "CurioUI" }
   },
   { 
-    name: "glitch-text", 
-    displayName: "Glitch Text", 
-    component: GlitchText, 
-    href: "/text-animations/glitch-text",
-    props: { children: "Glitch" }
-  },
-  { 
     name: "rotating-text", 
     displayName: "Rotating Text", 
     component: RotatingText, 
     href: "/text-animations/rotating-text",
     props: { texts: ["Rotating", "Text", "Effect"] }
-  },
-  { 
-    name: "true-focus", 
-    displayName: "True Focus", 
-    component: TrueFocus, 
-    href: "/text-animations/true-focus",
-    props: { sentence: "True Focus" }
   },
 ];
 
@@ -107,7 +82,6 @@ export default function TextAnimationsPage() {
         </p>
       </motion.div>
 
-      {/* Components Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {textAnimationComponents.map((component, i) => (
           <motion.div

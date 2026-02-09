@@ -4,20 +4,16 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import ThreeDButton from "@/registry/buttons/3d-button";
 import ShineButton from "@/registry/buttons/shine-button";
-import BorderGlowButton from "@/registry/buttons/border-glow-button";
 import GradientFillButton from "@/registry/buttons/gradient-fill-button";
 import WetPaintButton from "@/registry/buttons/wet-paint-button";
 import DotExpandButton from "@/registry/buttons/dot-expand-button";
-import { StarBorder } from "@/registry/star-border";
 
 const buttons = [
   { name: "3d-button", displayName: "3D Button", component: ThreeDButton, href: "/components/buttons/3d-button" },
   { name: "shine-button", displayName: "Shine Button", component: ShineButton, href: "/components/buttons/shine-button" },
-  { name: "border-glow-button", displayName: "Border Glow", component: BorderGlowButton, href: "/components/buttons/border-glow-button" },
   { name: "gradient-fill-button", displayName: "Gradient Fill", component: GradientFillButton, href: "/components/buttons/gradient-fill-button" },
   { name: "wet-button", displayName: "Wet Paint", component: WetPaintButton, href: "/components/buttons/wet-button" },
   { name: "dot-expand-button", displayName: "Dot Expand", component: DotExpandButton, href: "/components/buttons/dot-expand-button" },
-  { name: "star-border", displayName: "Star Border", component: StarBorder, href: "/star-border" },
 ];
 
 export default function ComponentsButtonsPage() {

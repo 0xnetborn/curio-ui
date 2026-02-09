@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Home, Component, Terminal, ExternalLink, Github, Menu, PanelLeftClose, PanelLeft, Layers, MousePointer, LayoutGrid, Type, Loader2 } from "lucide-react";
+import { Home, Component, Terminal, ExternalLink, Github, Menu, PanelLeftClose, PanelLeft, Layers, MousePointer, LayoutGrid, Type, Loader2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -24,6 +24,7 @@ const categoryIcons = {
     text: Type,
     loaders: Loader2,
     headers: Menu,
+    effects: Sparkles,
 };
 
 // Custom scrollbar with accent color

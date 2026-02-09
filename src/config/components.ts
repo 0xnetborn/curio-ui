@@ -42,6 +42,11 @@ export const componentCategories = {
         description: "Navigation and header components",
         icon: "Menu",
     },
+    effects: {
+        name: "Effects",
+        description: "Cursor effects and interactive elements",
+        icon: "Sparkles",
+    },
 } as const;
 
 // Component Registry
@@ -81,14 +86,6 @@ export const components: ComponentMeta[] = [
         isNew: false,
     },
     {
-        slug: "buttons/border-glow-button",
-        name: "Border Glow Button",
-        description: "Button with mouse-tracking glow effect on border",
-        category: "buttons",
-        isPremium: false,
-        isNew: false,
-    },
-    {
         slug: "buttons/gradient-fill-button",
         name: "Gradient Fill Button",
         description: "Button that fills with gradient from bottom on hover",
@@ -104,14 +101,6 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: false,
         dependencies: ["framer-motion"],
-    },
-    {
-        slug: "star-border",
-        name: "Star Border",
-        description: "Button with animated star border effect",
-        category: "buttons",
-        isPremium: false,
-        isNew: true,
     },
     {
         slug: "components/buttons/dot-expand-button",
@@ -184,14 +173,6 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-    {
-        slug: "components/text/variable-proximity",
-        name: "VariableProximity",
-        description: "VariableProximity animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
     // Loaders
     {
         slug: "loaders/spiral-loader",
@@ -229,14 +210,6 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "text-animations/glitch-text",
-        name: "Glitch Text",
-        description: "Text with glitch animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
         slug: "text-animations/rotating-text",
         name: "Rotating Text",
         description: "Animated text that rotates through strings with character-by-character transitions",
@@ -245,14 +218,23 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["framer-motion"],
     },
+    // Effects
     {
-        slug: "text-animations/true-focus",
-        name: "True Focus",
-        description: "Word-by-word focus animation with blur effect and animated corner brackets",
-        category: "text",
+        slug: "components/effects/text-cursor",
+        name: "Text Cursor",
+        description: "Emoji/text trail that follows mouse cursor with smooth animations",
+        category: "effects",
         isPremium: false,
         isNew: true,
         dependencies: ["framer-motion"],
+    },
+    {
+        slug: "components/effects/electric-border",
+        name: "Electric Border",
+        description: "Turbulent, animated electric border effect using SVG filters",
+        category: "effects",
+        isPremium: false,
+        isNew: true,
     },
 ];
 

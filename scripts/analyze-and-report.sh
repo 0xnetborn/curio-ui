@@ -17,20 +17,21 @@ log "🔍 Starting Curio UI component analysis..."
 
 cd "$REPO_DIR"
 
-# Find components to check
+# Find already implemented components
 ALREADY_DONE=()
 while IFS= read -r f; do
     name=$(basename "$f" .tsx | tr '[:upper:]' '[:lower:]')
     ALREADY_DONE+=("$name")
 done < <(find "$REGISTRY_DIR" -name "*.tsx" -type f 2>/dev/null)
 
-# Find a new component
+# Find a new component we haven't added yet
 cd "$REACTBITS_DIR"
 NEW_COMPONENT=""
 NEW_COMPONENT_NAME=""
 
 for component in *.tsx; do
     component_name=$(echo "$component" | tr '[:upper:]' '[:lower:]' | sed 's/\.tsx$//')
+    # Skip if already implemented OR if it's the asciitext (already exists)
     skip=0
     for done in "${ALREADY_DONE[@]}"; do
         if [ "$component_name" = "$done" ]; then
@@ -61,6 +62,20 @@ if [ -n "$NEW_COMPONENT" ]; then
     sed -i '' 's/SyntaxUI/CurioUI/g' "$REGISTRY_DIR/$NEW_COMPONENT_NAME/index.tsx"
     sed -i '' 's/syntax-ui/CurioUI/g' "$REGISTRY_DIR/$NEW_COMPONENT_NAME/index.tsx"
     
+    # Add theme detection if hardcoded colors exist
+    if grep -q "#000000\|#FFFFFF" "$REGISTRY_DIR/$NEW_COMPONENT_NAME/index.tsx" 2>/dev/null; then
+        sed -i '' '/^import/a\
+\
+const [isLight, setIsLight] = useState(false);\
+useEffect(() => {\
+  const checkTheme = () => setIsLight(document.documentElement.classList.contains("light"));\
+  checkTheme();\
+  const observer = new MutationObserver(checkTheme);\
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });\
+  return () => observer.disconnect();\
+}, []);' "$REGISTRY_DIR/$NEW_COMPONENT_NAME/index.tsx" 2>/dev/null || true
+    fi
+    
     log "✅ Added $NEW_COMPONENT_NAME"
     
     # Check build
@@ -80,8 +95,8 @@ if [ -n "$NEW_COMPONENT" ]; then
         fi
     else
         log "❌ Build failed - reverting changes"
-        git checkout -- "$REGISTRY_DIR/$NEW_COMPONENT_NAME" 2>/dev/null || true
         rm -rf "$REGISTRY_DIR/$NEW_COMPONENT_NAME" 2>/dev/null || true
+        git checkout -- "$REGISTRY_DIR" 2>/dev/null || true
     fi
 else
     log "✅ No new components to add"
