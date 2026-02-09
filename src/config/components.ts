@@ -53,6 +53,14 @@ export const components: ComponentMeta[] = [
         description: "Convert video and images to real-time ASCII art with WebGL",
         category: "backgrounds",
         isPremium: false,
+        isNew: false,
+    },
+    {
+        slug: "components/backgrounds/click-spark",
+        name: "Click Spark",
+        description: "Spark burst animation on click interactions",
+        category: "backgrounds",
+        isPremium: false,
         isNew: true,
     },
     // Buttons / Surfaces
