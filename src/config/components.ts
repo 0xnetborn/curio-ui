@@ -105,6 +105,14 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
+    {
+        slug: "components/buttons/dot-expand-button",
+        name: "Dot Expand",
+        description: "Button with expanding dot animation on hover",
+        category: "buttons",
+        isPremium: false,
+        isNew: true,
+    },
     // Text Animations
     {
         slug: "text-animations/fuzzy-text",
