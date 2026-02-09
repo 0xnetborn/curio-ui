@@ -4,30 +4,28 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import DecryptedText from "@/registry/text/decrypted-text";
-import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
+import { PreviewCodeUsageTabs, type PropItem } from "@/components/ui/tabs";
 
 const componentCode = `"use client";
 
 import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
+const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+
 interface DecryptedTextProps {
   text: string;
   speed?: number;
   maxIterations?: number;
   reveal?: number;
-  characters?: string;
   className?: string;
 }
-
-const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
 
 const DecryptedText = ({
   text,
   speed = 30,
   maxIterations = 10,
   reveal = 3,
-  characters: charset = characters,
   className = "",
 }: DecryptedTextProps) => {
   const [displayedText, setDisplayedText] = useState(text);
@@ -40,7 +38,7 @@ const DecryptedText = ({
           .split("")
           .map((letter, index) => {
             if (index < reveal) return text[index];
-            return letters[index % letters.length];
+            return CHARS[index % CHARS.length];
           })
           .join("")
       );
@@ -67,26 +65,36 @@ export default DecryptedText;`;
 
 const usageCode = `import DecryptedText from "@/registry/text/decrypted-text";
 
-<DecryptedText text="CurioUI" speed={30} />`;
+<DecryptedText 
+  text="CurioUI"
+  speed={30}
+  className="text-4xl font-bold"
+/>`;
+
+const props: PropItem[] = [
+  { name: "text", type: "string", description: "Text content to animate" },
+  { name: "speed", type: "number", default: "30", description: "Scramble speed (ms)" },
+  { name: "maxIterations", type: "number", default: "10", description: "Number of scramble iterations" },
+  { name: "reveal", type: "number", default: "3", description: "Number of characters to reveal" },
+  { name: "className", type: "string", description: "Additional CSS classes" },
+];
+
+const dependencies = ["framer-motion"];
 
 export default function DecryptedTextPage() {
   return (
     <div className="space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
+      <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Link href="/text-animations" className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">DecryptedText</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">
-          DecryptedText animation effect.
+        <p className="text-muted-foreground max-w-lg pl-9">
+          Text that scrambles and reveals like a decryption effect.
         </p>
-      </motion.div>
+      </div>
 
       <PreviewCodeUsageTabs
         preview={
@@ -96,6 +104,8 @@ export default function DecryptedTextPage() {
         }
         code={componentCode}
         usage={usageCode}
+        props={props}
+        dependencies={dependencies}
       />
     </div>
   );

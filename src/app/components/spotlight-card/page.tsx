@@ -10,8 +10,7 @@ const componentCode = `"use client";
 
 import React, { useRef, useState } from "react";
 
-interface SpotlightCardProps {
-  children: React.ReactNode;
+interface SpotlightCardProps extends React.PropsWithChildren {
   className?: string;
   spotlightColor?: string;
 }
@@ -19,7 +18,7 @@ interface SpotlightCardProps {
 export function SpotlightCard({
   children,
   className = "",
-  spotlightColor = "rgba(255, 255, 255, 0.25)",
+  spotlightColor = "hsl(var(--accent) / 0.4)",
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -36,11 +35,11 @@ export function SpotlightCard({
     <div
       ref={divRef}
       onMouseMove={handleMouseMove}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
-      onMouseEnter={() => setOpacity(isFocused ? 0.6 : 0.6)}
+      onFocus={() => { setIsFocused(true); setOpacity(0.6); }}
+      onBlur={() => { setIsFocused(false); setOpacity(0); }}
+      onMouseEnter={() => setOpacity(0.6)}
       onMouseLeave={() => setOpacity(0)}
-      className={\`relative rounded-3xl border border-white/10 bg-slate-950 overflow-hidden p-8 \${className}\`}
+      className={\`relative rounded-3xl border border-accent/20 bg-card overflow-hidden p-8 \${className}\`}
     >
       <div
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 ease-in-out"
@@ -59,13 +58,13 @@ export default SpotlightCard;`;
 const usageCode = `import { SpotlightCard } from "@/registry/spotlight-card";
 
 <SpotlightCard>
-  <h3 className="text-xl font-semibold text-white mb-2">Title</h3>
-  <p className="text-slate-300">Description here.</p>
+  <h3 className="text-xl font-semibold">Title</h3>
+  <p className="text-muted-foreground">Description here.</p>
 </SpotlightCard>`;
 
 const props: PropItem[] = [
   { name: "children", type: "ReactNode", description: "Card content" },
-  { name: "spotlightColor", type: "string", default: "rgba(255,255,255,0.25)", description: "Spotlight gradient color" },
+  { name: "spotlightColor", type: "string", default: "hsl(var(--accent) / 0.4)", description: "Spotlight gradient color" },
   { name: "className", type: "string", description: "Additional CSS classes" },
 ];
 
@@ -74,39 +73,32 @@ const dependencies = ["framer-motion"];
 export default function SpotlightCardPage() {
   return (
     <div className="space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
+      <div className="space-y-4">
         <div className="flex items-center gap-2">
-          <Link
-            href="/components"
-            className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer"
-          >
+          <Link href="/components" className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer">
             <ArrowLeft className="w-4 h-4" />
           </Link>
           <h1 className="font-display text-4xl font-bold">Spotlight Card</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">
-          Card with spotlight effect that follows mouse cursor.
+        <p className="text-muted-foreground max-w-lg pl-9">
+          Card with gradient spotlight effect that follows your cursor.
         </p>
-      </motion.div>
+      </div>
 
       <PreviewCodeUsageTabs
         preview={
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <SpotlightCard>
-              <h3 className="text-xl font-semibold text-white mb-2">Curiositas Studio</h3>
-              <p className="text-slate-300">We build intelligent systems with craft.</p>
+              <h3 className="text-xl font-semibold mb-2">Curiositas Studio</h3>
+              <p className="text-muted-foreground">We build intelligent systems with craft.</p>
             </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(59, 130, 246, 0.25)">
-              <h3 className="text-xl font-semibold text-white mb-2">AI Automation</h3>
-              <p className="text-slate-300">Eliminate manual work with AI-powered workflows.</p>
+            <SpotlightCard spotlightColor="hsl(var(--accent) / 0.3)">
+              <h3 className="text-xl font-semibold mb-2">AI Automation</h3>
+              <p className="text-muted-foreground">Eliminate manual work with AI-powered workflows.</p>
             </SpotlightCard>
-            <SpotlightCard spotlightColor="rgba(168, 85, 247, 0.25)">
-              <h3 className="text-xl font-semibold text-white mb-2">Custom Software</h3>
-              <p className="text-slate-300">Tailored platforms engineered for your team.</p>
+            <SpotlightCard spotlightColor="hsl(var(--accent) / 0.2)">
+              <h3 className="text-xl font-semibold mb-2">Custom Software</h3>
+              <p className="text-muted-foreground">Tailored platforms engineered for your team.</p>
             </SpotlightCard>
           </div>
         }

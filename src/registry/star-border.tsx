@@ -13,27 +13,23 @@ type StarBorderProps<T extends React.ElementType> = React.ComponentPropsWithoutR
 };
 
 export function StarBorder<T extends React.ElementType = "button">({
-  as,
   className = "",
-  color = "white",
+  color = "hsl(var(--accent))",
   speed = "6s",
   thickness = 1,
   children,
   ...rest
 }: StarBorderProps<T>) {
-  const Component = as || "button";
-
   return (
-    <Component
+    <button
       className={cn(
-        "relative inline-block overflow-hidden rounded-[20px]",
+        "relative inline-flex items-center justify-center overflow-hidden rounded-[20px] cursor-pointer",
         className
       )}
-      {...(rest as any)}
       style={{
         padding: `${thickness}px 0`,
-        ...((rest as any).style || {}),
       }}
+      {...(rest as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       <div
         className="absolute w-[300%] h-[50%] opacity-70 bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0"
@@ -49,10 +45,10 @@ export function StarBorder<T extends React.ElementType = "button">({
           animationDuration: speed,
         }}
       />
-      <div className="relative z-1 bg-gradient-to-b from-black to-gray-900 border border-gray-800 text-white text-center text-[16px] py-[16px] px-[26px] rounded-[20px]">
+      <div className="relative z-1 bg-gradient-to-b from-accent/10 to-accent/5 border border-accent/30 text-accent-foreground text-center text-[16px] font-medium py-[16px] px-[26px] rounded-[20px]">
         {children}
       </div>
-    </Component>
+    </button>
   );
 }
 
