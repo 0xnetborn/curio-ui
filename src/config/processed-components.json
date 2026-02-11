@@ -1,4 +1,9 @@
 [
   "FuzzyText",
-  "ASCIIText"
+  "ASCIIText",
+  "gsap-AnimatedContent",
+  "Antigravity",
+  "gsap-Antigravity",
+  "gsap-BlobCursor",
+  "BlurText"
 ]
