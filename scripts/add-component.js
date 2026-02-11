@@ -11,6 +11,7 @@ import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REACTBITS_PATH = path.join(__dirname, '../node_modules/reactbits-installer/components/reactbits');
+const REACTBITS_ROOT_PATH = path.join(__dirname, '../node_modules/reactbits-installer/components');
 const REGISTRY_PATH = path.join(__dirname, '../src/registry');
 const COMPONENTS_PATH = path.join(__dirname, '../src/app/components');
 const CONFIG_PATH = path.join(__dirname, '../src/config/components.ts');
@@ -20,34 +21,78 @@ const REACTBITS_COMPONENTS = [
   'ASCIIText',
   'AnimatedContent',
   'Antigravity',
-  'BlobCursor',
-  'BlurText',
+  'Aurora',
+  'BounceCards',
+  'BubbleMenu',
+  'CardSwap',
+  'ChromaGrid',
   'CircularText',
   'ClickSpark',
-  'CountUp',
-  'Crosshair',
-  'Cubes',
+  'Counter',
   'CurvedLoop',
   'DecryptedText',
+  'Dock',
   'ElectricBorder',
   'FadeContent',
   'FallingText',
+  'FlowingMenu',
+  'Folder',
   'FuzzyText',
+  'Galaxy',
+  'GhostCursor',
+  'GlareHover',
+  'GlassIcons',
   'GlitchText',
+  'GooeyNav',
+  'GradientBlinds',
   'GradientText',
+  'GradualBlur',
+  'GridPulse',
+  'ImageTrail',
+  'Iridescence',
+  'LetterGlitch',
+  'Lightning',
+  'LiquidChrome',
+  'LogoLoop',
+  'Magnet',
+  'Masonry',
+  'MetaBalls',
+  'Noise',
+  'Orb',
+  'Particles',
+  'PillNav',
+  'PixelTrail',
+  'PixelTransition',
+  'Plasma',
+  'Prism',
+  'ProfileCard',
+  'Ribbons',
+  'RippleGrid',
   'RotatingText',
   'ScrambledText',
   'ScrollFloat',
   'ScrollReveal',
+  'ScrollStack',
   'ScrollVelocity',
+  'ShapeBlur',
   'ShinyText',
   'Shuffle',
-  'SplitText',
+  'Silk',
+  'SpotlightCard',
+  'Squares',
+  'Stack',
+  'StarBorder',
+  'StickerPeel',
+  'TargetCursor',
   'TextCursor',
   'TextPressure',
   'TextType',
+  'Threads',
+  'TiltCard',
+  'TiltedCard',
   'TrueFocus',
   'VariableProximity',
+  'Waves',
 ];
 
 async function addComponent(componentName, category = 'text', componentCode) {
@@ -56,7 +101,8 @@ async function addComponent(componentName, category = 'text', componentCode) {
   // Fix imports for compatibility with curio-ui
   componentCode = componentCode
     .replace(/from ['"]motion\/react['"]/g, "from 'framer-motion'")
-    .replace(/from ["']motion\/react["']/g, "from 'framer-motion'");
+    .replace(/from ["']motion\/react["']/g, "from 'framer-motion'")
+    .replace(/import ['"][.\/].*\.css['"];?/g, '');
 
   // Create registry file
   const registryFile = path.join(REGISTRY_PATH, category, `${slug}.tsx`);
@@ -220,8 +266,13 @@ if (args.length === 0) {
   while (component && attempts < maxAttempts) {
     console.log(`\n📦 Processing: ${component} (attempt ${attempts + 1})`);
     const componentFile = `${component}.tsx`;
-    const sourcePath = path.join(REACTBITS_PATH, componentFile);
-
+    let sourcePath = path.join(REACTBITS_PATH, componentFile);
+    
+    // Check in reactbits subfolder first, then in root components folder
+    if (!fs.existsSync(sourcePath)) {
+      sourcePath = path.join(REACTBITS_ROOT_PATH, componentFile);
+    }
+    
     if (!fs.existsSync(sourcePath)) {
       console.error(`❌ Component ${component} not found in reactbits`);
       attempts++;
@@ -233,13 +284,16 @@ if (args.length === 0) {
 
     // Check for gsap dependency
     if (componentCode.includes("from 'gsap'") || componentCode.includes('from "gsap"') ||
-        componentCode.includes('gsap/ScrollTrigger') || componentCode.includes("gsap/ScrollTrigger")) {
-      console.log(`⏭️  ${component} requires gsap - skipping`);
+        componentCode.includes('gsap/ScrollTrigger') || componentCode.includes("gsap/ScrollTrigger") ||
+        componentCode.includes('@react-three/fiber') || componentCode.includes('matter-js')) {
+      console.log(`⏭️  ${component} requires unsupported dependency - skipping`);
       markAsSkipped(component);
       attempts++;
       component = getNextComponent();
       continue;
     }
+
+    // CSS imports will be stripped during component addition
 
     const slug = component.replace(/([A-Z])/g, '-$1').toLowerCase().replace(/^-/, '');
 
