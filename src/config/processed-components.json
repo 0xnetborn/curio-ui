@@ -7,8 +7,6 @@
   "DecryptedText",
   "Folder",
   "FuzzyText",
-  "ScrollVelocity",
   "ShinyText",
-  "TextPressure",
-  "TrueFocus"
+  "TextPressure"
 ]

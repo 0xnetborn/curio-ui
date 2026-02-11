@@ -200,11 +200,6 @@ export const components: ComponentMeta[] = [
     },
     {
         slug: "components/text/scroll-velocity",
-        name: "ScrollVelocity",
-        description: "ScrollVelocity animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
     },
     {
         slug: "components/text/shiny-text",
@@ -225,11 +220,6 @@ export const components: ComponentMeta[] = [
     },
     {
         slug: "components/text/true-focus",
-        name: "TrueFocus",
-        description: "TrueFocus animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
     },
     // Loaders
     {
