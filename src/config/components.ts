@@ -465,6 +465,46 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/ribbons",
+        name: "Ribbons",
+        description: "Ribbons animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/ripple-grid",
+        name: "RippleGrid",
+        description: "RippleGrid animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/rotating-text",
+        name: "RotatingText",
+        description: "RotatingText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/scroll-stack",
+        name: "ScrollStack",
+        description: "ScrollStack animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/scroll-velocity",
+        name: "ScrollVelocity",
+        description: "ScrollVelocity animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
