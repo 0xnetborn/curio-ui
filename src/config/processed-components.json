@@ -82,5 +82,8 @@
   "SpotlightCard",
   "Squares",
   "Stack",
-  "StarBorder"
+  "StarBorder",
+  "gsap-StickerPeel",
+  "gsap-TargetCursor",
+  "TextCursor"
 ]
