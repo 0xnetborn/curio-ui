@@ -249,7 +249,15 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-];
+,
+    {
+        slug: "text-animations/circular-text",
+        name: "CircularText",
+        description: "CircularText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {

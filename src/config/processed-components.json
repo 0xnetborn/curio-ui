@@ -8,5 +8,12 @@
   "Folder",
   "FuzzyText",
   "ShinyText",
-  "TextPressure"
+  "TextPressure",
+  "gsap-AnimatedContent",
+  "gsap-Antigravity",
+  "gsap-BounceCards",
+  "gsap-BubbleMenu",
+  "gsap-CardSwap",
+  "gsap-ChromaGrid",
+  "CircularText"
 ]
