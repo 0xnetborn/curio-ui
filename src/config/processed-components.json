@@ -19,5 +19,11 @@
   "CurvedLoop",
   "Dock",
   "gsap-Dock",
-  "ElectricBorder"
+  "ElectricBorder",
+  "gsap-FadeContent",
+  "gsap-FallingText",
+  "gsap-FlowingMenu",
+  "Galaxy",
+  "gsap-Galaxy",
+  "GhostCursor"
 ]

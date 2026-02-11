@@ -281,6 +281,22 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/galaxy",
+        name: "Galaxy",
+        description: "Galaxy animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/ghost-cursor",
+        name: "GhostCursor",
+        description: "GhostCursor animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
