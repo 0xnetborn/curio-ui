@@ -52,5 +52,10 @@
   "gsap-TextType",
   "VariableProximity",
   "gsap-VariableProximity",
-  "Aurora"
+  "Aurora",
+  "gsap-BounceCards",
+  "gsap-BubbleMenu",
+  "gsap-CardSwap",
+  "gsap-ChromaGrid",
+  "Counter"
 ]
