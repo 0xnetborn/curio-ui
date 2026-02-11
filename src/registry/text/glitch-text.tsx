@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 
 
 const GlitchText = ({ children, speed = 1, enableShadows = true, enableOnHover = true, className = '' }) => {

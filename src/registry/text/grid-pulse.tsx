@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import { useRef, useEffect } from "react";
 
 interface GridPulseProps {

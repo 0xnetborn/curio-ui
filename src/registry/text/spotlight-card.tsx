@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import { useRef, MouseEvent, ReactNode } from "react";
 
 interface SpotlightCardProps {

@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 // Component ported from https://codepen.io/JuanFuentes/full/rgXKGQ
 
 import { useEffect, useRef, useState } from 'react';

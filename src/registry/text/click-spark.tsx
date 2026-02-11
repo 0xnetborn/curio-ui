@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import { useRef, useEffect, useCallback } from 'react';
 
 const ClickSpark = ({

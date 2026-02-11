@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 // Component ported and enhanced from https://codepen.io/JuanFuentes/pen/eYEeoyE
 
 import { useRef, useEffect } from 'react';
