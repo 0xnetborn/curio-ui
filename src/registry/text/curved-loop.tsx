@@ -1,4 +1,3 @@
-"use client";
 
 import { useRef, useEffect, useState, useMemo, useId } from 'react';
 

@@ -102,7 +102,8 @@ async function addComponent(componentName, category = 'text', componentCode) {
   componentCode = componentCode
     .replace(/from ['"]motion\/react['"]/g, "from 'framer-motion'")
     .replace(/from ["']motion\/react["']/g, "from 'framer-motion'")
-    .replace(/import ['"][.\/].*\.css['"];?/g, '');
+    .replace(/import ['"][.\/].*\.css['"];?/g, '')
+    .replace(/^["']use client["'];?\s*/i, ''); // Remove existing "use client" if present
 
   // Create registry file
   const registryFile = path.join(REGISTRY_PATH, category, `${slug}.tsx`);

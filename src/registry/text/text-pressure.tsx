@@ -1,4 +1,3 @@
-"use client";
 
 // Component ported from https://codepen.io/JuanFuentes/full/rgXKGQ
 
