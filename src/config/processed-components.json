@@ -8,5 +8,12 @@
   "BlurText",
   "CircularText",
   "gsap-CircularText",
-  "ClickSpark"
+  "ClickSpark",
+  "CountUp",
+  "gsap-CountUp",
+  "gsap-Crosshair",
+  "gsap-Cubes",
+  "CurvedLoop",
+  "gsap-CurvedLoop",
+  "DecryptedText"
 ]

@@ -493,6 +493,30 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/count-up",
+        name: "CountUp",
+        description: "CountUp animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/curved-loop",
+        name: "CurvedLoop",
+        description: "CurvedLoop animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/decrypted-text",
+        name: "DecryptedText",
+        description: "DecryptedText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
