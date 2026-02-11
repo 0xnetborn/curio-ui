@@ -51,5 +51,17 @@
   "gsap-Masonry",
   "MetaBalls",
   "gsap-MetaBalls",
-  "Noise"
+  "Noise",
+  "Orb",
+  "gsap-Orb",
+  "Particles",
+  "gsap-Particles",
+  "gsap-PillNav",
+  "gsap-PixelTrail",
+  "gsap-PixelTransition",
+  "Plasma",
+  "gsap-Plasma",
+  "Prism",
+  "gsap-Prism",
+  "ProfileCard"
 ]
