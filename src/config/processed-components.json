@@ -38,5 +38,10 @@
   "gsap-SplitText",
   "TextCursor",
   "gsap-TextCursor",
-  "TextPressure"
+  "TextPressure",
+  "gsap-TextType",
+  "TrueFocus",
+  "gsap-TrueFocus",
+  "VariableProximity",
+  "gsap-VariableProximity"
 ]
