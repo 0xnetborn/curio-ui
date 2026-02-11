@@ -345,6 +345,22 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/gradual-blur",
+        name: "GradualBlur",
+        description: "GradualBlur animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/grid-pulse",
+        name: "GridPulse",
+        description: "GridPulse animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions

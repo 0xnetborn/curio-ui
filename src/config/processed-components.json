@@ -34,5 +34,8 @@
   "gsap-GooeyNav",
   "GradientBlinds",
   "gsap-GradientBlinds",
-  "GradientText"
+  "GradientText",
+  "GradualBlur",
+  "gsap-GradualBlur",
+  "GridPulse"
 ]
