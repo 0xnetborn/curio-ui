@@ -1,26 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import FuzzyText from "@/registry/text/fuzzy-text";
 import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
-const fuzzyTextCode = `"use client";
+const componentCode = `"use client";
 
 import React, { useEffect, useRef } from 'react';
-
-export interface FuzzyTextProps {
-  children: React.ReactNode;
-  fontSize?: string | number;
-  fontWeight?: string | number;
-  fontFamily?: string;
-  color?: string;
-  enableHover?: boolean;
-  baseIntensity?: number;
-  hoverIntensity?: number;
-  className?: string;
-}
 
 const FuzzyText = ({
   children,
@@ -30,9 +18,8 @@ const FuzzyText = ({
   color = '#fff',
   enableHover = true,
   baseIntensity = 0.18,
-  hoverIntensity = 0.5,
-  className = ''
-}: FuzzyTextProps) => {
+  hoverIntensity = 0.5
+}) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -53,7 +40,7 @@ const FuzzyText = ({
       const computedFontFamily =
         fontFamily === 'inherit' ? window.getComputedStyle(canvas).fontFamily || 'sans-serif' : fontFamily;
 
-      const fontSizeStr = typeof fontSize === 'number' ? fontSize + 'px' : fontSize;
+      const fontSizeStr = typeof fontSize === 'number' ? \`\${fontSize}px\` : fontSize;
       let numericFontSize;
       if (typeof fontSize === 'number') {
         numericFontSize = fontSize;
@@ -72,7 +59,7 @@ const FuzzyText = ({
       const offCtx = offscreen.getContext('2d');
       if (!offCtx) return;
 
-      offCtx.font = fontWeight + ' ' + fontSizeStr + ' ' + computedFontFamily;
+      offCtx.font = \`\${fontWeight} \${fontSizeStr} \${computedFontFamily}\`;
       offCtx.textBaseline = 'alphabetic';
       const metrics = offCtx.measureText(text);
 
@@ -91,7 +78,7 @@ const FuzzyText = ({
       offscreen.height = tightHeight;
 
       const xOffset = extraWidthBuffer / 2;
-      offCtx.font = fontWeight + ' ' + fontSizeStr + ' ' + computedFontFamily;
+      offCtx.font = \`\${fontWeight} \${fontSizeStr} \${computedFontFamily}\`;
       offCtx.textBaseline = 'alphabetic';
       offCtx.fillStyle = color;
       offCtx.fillText(text, xOffset - actualLeft, actualAscent);
@@ -127,7 +114,7 @@ const FuzzyText = ({
         return x >= interactiveLeft && x <= interactiveRight && y >= interactiveTop && y <= interactiveBottom;
       };
 
-      const handleMouseMove = (e) => {
+      const handleMouseMove = e => {
         if (!enableHover) return;
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -139,7 +126,7 @@ const FuzzyText = ({
         isHovering = false;
       };
 
-      const handleTouchMove = (e) => {
+      const handleTouchMove = e => {
         if (!enableHover) return;
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
@@ -170,7 +157,7 @@ const FuzzyText = ({
         }
       };
 
-      if (canvas) canvas.cleanupFuzzyText = cleanup;
+      canvas.cleanupFuzzyText = cleanup;
     };
 
     init();
@@ -184,104 +171,38 @@ const FuzzyText = ({
     };
   }, [children, fontSize, fontWeight, fontFamily, color, enableHover, baseIntensity, hoverIntensity]);
 
-  return <canvas ref={canvasRef} className={className} />;
+  return <canvas ref={canvasRef} />;
 };
 
-export default FuzzyText;`;
-
-const propsData = [
-  { prop: "children", type: "ReactNode", default: "-", desc: "Text content" },
-  { prop: "fontSize", type: "string | number", default: "'clamp(2rem, 10vw, 10rem)'", desc: "Font size (px or CSS)" },
-  { prop: "fontWeight", type: "string | number", default: "900", desc: "Font weight" },
-  { prop: "color", type: "string", default: "'#fff'", desc: "Text color" },
-  { prop: "baseIntensity", type: "number", default: "0.18", desc: "Blur intensity when idle (0-1)" },
-  { prop: "hoverIntensity", type: "number", default: "0.5", desc: "Blur intensity on hover (0-1)" },
-  { prop: "enableHover", type: "boolean", default: "true", desc: "Enable hover interaction" },
-];
+export default FuzzyText;
+`;
 
 const usageCode = `import FuzzyText from "@/registry/text/fuzzy-text";
 
-<FuzzyText className="text-5xl">
-  CurioUI
-</FuzzyText>`;
+<FuzzyText text="CurioUI" />`;
 
 export default function FuzzyTextPage() {
   return (
     <div className="space-y-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="space-y-4"
-      >
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
         <div className="flex items-center gap-2">
-          <Link
-            href="/text-animations"
-            className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer"
-          >
+          <Link href="/components/text" className="p-1 rounded-md hover:bg-secondary transition-colors cursor-pointer">
             <ArrowLeft className="w-4 h-4" />
           </Link>
-          <h1 className="font-display text-4xl font-bold">Fuzzy Text</h1>
+          <h1 className="font-display text-4xl font-bold">FuzzyText</h1>
         </div>
-        <p className="text-muted-foreground max-w-lg">
-          Canvas-based text effect with fuzzy/glitch blur on hover.
-        </p>
+        <p className="text-muted-foreground max-w-lg">FuzzyText animation effect.</p>
       </motion.div>
 
       <PreviewCodeUsageTabs
         preview={
           <div className="flex items-center justify-center min-h-[200px]">
-            <FuzzyText
-              className="text-5xl font-black text-white"
-              baseIntensity={0.18}
-              hoverIntensity={0.5}
-            >
-              CurioUI
-            </FuzzyText>
+            <FuzzyText text="CurioUI" />
           </div>
         }
-        code={fuzzyTextCode}
+        code={componentCode}
         usage={usageCode}
       />
-
-      <div className="rounded-xl border border-border bg-card overflow-hidden">
-        <div className="px-4 py-3 border-b border-border bg-secondary/30">
-          <h3 className="font-semibold text-sm">Props Reference</h3>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="text-left py-2 px-4 font-medium">Prop</th>
-                <th className="text-left py-2 px-4 font-medium">Type</th>
-                <th className="text-left py-2 px-4 font-medium">Default</th>
-                <th className="text-left py-2 px-4 font-medium">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {propsData.map((item) => (
-                <tr key={item.prop} className="border-border/50 last:border-0">
-                  <td className="py-2 px-4 font-mono text-accent">{item.prop}</td>
-                  <td className="py-2 px-4 font-mono text-xs text-muted-foreground">{item.type}</td>
-                  <td className="py-2 px-4 font-mono text-xs text-muted-foreground">{item.default}</td>
-                  <td className="py-2 px-4 text-muted-foreground">{item.desc}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <span>Source:</span>
-        <a
-          href="https://reactbits.dev/text-animations/fuzzy-text"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-accent hover:underline cursor-pointer"
-        >
-          reactbits.dev <ExternalLink className="w-3 h-3" />
-        </a>
-      </div>
     </div>
   );
 }

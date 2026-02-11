@@ -1,20 +1,10 @@
 "use client";
 
+"use client";
+
 import React, { useEffect, useRef } from 'react';
 
-export interface FuzzyTextProps {
-  children: React.ReactNode;
-  fontSize?: string | number;
-  fontWeight?: string | number;
-  fontFamily?: string;
-  color?: string;
-  enableHover?: boolean;
-  baseIntensity?: number;
-  hoverIntensity?: number;
-  className?: string;
-}
-
-const FuzzyText: React.FC<FuzzyTextProps> = ({
+const FuzzyText = ({
   children,
   fontSize = 'clamp(2rem, 10vw, 10rem)',
   fontWeight = 900,
@@ -22,15 +12,13 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   color = '#fff',
   enableHover = true,
   baseIntensity = 0.18,
-  hoverIntensity = 0.5,
-  className = ''
+  hoverIntensity = 0.5
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement & { cleanupFuzzyText?: () => void }>(null);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    let animationFrameId: number;
+    let animationFrameId;
     let isCancelled = false;
-    let cleanupFn: (() => void) | undefined;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -47,7 +35,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         fontFamily === 'inherit' ? window.getComputedStyle(canvas).fontFamily || 'sans-serif' : fontFamily;
 
       const fontSizeStr = typeof fontSize === 'number' ? `${fontSize}px` : fontSize;
-      let numericFontSize: number;
+      let numericFontSize;
       if (typeof fontSize === 'number') {
         numericFontSize = fontSize;
       } else {
@@ -116,11 +104,11 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
 
       run();
 
-      const isInsideTextArea = (x: number, y: number) => {
+      const isInsideTextArea = (x, y) => {
         return x >= interactiveLeft && x <= interactiveRight && y >= interactiveTop && y <= interactiveBottom;
       };
 
-      const handleMouseMove = (e: MouseEvent) => {
+      const handleMouseMove = e => {
         if (!enableHover) return;
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -132,7 +120,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         isHovering = false;
       };
 
-      const handleTouchMove = (e: TouchEvent) => {
+      const handleTouchMove = e => {
         if (!enableHover) return;
         e.preventDefault();
         const rect = canvas.getBoundingClientRect();
@@ -163,7 +151,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
         }
       };
 
-      if (canvas) canvas.cleanupFuzzyText = cleanup;
+      canvas.cleanupFuzzyText = cleanup;
     };
 
     init();
@@ -177,7 +165,8 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     };
   }, [children, fontSize, fontWeight, fontFamily, color, enableHover, baseIntensity, hoverIntensity]);
 
-  return <canvas ref={canvasRef} className={className} />;
+  return <canvas ref={canvasRef} />;
 };
 
 export default FuzzyText;
+
