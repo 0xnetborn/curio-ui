@@ -395,7 +395,23 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-];
+,
+    {
+        slug: "text-animations/threads",
+        name: "Threads",
+        description: "Threads animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/tilt-card",
+        name: "TiltCard",
+        description: "TiltCard animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {

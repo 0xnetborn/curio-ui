@@ -85,5 +85,9 @@
   "StarBorder",
   "gsap-StickerPeel",
   "gsap-TargetCursor",
-  "TextCursor"
+  "TextCursor",
+  "gsap-TextType",
+  "Threads",
+  "gsap-Threads",
+  "TiltCard"
 ]
