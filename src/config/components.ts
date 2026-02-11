@@ -529,6 +529,14 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/stack",
+        name: "Stack",
+        description: "Stack animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
