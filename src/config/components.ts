@@ -361,6 +361,22 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/iridescence",
+        name: "Iridescence",
+        description: "Iridescence animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/letter-glitch",
+        name: "LetterGlitch",
+        description: "LetterGlitch animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions

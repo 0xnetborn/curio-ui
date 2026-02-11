@@ -37,5 +37,9 @@
   "GradientText",
   "GradualBlur",
   "gsap-GradualBlur",
-  "GridPulse"
+  "GridPulse",
+  "gsap-ImageTrail",
+  "Iridescence",
+  "gsap-Iridescence",
+  "LetterGlitch"
 ]
