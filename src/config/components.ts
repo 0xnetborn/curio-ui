@@ -1,5 +1,6 @@
 // Component Categories Configuration
 // Central registry for all CurioUI components
+
 export interface ComponentMeta {
     slug: string;
     name: string;
@@ -9,6 +10,7 @@ export interface ComponentMeta {
     isNew?: boolean;
     dependencies?: string[];
 }
+
 export const componentCategories = {
     backgrounds: {
         name: "Backgrounds",
@@ -41,6 +43,7 @@ export const componentCategories = {
         icon: "Sparkles",
     },
 } as const;
+
 // Component Registry
 export const components: ComponentMeta[] = [
     // Backgrounds
@@ -122,6 +125,62 @@ export const components: ComponentMeta[] = [
     },
     // Text Animations
     {
+        slug: "components/text/a-s-c-i-i-text",
+        name: "ASCIIText",
+        description: "ASCIIText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/aurora",
+        name: "Aurora",
+        description: "Aurora animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/blur-text",
+        name: "Blur Text",
+        description: "Text that blurs in with staggered animation",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/click-spark",
+        name: "ClickSpark",
+        description: "Spark burst animation on click interactions",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/counter",
+        name: "Counter",
+        description: "Counter animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/decrypted-text",
+        name: "DecryptedText",
+        description: "DecryptedText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/folder",
+        name: "Folder",
+        description: "Folder animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
         slug: "components/text/fuzzy-text",
         name: "Fuzzy Text",
         description: "Text that blurs and reveals on hover",
@@ -140,6 +199,14 @@ export const components: ComponentMeta[] = [
         dependencies: ["framer-motion"],
     },
     {
+        slug: "components/text/scroll-velocity",
+        name: "ScrollVelocity",
+        description: "ScrollVelocity animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
         slug: "components/text/shiny-text",
         name: "Shiny Text",
         description: "Text with animated shine effect",
@@ -149,33 +216,17 @@ export const components: ComponentMeta[] = [
         dependencies: ["framer-motion"],
     },
     {
-        slug: "components/text/blur-text",
-        name: "Blur Text",
-        description: "Text that blurs in with staggered animation",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/a-s-c-i-i-text",
-        name: "ASCIIText",
-        description: "ASCIIText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/decrypted-text",
-        name: "DecryptedText",
-        description: "DecryptedText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
         slug: "components/text/text-pressure",
         name: "Text Pressure",
         description: "Text that responds to mouse movement with variable font weights",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/true-focus",
+        name: "TrueFocus",
+        description: "TrueFocus animation effect",
         category: "text",
         isPremium: false,
         isNew: true,
@@ -208,137 +259,21 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-,
-    {
-        slug: "components/text/antigravity",
-        name: "Antigravity",
-        description: "Antigravity animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/circular-text",
-        name: "CircularText",
-        description: "CircularText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/count-up",
-        name: "CountUp",
-        description: "CountUp animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/curved-loop",
-        name: "CurvedLoop",
-        description: "CurvedLoop animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/electric-border",
-        name: "ElectricBorder",
-        description: "ElectricBorder animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/falling-text",
-        name: "FallingText",
-        description: "FallingText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/glitch-text",
-        name: "GlitchText",
-        description: "GlitchText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/gradient-text",
-        name: "GradientText",
-        description: "GradientText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/rotating-text",
-        name: "RotatingText",
-        description: "RotatingText animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/text-cursor",
-        name: "TextCursor",
-        description: "TextCursor animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/variable-proximity",
-        name: "VariableProximity",
-        description: "VariableProximity animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/aurora",
-        name: "Aurora",
-        description: "Aurora animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/counter",
-        name: "Counter",
-        description: "Counter animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/dock",
-        name: "Dock",
-        description: "Dock animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },
-    {
-        slug: "components/text/folder",
-        name: "Folder",
-        description: "Folder animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },];
+];
+
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {
     return components.filter((c) => c.category === category);
 }
+
 export function getFreeComponents() {
     return components.filter((c) => !c.isPremium);
 }
+
 export function getPremiumComponents() {
     return components.filter((c) => c.isPremium);
 }
+
 export function getComponentBySlug(slug: string) {
     return components.find((c) => c.slug === slug);
 }
