@@ -47,5 +47,9 @@
   "gsap-LiquidChrome",
   "LogoLoop",
   "gsap-LogoLoop",
-  "Magnet"
+  "Magnet",
+  "gsap-Masonry",
+  "MetaBalls",
+  "gsap-MetaBalls",
+  "Noise"
 ]
