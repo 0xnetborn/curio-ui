@@ -5,5 +5,8 @@
   "Antigravity",
   "gsap-Antigravity",
   "gsap-BlobCursor",
-  "BlurText"
+  "BlurText",
+  "CircularText",
+  "gsap-CircularText",
+  "ClickSpark"
 ]

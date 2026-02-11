@@ -477,6 +477,22 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/circular-text",
+        name: "CircularText",
+        description: "CircularText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/click-spark",
+        name: "ClickSpark",
+        description: "ClickSpark animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
