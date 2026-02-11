@@ -377,6 +377,14 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/lightning",
+        name: "Lightning",
+        description: "Lightning animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
