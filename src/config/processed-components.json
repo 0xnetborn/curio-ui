@@ -57,5 +57,9 @@
   "gsap-BubbleMenu",
   "gsap-CardSwap",
   "gsap-ChromaGrid",
-  "Counter"
+  "Counter",
+  "Dock",
+  "gsap-Dock",
+  "gsap-FlowingMenu",
+  "Folder"
 ]

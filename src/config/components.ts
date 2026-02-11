@@ -315,6 +315,22 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/dock",
+        name: "Dock",
+        description: "Dock animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/folder",
+        name: "Folder",
+        description: "Folder animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
