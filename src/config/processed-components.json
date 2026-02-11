@@ -94,5 +94,6 @@
   "TrueFocus",
   "VariableProximity",
   "gsap-VariableProximity",
-  "Waves"
+  "Waves",
+  "CountUp"
 ]
