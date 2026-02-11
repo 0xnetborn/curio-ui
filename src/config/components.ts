@@ -385,6 +385,30 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/liquid-chrome",
+        name: "LiquidChrome",
+        description: "LiquidChrome animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/logo-loop",
+        name: "LogoLoop",
+        description: "LogoLoop animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/magnet",
+        name: "Magnet",
+        description: "Magnet animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions

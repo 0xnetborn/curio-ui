@@ -42,5 +42,10 @@
   "Iridescence",
   "gsap-Iridescence",
   "LetterGlitch",
-  "Lightning"
+  "Lightning",
+  "LiquidChrome",
+  "gsap-LiquidChrome",
+  "LogoLoop",
+  "gsap-LogoLoop",
+  "Magnet"
 ]
