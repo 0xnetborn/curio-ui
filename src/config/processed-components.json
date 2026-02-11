@@ -91,5 +91,8 @@
   "gsap-Threads",
   "TiltCard",
   "TiltedCard",
-  "TrueFocus"
+  "TrueFocus",
+  "VariableProximity",
+  "gsap-VariableProximity",
+  "Waves"
 ]
