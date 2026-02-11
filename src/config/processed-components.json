@@ -16,5 +16,8 @@
   "gsap-CardSwap",
   "gsap-ChromaGrid",
   "CircularText",
-  "CurvedLoop"
+  "CurvedLoop",
+  "Dock",
+  "gsap-Dock",
+  "ElectricBorder"
 ]
