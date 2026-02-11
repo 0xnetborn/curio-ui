@@ -343,6 +343,14 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
+    {
+        slug: "components/text/stack",
+        name: "Stack",
+        description: "Stack animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
     // Loaders
     {
         slug: "loaders/spiral-loader",
