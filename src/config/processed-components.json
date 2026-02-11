@@ -26,5 +26,8 @@
   "Galaxy",
   "gsap-Galaxy",
   "GhostCursor",
-  "GlareHover"
+  "GlareHover",
+  "GlassIcons",
+  "gsap-GlassIcons",
+  "GlitchText"
 ]
