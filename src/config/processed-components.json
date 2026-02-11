@@ -75,5 +75,6 @@
   "gsap-ScrollReveal",
   "ScrollStack",
   "gsap-ScrollStack",
-  "ScrollVelocity"
+  "ScrollVelocity",
+  "ShapeBlur"
 ]
