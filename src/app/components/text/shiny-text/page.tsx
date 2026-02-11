@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { ShinyText } from "@/registry/shiny-text";
+import { ShinyText } from "@/registry/text/shiny-text";
 import { PreviewCodeUsageTabs } from "@/components/ui/tabs";
 
 const shinyTextCode = `"use client";
@@ -41,7 +41,7 @@ export function ShinyText({
 
 export default ShinyText;`;
 
-const usageCode = `import { ShinyText } from "@/registry/shiny-text";
+const usageCode = `import { ShinyText } from "@/registry/text/shiny-text";
 
 <ShinyText text="CurioUI" speed={2} />`;
 
