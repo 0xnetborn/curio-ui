@@ -29,5 +29,10 @@
   "GlareHover",
   "GlassIcons",
   "gsap-GlassIcons",
-  "GlitchText"
+  "GlitchText",
+  "GooeyNav",
+  "gsap-GooeyNav",
+  "GradientBlinds",
+  "gsap-GradientBlinds",
+  "GradientText"
 ]

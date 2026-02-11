@@ -321,6 +321,30 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },,
+    {
+        slug: "text-animations/gooey-nav",
+        name: "GooeyNav",
+        description: "GooeyNav animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/gradient-blinds",
+        name: "GradientBlinds",
+        description: "GradientBlinds animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },,
+    {
+        slug: "text-animations/gradient-text",
+        name: "GradientText",
+        description: "GradientText animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
     },];
 
 // Helper functions
