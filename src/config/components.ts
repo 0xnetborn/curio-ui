@@ -379,7 +379,15 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-];
+,
+    {
+        slug: "text-animations/star-border",
+        name: "StarBorder",
+        description: "StarBorder animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {
