@@ -336,17 +336,33 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "components/text/text-pressure",
-        name: "Text Pressure",
-        description: "Text responds to mouse with variable font weights",
+        slug: "components/text/stack",
+        name: "Stack",
+        description: "Stack animation effect",
         category: "text",
         isPremium: false,
         isNew: true,
     },
     {
-        slug: "components/text/stack",
-        name: "Stack",
-        description: "Stack animation effect",
+        slug: "components/text/star-border",
+        name: "Star Border",
+        description: "Animated star border effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/text-cursor",
+        name: "Text Cursor",
+        description: "Emoji/text trail that follows mouse cursor",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
+        slug: "components/text/text-pressure",
+        name: "Text Pressure",
+        description: "Text responds to mouse with variable font weights",
         category: "text",
         isPremium: false,
         isNew: true,
@@ -379,23 +395,7 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-,
-    {
-        slug: "text-animations/star-border",
-        name: "StarBorder",
-        description: "StarBorder animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },,
-    {
-        slug: "text-animations/text-cursor",
-        name: "TextCursor",
-        description: "TextCursor animation effect",
-        category: "text",
-        isPremium: false,
-        isNew: true,
-    },];
+];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {
