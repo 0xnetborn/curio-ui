@@ -14,8 +14,9 @@ export function ComponentCard({ component, className }: ComponentCardProps) {
             href={`/${component.slug}`}
             className={cn(
                 "group relative flex flex-col rounded-xl border border-border bg-card overflow-hidden",
-                "h-[140px] transition-all duration-200",
-                "hover:border-accent/30 hover:shadow-[0_0_20px_rgba(13,148,136,0.08)]",
+                "h-[140px] transition-all duration-200 ease-out",
+                "hover:border-accent/30 hover:shadow-[0_0_20px_rgba(13,148,136,0.08)] hover:scale-[1.01]",
+                "active:scale-[0.99]",
                 className
             )}
         >
