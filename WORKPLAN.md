@@ -29,7 +29,7 @@
 - [x] Add "copy code" button to each component
 - [x] Add sitemap.xml and robots.txt for SEO
 - [x] Add OpenGraph meta tags
-- [ ] Add loading states and skeleton screens
+- [x] Add loading states and skeleton screens
 - [ ] Performance optimization (lazy loading)
 - [ ] Accessibility improvements (ARIA labels)
 
@@ -40,6 +40,6 @@
 
 ---
 
-**Status:** 🟢 IN PROGRESS - Component variants showcase added
+**Status:** 🟢 IN PROGRESS - Loading states and skeleton screens added
 
-*Timestamp: February 16th, 2026, 9:36 PM (Europe/Rome)*
+*Timestamp: February 16th, 2026, 10:06 PM (Europe/Rome)*
