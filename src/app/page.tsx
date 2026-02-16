@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Zap, Terminal, Palette, Box, Copy, Check } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Terminal, Palette, Box, Copy, Check, Layers, CreditCard, MousePointer2, Sparkle } from "lucide-react";
 import Link from "next/link";
 
 const features = [
@@ -341,6 +341,49 @@ export default function Home() {
 
       {/* Featured Components */}
       <FeaturedSection />
+
+      {/* Component Categories */}
+      <section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
+        >
+          <h2 className="font-display text-2xl font-bold mb-2">Component Categories</h2>
+          <p className="text-muted-foreground">Browse components by category</p>
+        </motion.div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {[
+            { icon: MousePointer2, name: "Buttons", count: 12, color: "from-blue-500 to-cyan-500", href: "/components/buttons" },
+            { icon: Sparkle, name: "Text Effects", count: 8, color: "from-purple-500 to-pink-500", href: "/components/text" },
+            { icon: Layers, name: "Backgrounds", count: 6, color: "from-orange-500 to-red-500", href: "/components/backgrounds" },
+            { icon: CreditCard, name: "Cards", count: 5, color: "from-green-500 to-emerald-500", href: "/components/spotlight-card" },
+            { icon: Zap, name: "Effects", count: 4, color: "from-violet-500 to-indigo-500", href: "/components/effects" },
+          ].map((category, i) => (
+            <motion.div
+              key={category.name}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <Link
+                href={category.href}
+                className="group block p-5 rounded-xl border border-border bg-card hover:border-accent/30 transition-all hover:shadow-lg hover:shadow-accent/5"
+              >
+                <div className={`inline-flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br ${category.color} mb-3`}>
+                  <category.icon className="w-5 h-5 text-white" />
+                </div>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-medium text-sm">{category.name}</h3>
+                  <span className="text-xs text-muted-foreground">{category.count}</span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
       {/* Features Grid */}
       <section>
