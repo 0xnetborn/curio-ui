@@ -14,8 +14,12 @@ export default function GradientText({
   };
 
   return (
-    <div className={`animated-gradient-text ${className}`}>
-      {showBorder && <div className="gradient-overlay" style={gradientStyle}></div>}
+    <div 
+      className={`animated-gradient-text ${className}`}
+      role="text"
+      aria-label={`Animated gradient text: ${children}`}
+    >
+      {showBorder && <div className="gradient-overlay" style={gradientStyle} aria-hidden="true"></div>}
       <div className="text-content" style={gradientStyle}>
         {children}
       </div>

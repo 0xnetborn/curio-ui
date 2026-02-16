@@ -31,6 +31,8 @@ const SpotlightCard = ({
       ref={containerRef}
       onMouseMove={handleMouseMove}
       className={`relative overflow-hidden ${className}`}
+      role="region"
+      aria-label="Spotlight card with hover effect"
       style={{
         background: `radial-gradient(
           400px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%),

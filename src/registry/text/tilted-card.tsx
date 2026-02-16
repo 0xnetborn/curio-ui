@@ -86,6 +86,8 @@ export default function TiltedCard({
       onMouseMove={handleMouse}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      role="img"
+      aria-label={`Tilted card with image: ${altText}`}
     >
       {showMobileWarning && (
         <div className="tilted-card-mobile-alert">This effect is not optimized for mobile. Check on desktop.</div>

@@ -74,6 +74,8 @@ const Aurora = ({
     <canvas
       ref={canvasRef}
       className={className}
+      role="img"
+      aria-label="Animated aurora borealis gradient background effect"
       style={{ 
         position: "absolute",
         inset: 0,

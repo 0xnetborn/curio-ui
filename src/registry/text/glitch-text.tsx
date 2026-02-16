@@ -12,7 +12,13 @@ const GlitchText = ({ children, speed = 1, enableShadows = true, enableOnHover =
   const hoverClass = enableOnHover ? 'enable-on-hover' : '';
 
   return (
-    <div className={`glitch ${hoverClass} ${className}`} style={inlineStyles} data-text={children}>
+    <div 
+      className={`glitch ${hoverClass} ${className}`} 
+      style={inlineStyles} 
+      data-text={children}
+      role="text"
+      aria-label={`Glitch text effect: ${children}`}
+    >
       {children}
     </div>
   );
