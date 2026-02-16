@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Sparkles, Zap, Terminal, Palette, Box, Copy, Check, Layers, CreditCard, MousePointer2, Sparkle } from "lucide-react";
+import { ArrowRight, Sparkles, Zap, Terminal, Palette, Box, Copy, Check, Layers, CreditCard, MousePointer2, Sparkle, Crown, Lock, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 
 const features = [
@@ -428,6 +428,116 @@ export default function Home() {
             <span className="text-sm font-medium text-accent">2,500+ developers</span>
             <span className="text-sm text-muted-foreground">building with CurioKit</span>
           </div>
+        </motion.div>
+      </section>
+
+      {/* Pricing / Pro Components */}
+      <section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
+        >
+          <h2 className="font-display text-2xl font-bold mb-2">Free & Pro Components</h2>
+          <p className="text-muted-foreground">Open-source core with premium advanced components</p>
+        </motion.div>
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          {/* Free Plan */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{ once: true }}
+            className="p-6 rounded-2xl border border-border bg-card"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Free</h3>
+                  <p className="text-xs text-muted-foreground">Open Source</p>
+                </div>
+              </div>
+              <span className="text-2xl font-bold">$0</span>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">Perfect for getting started with beautiful animations</p>
+            <ul className="space-y-2">
+              {["50+ Core Components", "Framer Motion animations", "Dark/Light mode", "TypeScript support", "MIT License"].map((feature) => (
+                <li key={feature} className="flex items-center gap-2 text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-green-500" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/components"
+              className="mt-6 block w-full py-2.5 text-center border border-border font-medium rounded-lg transition-all hover:bg-secondary"
+            >
+              Get Started Free
+            </Link>
+          </motion.div>
+
+          {/* Pro Plan */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative p-6 rounded-2xl border border-accent/30 bg-card overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 px-3 py-1 bg-accent text-accent-foreground text-xs font-medium rounded-bl-lg">
+              PRO
+            </div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+                  <Crown className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">Pro</h3>
+                  <p className="text-xs text-muted-foreground">Premium Collection</p>
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="text-2xl font-bold">$19</span>
+                <span className="text-xs text-muted-foreground">/one-time</span>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">Advanced components for professional projects</p>
+            <ul className="space-y-2">
+              {[
+                "Everything in Free",
+                "100+ Premium Components",
+                "Advanced 3D Effects",
+                "Exclusive UI Patterns",
+                "Priority Support",
+                "Early Access to New Components",
+              ].map((feature) => (
+                <li key={feature} className="flex items-center gap-2 text-sm">
+                  <CheckCircle2 className="w-4 h-4 text-amber-500" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+            <button className="mt-6 block w-full py-2.5 text-center bg-gradient-to-r from-amber-500 to-orange-600 text-white font-medium rounded-lg transition-all hover:opacity-90">
+              Coming Soon
+            </button>
+          </motion.div>
+        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-8 text-center"
+        >
+          <p className="text-sm text-muted-foreground">
+            <Lock className="w-4 h-4 inline mr-1" />
+            Pro components will be available via separate npm package
+          </p>
         </motion.div>
       </section>
     </div>
