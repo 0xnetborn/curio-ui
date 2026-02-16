@@ -36,10 +36,10 @@
 ### Dashboard (if applicable)
 - [x] Create dashboard landing page
 - [ ] Add analytics tracking
-- [ ] Add user preferences settings
+- [x] Add user preferences settings
 
 ---
 
-**Status:** 🟢 IN PROGRESS - Dashboard landing page created
+**Status:** 🟢 IN PROGRESS - User preferences settings added
 
-*Timestamp: February 16th, 2026, 11:36 PM (Europe/Rome)*
+*Timestamp: February 17th, 2026, 12:06 AM (Europe/Rome)*

@@ -3,6 +3,8 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { SettingsSheet } from "@/components/settings-sheet";
+import { usePreferences } from "@/hooks/use-preferences";
 import { 
   Search, 
   LayoutGrid, 
@@ -16,7 +18,9 @@ import {
   ArrowRight,
   Terminal,
   Copy,
-  Check
+  Check,
+  Settings,
+  Heart
 } from "lucide-react";
 import { components, componentCategories, getComponentsByCategory } from "@/config/components";
 
@@ -32,10 +36,14 @@ const categoryIcons = {
 // Quick preview card for dashboard
 function QuickComponentCard({
   component,
-  index
+  index,
+  isFavorite = false,
+  onToggleFavorite,
 }: {
   component: typeof components[0];
   index: number;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -83,6 +91,18 @@ function QuickComponentCard({
           Preview
           <ArrowRight className="w-3 h-3" />
         </Link>
+        {onToggleFavorite && (
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              onToggleFavorite();
+            }}
+            className="p-1.5 text-xs border border-border rounded hover:bg-secondary transition-colors"
+            title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          >
+            <Heart className={`w-3 h-3 ${isFavorite ? "fill-red-500 text-red-500" : ""}`} />
+          </button>
+        )}
         <button
           onClick={copyImport}
           className="p-1.5 text-xs border border-border rounded hover:bg-secondary transition-colors"
@@ -133,6 +153,8 @@ function CategoryCard({
 
 export default function DashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const { preferences, toggleFavorite, isFavorite } = usePreferences();
 
   // Filter components based on search
   const filteredComponents = useMemo(() => {
@@ -164,15 +186,24 @@ export default function DashboardPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-3"
+          className="flex items-center justify-between"
         >
-          <div className="p-2 rounded-lg bg-accent/10">
-            <Terminal className="w-6 h-6 text-accent" />
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-accent/10">
+              <Terminal className="w-6 h-6 text-accent" />
+            </div>
+            <div>
+              <h1 className="font-display text-3xl font-bold">Dashboard</h1>
+              <p className="text-muted-foreground">Quick access to all components</p>
+            </div>
           </div>
-          <div>
-            <h1 className="font-display text-3xl font-bold">Dashboard</h1>
-            <p className="text-muted-foreground">Quick access to all components</p>
-          </div>
+          <button
+            onClick={() => setSettingsOpen(true)}
+            className="p-2 rounded-lg border border-border bg-card hover:border-accent/30 hover:bg-card/80 transition-all"
+            title="Settings"
+          >
+            <Settings className="w-5 h-5 text-muted-foreground" />
+          </button>
         </motion.div>
 
         {/* Search */}
@@ -245,7 +276,13 @@ export default function DashboardPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {newComponents.map((comp, i) => (
-            <QuickComponentCard key={comp.slug} component={comp} index={i} />
+            <QuickComponentCard 
+              key={comp.slug} 
+              component={comp} 
+              index={i}
+              isFavorite={isFavorite(comp.slug)}
+              onToggleFavorite={() => toggleFavorite(comp.slug)}
+            />
           ))}
         </div>
       </section>
@@ -262,7 +299,13 @@ export default function DashboardPage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredComponents.map((comp, i) => (
-            <QuickComponentCard key={comp.slug} component={comp} index={i} />
+            <QuickComponentCard 
+              key={comp.slug} 
+              component={comp} 
+              index={i}
+              isFavorite={isFavorite(comp.slug)}
+              onToggleFavorite={() => toggleFavorite(comp.slug)}
+            />
           ))}
         </div>
         {filteredComponents.length === 0 && (
@@ -277,6 +320,9 @@ export default function DashboardPage() {
           </div>
         )}
       </section>
+
+      {/* Settings Sheet */}
+      <SettingsSheet open={settingsOpen} onOpenChange={setSettingsOpen} />
     </div>
   );
 }
