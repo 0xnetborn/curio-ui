@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Eye, Code2, Package2, Settings2, FileCode } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CodeBlock } from "@/components/ui/code-block";
+import { CopyButton } from "@/components/ui/copy-button";
 
 interface Tab {
   id: string;
@@ -92,6 +93,13 @@ export interface PropItem {
   description: string;
 }
 
+// Variant interface for component variants showcase
+export interface VariantItem {
+  name: string;
+  preview: React.ReactNode;
+  code?: string;
+}
+
 // Extended tabs with preview/code/usage and optional CSS tab
 interface PreviewCodeUsageTabsProps {
   preview: React.ReactNode;
@@ -101,20 +109,27 @@ interface PreviewCodeUsageTabsProps {
   props?: PropItem[];
   cssCode?: string; // For components that need global CSS
   dependencies?: string[]; // NPM packages to install
+  variants?: VariantItem[]; // Component variants to showcase
 }
 
-export function PreviewCodeUsageTabs({ preview, code, usage, codeLanguage = "tsx", props, cssCode, dependencies }: PreviewCodeUsageTabsProps) {
+export function PreviewCodeUsageTabs({ preview, code, usage, codeLanguage = "tsx", props, cssCode, dependencies, variants }: PreviewCodeUsageTabsProps) {
   const [activeTab, setActiveTab] = useState("preview");
+  const [copiedVariant, setCopiedVariant] = useState<string | null>(null);
 
   const tabs: Tab[] = [
     { id: "preview", label: "Preview", icon: <Eye className="w-4 h-4" /> },
+    { id: "variants", label: "Variants", icon: <Settings2 className="w-4 h-4" /> },
     { id: "code", label: "Code", icon: <Code2 className="w-4 h-4" /> },
     { id: "css", label: "CSS", icon: <FileCode className="w-4 h-4" /> },
     { id: "usage", label: "Usage", icon: <Package2 className="w-4 h-4" /> },
   ];
 
-  // Filter out CSS tab if no cssCode provided
-  const visibleTabs = cssCode ? tabs : tabs.filter(t => t.id !== "css");
+  // Filter tabs based on what is provided
+  const visibleTabs = tabs.filter(tab => {
+    if (tab.id === "css" && !cssCode) return false;
+    if (tab.id === "variants" && (!variants || variants.length === 0)) return false;
+    return true;
+  });
 
   return (
     <div className="rounded-xl border border-border bg-card overflow-hidden">
@@ -181,6 +196,36 @@ export function PreviewCodeUsageTabs({ preview, code, usage, codeLanguage = "tsx
                   </div>
                 </div>
               )}
+            </div>
+          ) : activeTab === "variants" && variants && variants.length > 0 ? (
+            <div className="space-y-6 p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {variants.map((variant, index) => (
+                  <div key={index} className="rounded-lg border border-border bg-card/50 overflow-hidden">
+                    <div className="flex items-center justify-between px-3 py-2 border-b border-border/50 bg-secondary/20">
+                      <span className="text-sm font-medium">{variant.name}</span>
+                      {variant.code && (
+                        <CopyButton 
+                          code={variant.code} 
+                          onCopy={() => {
+                            setCopiedVariant(variant.name);
+                            setTimeout(() => setCopiedVariant(null), 2000);
+                          }}
+                          copied={copiedVariant === variant.name}
+                        />
+                      )}
+                    </div>
+                    <div className="flex items-center justify-center min-h-[120px] p-4">
+                      {variant.preview}
+                    </div>
+                    {variant.code && (
+                      <div className="border-t border-border/50">
+                        <CodeBlock code={variant.code} language={codeLanguage} />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           ) : activeTab === "code" ? (
             <div className="p-0">

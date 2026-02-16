@@ -21,7 +21,7 @@
 - [x] Add search/filter to components page
 - [x] Add "copy code" button to each component
 - [x] Add dark/light mode toggle for component previews
-- [ ] Add component variants showcase
+- [x] Add component variants showcase
 - [ ] Create component documentation pages
 
 ### Technical
@@ -40,6 +40,6 @@
 
 ---
 
-**Status:** 🟢 COMPLETE - Component library enhancements
+**Status:** 🟢 IN PROGRESS - Component variants showcase added
 
-*Timestamp: February 16th, 2026, 9:06 PM (Europe/Rome)*
+*Timestamp: February 16th, 2026, 9:36 PM (Europe/Rome)*
