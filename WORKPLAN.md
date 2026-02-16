@@ -12,7 +12,7 @@
 - [x] Add animated hero section with component showcase
 - [x] Add "Featured Components" section with live previews
 - [x] Add component categories grid with icons
-- [ ] Add social proof / "Used by" section
+- [x] Add social proof / "Used by" section
 - [ ] Add pricing / pro components section
 - [ ] Add documentation / getting started section
 - [ ] Improve mobile responsiveness across all sections
@@ -40,4 +40,4 @@
 
 **Status:** 🟡 IN_PROGRESS - Landing page improvements
 
-*Timestamp: February 16, 2026, 5:36 PM (Europe/Rome)*
+*Timestamp: February 16, 2026, 6:06 PM (Europe/Rome)*

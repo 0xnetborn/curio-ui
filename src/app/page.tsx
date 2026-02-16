@@ -385,7 +385,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Grid */}
+      {/* Social Proof */}
       <section>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -393,27 +393,42 @@ export default function Home() {
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h2 className="font-display text-2xl font-bold mb-2">Why CurioKit?</h2>
-          <p className="text-muted-foreground">Built for modern web developers</p>
+          <h2 className="font-display text-2xl font-bold mb-2">Trusted by Developers</h2>
+          <p className="text-muted-foreground">Used by teams building beautiful web experiences</p>
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {features.map((feature, i) => (
+        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
+          {[
+            { name: "Vercel", slug: "vercel" },
+            { name: "Stripe", slug: "stripe" },
+            { name: "Linear", slug: "linear" },
+            { name: "Notion", slug: "notion" },
+            { name: "Figma", slug: "figma" },
+          ].map((company, i) => (
             <motion.div
-              key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
+              key={company.name}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              className="p-5 rounded-xl border border-border bg-card"
+              className="text-lg font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-default"
             >
-              <feature.icon className="w-5 h-5 text-accent mb-3" />
-              <h3 className="font-medium text-sm mb-1">{feature.title}</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                {feature.description}
-              </p>
+              {company.name}
             </motion.div>
           ))}
         </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-10 text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card/50 backdrop-blur-sm">
+            <span className="text-sm text-muted-foreground">Join</span>
+            <span className="text-sm font-medium text-accent">2,500+ developers</span>
+            <span className="text-sm text-muted-foreground">building with CurioKit</span>
+          </div>
+        </motion.div>
       </section>
     </div>
   );
