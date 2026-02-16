@@ -2,7 +2,7 @@
 
 **Project:** CurioKit Component Library  
 **Status:** Active  
-**Last Updated:** February 16, 2026, 4:36 PM (Europe/Rome)
+**Last Updated:** February 16th, 2026, 7:06 PM (Europe/Rome)
 
 ---
 
@@ -14,8 +14,8 @@
 - [x] Add component categories grid with icons
 - [x] Add social proof / "Used by" section
 - [x] Add pricing / pro components section
-- [ ] Add documentation / getting started section
-- [ ] Improve mobile responsiveness across all sections
+- [x] Add documentation / getting started section
+- [x] Improve mobile responsiveness across all sections
 
 ### Component Library Enhancements  
 - [ ] Add search/filter to components page
@@ -40,4 +40,4 @@
 
 **Status:** 🟡 IN_PROGRESS - Landing page improvements
 
-*Timestamp: February 16, 2026, 6:36 PM (Europe/Rome)*
+*Timestamp: February 16th, 2026, 7:06 PM (Europe/Rome)*

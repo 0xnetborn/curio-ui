@@ -47,7 +47,7 @@ function ButtonShowcase() {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
       {buttons.map((btn, i) => (
         <motion.div
           key={btn.name}
@@ -119,7 +119,7 @@ function StatsShowcase() {
   ];
 
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-wrap gap-4 sm:gap-6">
       {stats.map((stat, i) => (
         <motion.div
           key={stat.label}
@@ -128,7 +128,7 @@ function StatsShowcase() {
           transition={{ delay: 1 + i * 0.1 }}
           className="text-center"
         >
-          <div className="text-xl font-bold text-accent">{stat.value}</div>
+          <div className="text-lg sm:text-xl font-bold text-accent">{stat.value}</div>
           <div className="text-xs text-muted-foreground">{stat.label}</div>
         </motion.div>
       ))}
@@ -145,7 +145,7 @@ function FeaturedSection() {
       description: "Interactive 3D button with press effect",
       slug: "buttons/3d-button",
       preview: (
-        <button className="px-6 py-3 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 rounded-lg shadow-[0_4px_0_rgb(100,100,100),0_6px_10px_rgba(0,0,0,0.2)] active:shadow-[0_2px_0_rgb(100,100,100),0_2px_5px_rgba(0,0,0,0.2)] active:translate-y-1 transition-all font-medium text-gray-800">
+        <button className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-b from-gray-100 to-gray-300 border border-gray-400 rounded-lg shadow-[0_4px_0_rgb(100,100,100),0_6px_10px_rgba(0,0,0,0.2)] active:shadow-[0_2px_0_rgb(100,100,100),0_2px_5px_rgba(0,0,0,0.2)] active:translate-y-1 transition-all text-xs sm:text-sm font-medium text-gray-800">
           Click Me
         </button>
       ),
@@ -156,8 +156,8 @@ function FeaturedSection() {
       description: "Button with animated border glow effect",
       slug: "buttons/border-glow-button",
       preview: (
-        <button className="relative px-6 py-3 bg-black text-white rounded-lg overflow-hidden group">
-          <span className="relative z-10 font-medium">Hover Me</span>
+        <button className="relative px-4 sm:px-6 py-2 sm:py-3 bg-black text-white rounded-lg overflow-hidden group text-xs sm:text-sm font-medium">
+          <span className="relative z-10">Hover Me</span>
           <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 opacity-75 blur-md group-hover:opacity-100 transition-opacity duration-300" />
           <div className="absolute inset-[1px] rounded-lg bg-black" />
         </button>
@@ -169,7 +169,7 @@ function FeaturedSection() {
       description: "Text with sweeping shine animation",
       slug: "text/shiny-text",
       preview: (
-        <div className="text-2xl font-bold bg-gradient-to-r from-gray-700 via-white to-gray-700 bg-[length:200%_auto] bg-clip-text text-transparent animate-pulse">
+        <div className="text-lg sm:text-2xl font-bold bg-gradient-to-r from-gray-700 via-white to-gray-700 bg-[length:200%_auto] bg-clip-text text-transparent animate-pulse">
           CurioKit
         </div>
       ),
@@ -180,9 +180,9 @@ function FeaturedSection() {
       description: "Card with animated star border effect",
       slug: "cards/star-border",
       preview: (
-        <div className="relative p-4 rounded-lg bg-gray-900">
+        <div className="relative p-2 sm:p-4 rounded-lg bg-gray-900">
           <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 opacity-50 blur-sm animate-pulse" />
-          <div className="relative bg-gray-900 rounded p-4 text-white text-sm font-medium text-center">
+          <div className="relative bg-gray-900 rounded p-2 sm:p-4 text-white text-xs sm:text-sm font-medium text-center">
             Featured
           </div>
         </div>
@@ -196,12 +196,12 @@ function FeaturedSection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-8"
+        className="text-center mb-6 sm:mb-8"
       >
         <h2 className="font-display text-2xl font-bold mb-2">Featured Components</h2>
         <p className="text-muted-foreground">Explore our most popular animated components</p>
       </motion.div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {components.map((component, i) => (
           <motion.div
             key={component.name}
@@ -248,7 +248,7 @@ export default function Home() {
   return (
     <div className="space-y-24 pb-20">
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex flex-col justify-center">
+      <section className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh] flex flex-col justify-center py-12 sm:py-16">
         {/* Background decoration */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-1/4 -left-32 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
@@ -277,14 +277,14 @@ export default function Home() {
             </motion.div>
 
             {/* Headline */}
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1]">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-[1.1]">
               Beautiful animated
               <br />
               <span className="text-accent">components</span>
             </h1>
 
             {/* Subtitle */}
-            <p className="max-w-lg text-lg text-muted-foreground leading-relaxed">
+            <p className="max-w-lg text-base sm:text-lg text-muted-foreground leading-relaxed">
               A collection of high-quality, animated UI components
               designed for modern web experiences. Built with React,
               Framer Motion, and Tailwind CSS.
@@ -348,12 +348,12 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-8"
         >
           <h2 className="font-display text-2xl font-bold mb-2">Component Categories</h2>
           <p className="text-muted-foreground">Browse components by category</p>
         </motion.div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {[
             { icon: MousePointer2, name: "Buttons", count: 12, color: "from-blue-500 to-cyan-500", href: "/components/buttons" },
             { icon: Sparkle, name: "Text Effects", count: 8, color: "from-purple-500 to-pink-500", href: "/components/text" },
@@ -391,12 +391,12 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-8"
         >
           <h2 className="font-display text-2xl font-bold mb-2">Trusted by Developers</h2>
           <p className="text-muted-foreground">Used by teams building beautiful web experiences</p>
         </motion.div>
-        <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60">
+        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 md:gap-16 opacity-60">
           {[
             { name: "Vercel", slug: "vercel" },
             { name: "Stripe", slug: "stripe" },
@@ -539,6 +539,67 @@ export default function Home() {
             Pro components will be available via separate npm package
           </p>
         </motion.div>
+      </section>
+
+      {/* Documentation / Getting Started */}
+      <section>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-8"
+        >
+          <h2 className="font-display text-2xl font-bold mb-2">Getting Started</h2>
+          <p className="text-muted-foreground">Install CurioKit in your project</p>
+        </motion.div>
+        
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{ once: true }}
+            className="p-4 sm:p-6 rounded-2xl border border-border bg-card"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium">Install with npm</span>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText('npm install curio-kit');
+                }}
+                className="p-2 hover:bg-secondary rounded-lg transition-colors"
+                aria-label="Copy install command"
+              >
+                <Copy className="w-4 h-4 text-muted-foreground" />
+              </button>
+            </div>
+            <div className="p-3 sm:p-4 rounded-lg bg-muted font-mono text-sm overflow-x-auto">
+              <code className="text-accent">npm install curio-kit</code>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+            className="mt-6 grid sm:grid-cols-2 gap-4"
+          >
+            {[
+              { title: "Browse Components", desc: "Explore our collection of animated components", href: "/components" },
+              { title: "Read the Docs", desc: "Learn how to customize and theme components", href: "#" },
+            ].map((item, i) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className="group p-4 rounded-xl border border-border bg-card hover:border-accent/30 transition-all hover:shadow-lg hover:shadow-accent/5"
+              >
+                <h3 className="font-medium mb-1 group-hover:text-accent transition-colors">{item.title}</h3>
+                <p className="text-xs text-muted-foreground">{item.desc}</p>
+              </Link>
+            ))}
+          </motion.div>
+        </div>
       </section>
     </div>
   );
