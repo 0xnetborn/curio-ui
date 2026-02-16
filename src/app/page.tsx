@@ -488,7 +488,7 @@ export default function Home() {
           >
             {[
               { title: "Browse Components", desc: "Explore our collection of animated components", href: "/components" },
-              { title: "Read the Docs", desc: "Learn how to customize and theme components", href: "#" },
+              { title: "Read the Docs", desc: "Learn how to customize and theme components", href: "/docs" },
             ].map((item, i) => (
               <Link
                 key={item.title}
