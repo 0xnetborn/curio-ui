@@ -1,0 +1,6 @@
+# robots.txt for CurioKit
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://curiosokit.dev/sitemap.xml

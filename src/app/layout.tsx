@@ -13,8 +13,28 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CurioUI | Animated Components",
-  description: "Next-gen animated UI components by Curiositas",
+  title: "CurioKit | Premium Animated UI Components",
+  description: "Next-gen animated UI components by Curiositas Studio. High-performance, fully customizable components for modern web experiences.",
+  keywords: ["UI components", "animated components", "React", "Next.js", "animations", "UI library"],
+  authors: [{ name: "Curiositas Studio" }],
+  openGraph: {
+    title: "CurioKit | Premium Animated UI Components",
+    description: "Next-gen animated UI components by Curiositas Studio. High-performance, fully customizable components for modern web experiences.",
+    url: "https://curiosokit.dev",
+    siteName: "CurioKit",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CurioKit | Premium Animated UI Components",
+    description: "Next-gen animated UI components by Curiositas Studio",
+    creator: "@curiositas",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
