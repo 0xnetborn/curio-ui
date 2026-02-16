@@ -95,5 +95,9 @@
   "VariableProximity",
   "gsap-VariableProximity",
   "Waves",
-  "CountUp"
+  "CountUp",
+  "gsap-SplitText",
+  "gsap-BlobCursor",
+  "gsap-Crosshair",
+  "gsap-Cubes"
 ]
