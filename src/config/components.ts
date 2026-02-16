@@ -395,7 +395,6 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
-,
     {
         slug: "text-animations/threads",
         name: "Threads",
@@ -403,7 +402,7 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
     {
         slug: "text-animations/tilt-card",
         name: "TiltCard",
@@ -411,7 +410,7 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
     {
         slug: "text-animations/tilted-card",
         name: "TiltedCard",
@@ -419,7 +418,7 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
     {
         slug: "text-animations/true-focus",
         name: "TrueFocus",
@@ -427,7 +426,7 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
     {
         slug: "text-animations/variable-proximity",
         name: "VariableProximity",
@@ -435,7 +434,7 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
     {
         slug: "text-animations/waves",
         name: "Waves",
@@ -443,7 +442,15 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },,
+    },
+    {
+        slug: "components/text/animated-list",
+        name: "Animated List",
+        description: "Animated list with hover effects and keyboard navigation",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
     {
         slug: "text-animations/count-up",
         name: "CountUp",
@@ -451,7 +458,8 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
-    },];
+    },
+];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {
