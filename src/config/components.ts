@@ -452,6 +452,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
+        slug: "components/text/animated-content",
+        name: "AnimatedContent",
+        description: "Scroll-triggered animation with GSAP",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["gsap"],
+    },
+    {
         slug: "text-animations/count-up",
         name: "CountUp",
         description: "CountUp animation effect",
