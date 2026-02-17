@@ -16,6 +16,15 @@
 - [x] Categorie corrette: spotlight-card e tilted-card -> cards
 - [x] Aggiunte category pages: backgrounds, cards, effects, loaders
 
+## Statistiche
+- Totale componenti: 50
+  - backgrounds: 1
+  - buttons: 7
+  - cards: 2
+  - effects: 2
+  - loaders: 1
+  - text: 37
+
 ## Cosa Devo Fare (TODO)
 1. [ ] Sistemare componenti che non funzionano bene
 2. [ ] Aggiungere nuovi componenti "senior design"
