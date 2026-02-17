@@ -20,6 +20,7 @@
 - [x] Fix fade-content and shiny-text import (default export)
 - [x] Remove old route folders (buttons/, loaders/, ascii-media/, etc)
 - [x] Standardize slugs: text-animations -> components/text/*
+- [x] Add spiral-loader page
 
 ## Statistiche
 - Totale componenti: 50 (config)
