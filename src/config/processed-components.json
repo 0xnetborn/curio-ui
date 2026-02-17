@@ -99,5 +99,6 @@
   "gsap-BlobCursor",
   "gsap-Crosshair",
   "gsap-Cubes",
-  "TextType"
+  "TextType",
+  "ScrollFloat"
 ]

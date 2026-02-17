@@ -285,6 +285,14 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
+        slug: "components/text/rotating-text",
+        name: "Rotating Text",
+        description: "Text that rotates with continuous animation",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    {
         slug: "components/text/scroll-velocity",
         name: "Scroll Velocity",
         description: "Text responds to scroll speed",
