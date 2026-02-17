@@ -28,17 +28,19 @@
 - Build: ✅ OK (no errors, no warnings)
 
 ## Cosa Devo Fare (TODO)
-1. [ ] Sistemare preview con hover animations (homepage grid)
-2. [ ] Allineare code tabs con preview tabs
-3. [ ] Aggiungere nuovi componenti "senior design"
-4. [ ] Testare componenti problematici
+1. [ ] Sistemare preview con hover animations (homepage grid) - BASSO PRIORITARIO
+2. [ ] Allineare code tabs con preview tabs - BASSO PRIORITARIO  
+3. [ ] Aggiungere nuovi componenti "senior design" - MEDIO PRIORITARIO
+4. [ ] Testare componenti problematici - ALTO PRIORITARIO
 
-## Fatto
+## Fatto (struttura)
 - [x] Structure: tutte le category pages presenti
 - [x] Config: slug standardizzati
 - [x] Fix imports: fade-content, shiny-text
 - [x] Fix analytics
 - [x] Category pages dinamiche via config
+- [x] Spiral-loader page aggiunta
+- [x] Route legacy rimosse
 
 ## Componenti Aggiunti Oggi
 - border-glow-button
