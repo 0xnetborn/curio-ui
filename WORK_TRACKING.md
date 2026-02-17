@@ -16,6 +16,7 @@
 - [x] Categorie corrette: spotlight-card e tilted-card -> cards
 - [x] Aggiunte category pages: backgrounds, cards, effects, loaders
 - [x] Aggiunta text category page
+- [x] Standardized button slugs to components/buttons/*
 
 ## Statistiche
 - Totale componenti: 50
