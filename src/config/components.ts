@@ -394,6 +394,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
+        slug: "components/effects/crosshair",
+        name: "Crosshair",
+        description: "Animated crosshair lines that follow the cursor",
+        category: "effects",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["gsap"],
+    },
+    {
         slug: "components/text/tilt-card",
         name: "TiltCard",
         description: "TiltCard animation effect",
