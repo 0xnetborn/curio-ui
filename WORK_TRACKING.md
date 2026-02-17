@@ -15,6 +15,7 @@
 - [x] Verifica build: OK
 - [x] Categorie corrette: spotlight-card e tilted-card -> cards
 - [x] Aggiunte category pages: backgrounds, cards, effects, loaders
+- [x] Aggiunta text category page
 
 ## Statistiche
 - Totale componenti: 50
