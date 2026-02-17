@@ -326,6 +326,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
+        slug: "components/cards/bounce-cards",
+        name: "BounceCards",
+        description: "Interactive bouncing cards with GSAP animations",
+        category: "cards",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["gsap"],
+    },
+    {
         slug: "components/text/squares",
         name: "Squares",
         description: "Animated square pattern effect",

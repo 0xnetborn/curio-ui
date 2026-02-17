@@ -1,6 +1,6 @@
 # CurioUI - Lavoro in Corso
 
-**Ultimo aggiornamento:** 2026-02-17 15:36
+**Ultimo aggiornamento:** 2026-02-17 16:07
 
 ## Stato Generale
 - **Build:** ✅ OK
@@ -23,9 +23,9 @@
 - [x] Add spiral-loader page
 
 ## Statistiche
-- Totale componenti: 51 (config)
-- Totale routes: 63 (clean, no duplicates)
-- Build: ✅ OK (no errors, no warnings)
+- Totale componenti: 55 (config)
+- Totale routes: 66
+- Build: ✅ OK
 
 ## Cosa Devo Fare (TODO)
 1. [ ] Sistemare preview con hover animations (homepage grid) - BASSO PRIORITARIO
