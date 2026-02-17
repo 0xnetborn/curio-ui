@@ -359,7 +359,7 @@ export const components: ComponentMeta[] = [
     },
     // Loaders
     {
-        slug: "loaders/spiral-loader",
+        slug: "components/loaders/spiral-loader",
         name: "Spiral Loader",
         description: "Animated spiral loader with pulsing dots",
         category: "loaders",
@@ -386,7 +386,7 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "text-animations/tilt-card",
+        slug: "components/text/tilt-card",
         name: "TiltCard",
         description: "TiltCard animation effect",
         category: "text",
@@ -394,7 +394,7 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "text-animations/tilted-card",
+        slug: "components/text/tilted-card",
         name: "TiltedCard",
         description: "TiltedCard animation effect",
         category: "cards",
@@ -402,7 +402,7 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "text-animations/true-focus",
+        slug: "components/text/true-focus",
         name: "TrueFocus",
         description: "TrueFocus animation effect",
         category: "text",
@@ -410,7 +410,7 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
-        slug: "text-animations/waves",
+        slug: "components/text/waves",
         name: "Waves",
         description: "Waves animation effect",
         category: "text",
@@ -435,7 +435,7 @@ export const components: ComponentMeta[] = [
         dependencies: ["gsap"],
     },
     {
-        slug: "text-animations/count-up",
+        slug: "components/text/count-up",
         name: "CountUp",
         description: "CountUp animation effect",
         category: "text",
