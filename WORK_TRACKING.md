@@ -13,9 +13,7 @@
 - [x] Reso buttons page dinamico via config
 - [x] Fix analytics: trackEvent -> track (nuova versione)
 - [x] Verifica build: OK
-
-## In Corso
-- Verifica componenti uno a uno
+- [x] Categorie corrette: spotlight-card e tilted-card -> cards
 
 ## Cosa Devo Fare (TODO)
 1. [ ] Sistemare componenti che non funzionano bene
