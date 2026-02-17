@@ -1,10 +1,10 @@
 "use client";
 
-import { trackEvent } from "@vercel/analytics";
+import { track } from "@vercel/analytics";
 
 // Track component preview clicks
 export function trackComponentPreview(componentName: string, componentSlug: string) {
-  trackEvent("component_preview", {
+  track("component_preview", {
     component_name: componentName,
     component_slug: componentSlug,
   });
@@ -12,7 +12,7 @@ export function trackComponentPreview(componentName: string, componentSlug: stri
 
 // Track component import copy
 export function trackComponentCopy(componentName: string, componentSlug: string) {
-  trackEvent("component_copy", {
+  track("component_copy", {
     component_name: componentName,
     component_slug: componentSlug,
   });
@@ -20,7 +20,7 @@ export function trackComponentCopy(componentName: string, componentSlug: string)
 
 // Track favorites toggles
 export function trackFavoriteToggle(componentName: string, componentSlug: string, isFavorite: boolean) {
-  trackEvent("favorite_toggle", {
+  track("favorite_toggle", {
     component_name: componentName,
     component_slug: componentSlug,
     is_favorite: isFavorite,
@@ -29,7 +29,7 @@ export function trackFavoriteToggle(componentName: string, componentSlug: string
 
 // Track search queries
 export function trackSearch(query: string, resultCount: number) {
-  trackEvent("search", {
+  track("search", {
     query,
     result_count: resultCount,
   });
@@ -37,7 +37,7 @@ export function trackSearch(query: string, resultCount: number) {
 
 // Track category views
 export function trackCategoryView(category: string, componentCount: number) {
-  trackEvent("category_view", {
+  track("category_view", {
     category,
     component_count: componentCount,
   });
