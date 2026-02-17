@@ -14,6 +14,7 @@
 - [x] Fix analytics: trackEvent -> track (nuova versione)
 - [x] Verifica build: OK
 - [x] Categorie corrette: spotlight-card e tilted-card -> cards
+- [x] Aggiunte category pages: backgrounds, cards, effects, loaders
 
 ## Cosa Devo Fare (TODO)
 1. [ ] Sistemare componenti che non funzionano bene
