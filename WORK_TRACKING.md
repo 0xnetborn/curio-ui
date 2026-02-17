@@ -18,6 +18,8 @@
 - [x] Aggiunta text category page
 - [x] Standardized button slugs to components/buttons/*
 - [x] Fix fade-content and shiny-text import (default export)
+- [x] Remove old route folders (buttons/, loaders/, ascii-media/, etc)
+- [x] Standardize slugs: text-animations -> components/text/*
 
 ## Statistiche
 - Totale componenti: 50 (config)
