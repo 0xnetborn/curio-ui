@@ -48,14 +48,6 @@ export const componentCategories = {
 export const components: ComponentMeta[] = [
     // Backgrounds
     {
-        slug: "ascii-media",
-        name: "ASCII Media",
-        description: "Convert video and images to real-time ASCII art with WebGL",
-        category: "backgrounds",
-        isPremium: false,
-        isNew: false,
-    },
-    {
         slug: "components/backgrounds/click-spark",
         name: "Click Spark",
         description: "Spark burst animation on click interactions",
@@ -120,24 +112,6 @@ export const components: ComponentMeta[] = [
         category: "buttons",
         isPremium: false,
         isNew: false,
-    },
-    // Cards
-    {
-        slug: "components/spotlight-card",
-        name: "Spotlight Card",
-        description: "Card with gradient spotlight effect on hover",
-        category: "cards",
-        isPremium: false,
-        isNew: false,
-    },
-    {
-        slug: "tilted-card",
-        name: "Tilted Card",
-        description: "Card with 3D tilt effect that follows mouse",
-        category: "cards",
-        isPremium: false,
-        isNew: true,
-        dependencies: ["framer-motion"],
     },
     // Text Animations
     {
