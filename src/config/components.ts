@@ -105,6 +105,22 @@ export const components: ComponentMeta[] = [
         isPremium: false,
         isNew: true,
     },
+    {
+        slug: "components/buttons/border-glow-button",
+        name: "Border Glow",
+        description: "Button with glowing border animation on hover",
+        category: "buttons",
+        isPremium: false,
+        isNew: false,
+    },
+    {
+        slug: "components/buttons/wet-paint-button",
+        name: "Wet Paint",
+        description: "Dripping paint effect with glossy appearance on hover",
+        category: "buttons",
+        isPremium: false,
+        isNew: false,
+    },
     // Cards
     {
         slug: "components/spotlight-card",
@@ -467,6 +483,24 @@ export const components: ComponentMeta[] = [
         category: "text",
         isPremium: false,
         isNew: true,
+    },
+    {
+        slug: "components/text/falling-text",
+        name: "Falling Text",
+        description: "Physics-based text that falls with gravity",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["matter-js"],
+    },
+    {
+        slug: "components/text/text-type",
+        name: "Text Type",
+        description: "Animated typewriter effect with cursor and loop options",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["gsap"],
     },
 ];
 

@@ -98,5 +98,6 @@
   "gsap-SplitText",
   "gsap-BlobCursor",
   "gsap-Crosshair",
-  "gsap-Cubes"
+  "gsap-Cubes",
+  "TextType"
 ]
