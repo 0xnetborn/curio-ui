@@ -57,7 +57,7 @@ export const components: ComponentMeta[] = [
     },
     // Buttons / Surfaces
     {
-        slug: "buttons/3d-button",
+        slug: "components/buttons/3d-button",
         name: "3D Button",
         description: "Button with 3D depth effect and ripple on hover",
         category: "buttons",
@@ -65,7 +65,7 @@ export const components: ComponentMeta[] = [
         isNew: false,
     },
     {
-        slug: "buttons/shine-button",
+        slug: "components/buttons/shine-button",
         name: "Shine Button",
         description: "Button with diagonal light sweep effect on hover",
         category: "buttons",
@@ -73,7 +73,7 @@ export const components: ComponentMeta[] = [
         isNew: false,
     },
     {
-        slug: "buttons/gradient-fill-button",
+        slug: "components/buttons/gradient-fill-button",
         name: "Gradient Fill Button",
         description: "Button that fills with gradient from bottom on hover",
         category: "buttons",
