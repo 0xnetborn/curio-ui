@@ -42,8 +42,8 @@ function ThemeToggle() {
   );
 }`;
 
-const copyToClipboard = (text: string, setCopied: (v: boolean) =>  navigator.clipboard void) => {
-.writeText(text);
+const copyToClipboard = async (text: string, setCopied: (v: boolean) => void) => {
+  await navigator.clipboard.writeText(text);
   setCopied(true);
   setTimeout(() => setCopied(false), 2000);
 };

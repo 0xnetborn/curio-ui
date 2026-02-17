@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { SettingsSheet } from "@/components/settings-sheet";
 import { usePreferences } from "@/hooks/use-preferences";
-import { 
+import {
   Search, 
   LayoutGrid, 
   Layers, 
@@ -23,6 +23,13 @@ import {
   Heart
 } from "lucide-react";
 import { components, componentCategories, getComponentsByCategory } from "@/config/components";
+import {
+  trackComponentPreview,
+  trackComponentCopy,
+  trackFavoriteToggle,
+  trackSearch,
+  trackCategoryView,
+} from "@/lib/analytics";
 
 const categoryIcons = {
   backgrounds: Layers,
@@ -52,6 +59,7 @@ function QuickComponentCard({
       ? component.slug 
       : component.slug.replace('buttons/', 'components/buttons/').replace('text-animations/', 'components/text/');
     navigator.clipboard.writeText(`import ${component.name.replace(/\s+/g, '')} from "@/registry/${importPath}"`);
+    trackComponentCopy(component.name, component.slug);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -86,6 +94,7 @@ function QuickComponentCard({
       <div className="flex items-center gap-2">
         <Link
           href={`/${component.slug}`}
+          onClick={() => trackComponentPreview(component.name, component.slug)}
           className="flex-1 inline-flex items-center justify-center gap-1 px-3 py-1.5 text-xs font-medium bg-foreground text-background rounded hover:opacity-90 transition-opacity"
         >
           Preview
@@ -95,6 +104,7 @@ function QuickComponentCard({
           <button
             onClick={(e) => {
               e.preventDefault();
+              trackFavoriteToggle(component.name, component.slug, !isFavorite);
               onToggleFavorite();
             }}
             className="p-1.5 text-xs border border-border rounded hover:bg-secondary transition-colors"
@@ -136,6 +146,7 @@ function CategoryCard({
     >
       <Link
         href={`/components?category=${category}`}
+        onClick={() => trackCategoryView(category, count)}
         className="flex items-center gap-4 p-4 rounded-lg border border-border bg-card hover:border-accent/30 hover:bg-card/80 transition-all group"
       >
         <div className="p-2 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
@@ -178,6 +189,15 @@ export default function DashboardPage() {
   const newComponents = useMemo(() => {
     return components.filter((c) => c.isNew).slice(0, 6);
   }, []);
+
+  // Track search queries
+  const [lastTrackedQuery, setLastTrackedQuery] = useState("");
+  useEffect(() => {
+    if (searchQuery && searchQuery !== lastTrackedQuery && searchQuery.length >= 2) {
+      trackSearch(searchQuery, filteredComponents.length);
+      setLastTrackedQuery(searchQuery);
+    }
+  }, [searchQuery, filteredComponents.length, lastTrackedQuery]);
 
   return (
     <div className="space-y-12 pb-20">

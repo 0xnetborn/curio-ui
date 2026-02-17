@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import Sidebar from "@/components/Sidebar";
@@ -47,6 +48,7 @@ export default function RootLayout({
       <body
         className={`${jetbrainsMono.variable} font-sans antialiased`}
       >
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
