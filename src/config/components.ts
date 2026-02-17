@@ -486,7 +486,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["gsap"],
     },
-];
+,
+    {
+        slug: "text-animations/variable-proximity",
+        name: "VariableProximity",
+        description: "VariableProximity animation effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+    },];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {

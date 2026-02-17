@@ -91,7 +91,6 @@
   "TiltedCard",
   "TrueFocus",
   "VariableProximity",
-  "gsap-VariableProximity",
   "Waves",
   "CountUp",
   "gsap-SplitText",
@@ -100,5 +99,6 @@
   "gsap-Cubes",
   "TextType",
   "ScrollFloat",
-  "gsap-ScrollReveal"
+  "gsap-ScrollReveal",
+  "VariableProximity"
 ]
