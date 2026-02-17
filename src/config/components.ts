@@ -412,6 +412,15 @@ export const components: ComponentMeta[] = [
         dependencies: ["gsap"],
     },
     {
+        slug: "components/effects/blob-cursor",
+        name: "Blob Cursor",
+        description: "Animated cursor with blob trail effect that follows mouse movement",
+        category: "effects",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["gsap"],
+    },
+    {
         slug: "components/text/tilt-card",
         name: "TiltCard",
         description: "TiltCard animation effect",
