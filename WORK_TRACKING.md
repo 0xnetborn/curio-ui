@@ -17,6 +17,7 @@
 - [x] Aggiunte category pages: backgrounds, cards, effects, loaders
 - [x] Aggiunta text category page
 - [x] Standardized button slugs to components/buttons/*
+- [x] Fix fade-content and shiny-text import (default export)
 
 ## Statistiche
 - Totale componenti: 50
