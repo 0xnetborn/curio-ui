@@ -23,8 +23,8 @@
 - [x] Add spiral-loader page
 
 ## Statistiche
-- Totale componenti: 50 (config)
-- Totale routes: 62 (clean, no duplicates)
+- Totale componenti: 51 (config)
+- Totale routes: 63 (clean, no duplicates)
 - Build: ✅ OK (no errors, no warnings)
 
 ## Cosa Devo Fare (TODO)
