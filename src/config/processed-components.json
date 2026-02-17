@@ -71,7 +71,6 @@
   "RotatingText",
   "gsap-ScrambledText",
   "gsap-ScrollFloat",
-  "gsap-ScrollReveal",
   "ScrollStack",
   "gsap-ScrollStack",
   "ScrollVelocity",
@@ -100,5 +99,6 @@
   "gsap-Crosshair",
   "gsap-Cubes",
   "TextType",
-  "ScrollFloat"
+  "ScrollFloat",
+  "gsap-ScrollReveal"
 ]
