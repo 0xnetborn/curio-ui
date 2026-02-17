@@ -25,14 +25,17 @@
 - Build: ✅ OK
 
 ## Cosa Devo Fare (TODO)
-1. [ ] Sistemare componenti che non funzionano bene
-2. [ ] Aggiungere nuovi componenti "senior design"
-3. [ ] Sistemare preview con hover animations
-4. [ ] Allineare code tabs con preview tabs
-5. [ ] Verificare categorie corrette
+1. [ ] Sistemare preview con hover animations (homepage grid)
+2. [ ] Allineare code tabs con preview tabs
+3. [ ] Aggiungere nuovi componenti "senior design"
+4. [ ] Testare componenti problematici
 
-## Componenti Problema
-- _TBD - da analizzare_
+## Fatto
+- [x] Structure: tutte le category pages presenti
+- [x] Config: slug standardizzati
+- [x] Fix imports: fade-content, shiny-text
+- [x] Fix analytics
+- [x] Category pages dinamiche via config
 
 ## Componenti Aggiunti Oggi
 - border-glow-button
