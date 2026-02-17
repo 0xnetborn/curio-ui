@@ -11,6 +11,11 @@
 - [x] Rimossi legacy config (ascii-media, threads, variable-proximity)  
 - [x] Rimossi duplicati (spotlight-card x2, tilted-card x2)
 - [x] Reso buttons page dinamico via config
+- [x] Fix analytics: trackEvent -> track (nuova versione)
+- [x] Verifica build: OK
+
+## In Corso
+- Verifica componenti uno a uno
 
 ## Cosa Devo Fare (TODO)
 1. [ ] Sistemare componenti che non funzionano bene
