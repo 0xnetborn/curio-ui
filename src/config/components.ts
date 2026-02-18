@@ -48,6 +48,14 @@ export const componentCategories = {
 export const components: ComponentMeta[] = [
     // Backgrounds
     {
+        slug: "components/backgrounds/orb",
+        name: "Orb",
+        description: "Mesmerizing WebGL orb with fluid noise animation",
+        category: "backgrounds",
+        isPremium: false,
+        isNew: true,
+    },
+    {
         slug: "components/backgrounds/click-spark",
         name: "Click Spark",
         description: "Spark burst animation on click interactions",
@@ -412,6 +420,15 @@ export const components: ComponentMeta[] = [
         dependencies: ["gsap"],
     },
     {
+        slug: "components/effects/cubes",
+        name: "Cubes",
+        description: "Animated cubes effect with GSAP",
+        category: "effects",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["gsap"],
+    },
+    {
         slug: "components/effects/blob-cursor",
         name: "Blob Cursor",
         description: "Animated cursor with blob trail effect that follows mouse movement",
@@ -495,15 +512,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
         dependencies: ["gsap"],
     },
-,
     {
-        slug: "text-animations/variable-proximity",
+        slug: "components/text/variable-proximity",
         name: "VariableProximity",
         description: "VariableProximity animation effect",
         category: "text",
         isPremium: false,
         isNew: true,
-    },];
+    },
+];
 
 // Helper functions
 export function getComponentsByCategory(category: keyof typeof componentCategories) {
