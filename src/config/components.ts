@@ -395,7 +395,7 @@ export const components: ComponentMeta[] = [
     // Effects
     {
         slug: "components/effects/text-cursor",
-        name: "Text Cursor",
+        name: "Text Cursor Effect",
         description: "Emoji/text trail that follows mouse cursor",
         category: "effects",
         isPremium: false,
@@ -404,7 +404,7 @@ export const components: ComponentMeta[] = [
     },
     {
         slug: "components/effects/electric-border",
-        name: "Electric Border",
+        name: "Electric Border Effect",
         description: "Turbulent electric border effect",
         category: "effects",
         isPremium: false,
@@ -495,6 +495,15 @@ export const components: ComponentMeta[] = [
         isNew: true,
     },
     {
+        slug: "components/text/fade-content",
+        name: "FadeContent",
+        description: "Scroll-triggered fade-in animation with optional blur effect",
+        category: "text",
+        isPremium: false,
+        isNew: true,
+        dependencies: ["gsap"],
+    },
+    {
         slug: "components/text/falling-text",
         name: "Falling Text",
         description: "Physics-based text that falls with gravity",
@@ -517,6 +526,15 @@ export const components: ComponentMeta[] = [
         name: "VariableProximity",
         description: "VariableProximity animation effect",
         category: "text",
+        isPremium: false,
+        isNew: true,
+    },
+    // Effects - Magnet
+    {
+        slug: "components/effects/magnet",
+        name: "Magnet",
+        description: "Text that attracts towards mouse cursor with spring physics",
+        category: "effects",
         isPremium: false,
         isNew: true,
     },
