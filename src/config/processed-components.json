@@ -96,8 +96,8 @@
   "ScrollFloat",
   "gsap-ScrollReveal",
   "VariableProximity",
-  "gsap-ScrambledText",
-  "gsap-Shuffle",
   "gsap-Cubes",
-  "Antigravity"
+  "Antigravity",
+  "gsap-ScrambledText",
+  "gsap-Shuffle"
 ]
